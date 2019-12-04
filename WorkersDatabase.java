@@ -6,7 +6,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class WorkersDatabase {
-	public static String[][] attributes = {{"George Washington", "27", "Serbian", "London", "110000", "15653278","392457389"},
+	private static JSONArray employeeList = new JSONArray();
+	private static String[][] attributes = {{"George Washington", "27", "Serbian", "London", "110000", "15653278","392457389"},
 										   {"Manos Amanatidis", "33", "Greek", "Athens", "70000", "35463189","566137267"},
 										   {"Mohammed Salah", "25", "Egyptian", "New York", "150000", "43564318","431654757"},
 										   {"Shergeh Staikovski", "45", "Russian", "San Diego", "80000", "25455543","436895270"},
@@ -26,23 +27,21 @@ public class WorkersDatabase {
 										   {"Charles Carter", "39", "USA", "New York", "58000", "16587085","124378589"},
 										   {"Mario Bellineli", "41", "Italian", "London", "64000", "25867074","321467432"},
 										   {"Giannis Karampelas", "43", "Greek", "San Diego", "79000", "46798701","547547987"},
-										   {"Nigel Farage", "36", "British", "Athens", "175000", "16821400","432675876"},
-										   {"Anthony Hopkins", "33", "USA", "London", "150000", "24366876","437856467"},
-										   {"Dimitris Papanastasiou", "34", "Greek", "New York", "190000", "35765900","472813865"},
-										   {"Matt Barnes", "38", "USA", "Athens", "110000", "44375480","798765320"},
+										   {"Nigel Farage", "36", "British", "Athens", "175000", "56821400","432675876"},
+										   {"Emily Blunt", "33", "USA", "London", "150000", "64366876","437856467"},
+										   {"Dimitris Papanastasiou", "34", "Greek", "New York", "190000", "75765900","472813865"},
+										   {"Matt Barnes", "38", "USA", "Athens", "110000", "84375480","798765320"},
 										   {"John White", "35", "USA", "San Diego", "170000", "02142362","413653421"},
 										  };
 	@SuppressWarnings("unchecked")
-	public static void createDatabase(String name) {
+	public static void createDatabase() {
 		try {
-			JSONArray employeeList = new JSONArray();
-			
 			for(String[] attribute : attributes ) {
 				employeeList.add(createEmployee(attribute[0], Integer.parseInt(attribute[1]), attribute[2], 
-						attribute[3], Double.parseDouble(attribute[4]), Integer.parseInt(attribute[5]), Integer.parseInt(attribute[6])));
+						attribute[3], Double.parseDouble(attribute[4]), attribute[5], attribute[6]));
 			}
 
-			File file=new File(name);  
+			File file=new File("WorkersDatabase.json");  
 			file.createNewFile();  
 			FileWriter fileWriter = new FileWriter(file); 
 			fileWriter.write(employeeList.toJSONString());  
@@ -53,9 +52,10 @@ public class WorkersDatabase {
 			System.out.println(e);
 		}
 	}
+
 	@SuppressWarnings("unchecked")
-	public static JSONObject createEmployee(String full_name, int age, String nationality,
-			String city_of_residence, double salary, int id, int ssn) {
+	public static JSONObject createEmployee(String full_name, long age, String nationality,
+			String city_of_residence, double salary, String id, String ssn) {
 		JSONObject employee = new JSONObject();
 		
 		employee.put("full_name", full_name);
@@ -67,5 +67,10 @@ public class WorkersDatabase {
 		employee.put("id",id);
 		
 		return employee;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static void addEmployeeToEmployeeList(JSONObject employee) {
+		employeeList.add(employee); 
 	}
 }

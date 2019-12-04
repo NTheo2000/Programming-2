@@ -1,3 +1,4 @@
+
 import org.json.simple.JSONObject;;
 
 public class Employee {
@@ -6,9 +7,9 @@ public class Employee {
 	private long age;
 	private String nationality;
 	private String city_of_residence;
-	private long ssn;
+	private String ssn;
 	private double salary;
-	private long id;
+	private String id;
 	private String department; 
 	
 	public Employee() {
@@ -20,39 +21,57 @@ public class Employee {
 		this.age = (long) searchPersonalDataInFile(employee, "age");
 		this.nationality = (String) searchPersonalDataInFile(employee, "nationality");
 		this.city_of_residence = (String) searchPersonalDataInFile(employee, "city_of_residence");
-		this.ssn = (long) searchPersonalDataInFile(employee, "ssn");
+		this.ssn = (String) searchPersonalDataInFile(employee, "ssn");
 		this.salary = (double) searchPersonalDataInFile(employee, "salary");
-		this.id = (long) searchPersonalDataInFile(employee, "id");
+		this.id = (String) searchPersonalDataInFile(employee, "id");
 		this.department = findDepartment();
 	}
 
-	protected Object searchPersonalDataInFile(JSONObject candidate, String keywords)  {
-		return candidate.get(keywords);
+	protected Object searchPersonalDataInFile(JSONObject employee, String keywords)  {
+		return employee.get(keywords);
 	}
 
 	public double getSalary() {
 		return salary;
+	}
+	public String getDepartment() {
+		return department;
 	}
 
 	private String findDepartment() {
 		String dep = "";
 		int dep_number = Integer.parseInt((String.valueOf(id)).substring(0, 1));
 		switch(dep_number) {
-			case 1 : 
-				dep = "Marketing";
-				break;
-			case 2 :
-				dep = "Accounting";
-				break;
-			case 3 :
-				dep = "IT";
-				break;
-			case 4 : 
-				dep = "HR";
-				break;
-			default:
-				dep = "Unidentified departmnet";
-				break;
+		case 0 :
+			dep = "HR Manager";
+			break;
+		case 1 : 
+			dep = "Marketing Employee";
+			break;
+		case 2 :
+			dep = "Accounting Employee";
+			break;
+		case 3 :
+			dep = "IT Employee";
+			break;
+		case 4 : 
+			dep = "HR Employee";
+			break;
+		case 5 :
+			dep = "Marketing Director";
+			break;
+		case 6 :
+			dep = "Accounting Director";
+			break;
+		case 7 :
+			dep = "IT Director";
+			break;
+		case 8:
+			dep = "HR Director";
+			break;
+		default:
+			dep = "Unidentified departmnet";
+			break;
 		}
 		return dep;
 	}
@@ -60,8 +79,6 @@ public class Employee {
 	public String toString() {
 		return "Employee [full_name=" + full_name + ", age=" + age + ", nationality=" + nationality
 				+ ", city_of_residence=" + city_of_residence + ", ssn=" + ssn + ", salary=" + salary + "] "
-						+ "works in " + department;
-	}
-		
-	
+						+ "works as " + department;
+	}	
 }
