@@ -1,7 +1,18 @@
+/*
+ * Name of class: Accounting_Director_Candidate
+ * 
+ * Copyright 2019 Miltiadis Tsichlis & Michael Dontas.
+ */
 import org.json.simple.JSONObject;
 
 public class Accounting_Director_Candidate extends Accounting_Employee_Candidate {
-
+/**
+	 * Searches a Json file for masters and phds in Accounting Science and other fields
+	 * The class reads a Json file and and finds key words in order to count the points for each candidate using fixed multipliers. 
+	 * 
+	 * @version 1.0 25 November 2019
+	 * @author Michael Dontas & Miltiadis Tsichlis
+	 */
 	private static final int MULTIPLIER_FOR_EACH_MASTER_IN_ACCOUNTING=10;
 	private static final int MULTIPLIER_FOR_EACH_PHD_IN_ACCOUNTING=15;
 	private static final int MULTIPLIER_FOR_EACH_MASTER_IN_OTHER_FIELD=5;
