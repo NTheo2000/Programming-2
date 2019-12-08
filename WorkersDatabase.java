@@ -1,9 +1,13 @@
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class WorkersDatabase {
 	private static JSONArray employeeList = new JSONArray();
@@ -41,20 +45,19 @@ public class WorkersDatabase {
 						attribute[3], Double.parseDouble(attribute[4]), attribute[5], attribute[6]));
 			}
 
-			File file=new File("WorkersDatabase.json");  
+			File file = new File("WorkersDatabase.json");  
 			file.createNewFile();  
 			FileWriter fileWriter = new FileWriter(file); 
 			fileWriter.write(employeeList.toJSONString());  
-			fileWriter.flush();  
-	        fileWriter.close();  
-		
+			fileWriter.flush();
+	        fileWriter.close();
 		} catch(IOException e) {
 			System.out.println(e);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	public static JSONObject createEmployee(String full_name, long age, String nationality,
+	private static JSONObject createEmployee(String full_name, long age, String nationality,
 			String city_of_residence, double salary, String id, String ssn) {
 		JSONObject employee = new JSONObject();
 		
@@ -69,8 +72,21 @@ public class WorkersDatabase {
 		return employee;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public static void addEmployeeToEmployeeList(JSONObject employee) {
-		employeeList.add(employee); 
+	@SuppressWarnings({ "unchecked", "resource" })
+	public static void addEmployeeToEmployeeList(Candidate candidate, double salary, String id)
+			throws FileNotFoundException, IOException, ParseException {
+		JSONParser parser = new JSONParser();
+		JSONArray list_of_employees = (JSONArray) parser.parse(new FileReader("WorkersDatabase.json"));
+		list_of_employees.add(createEmployee(candidate.getFull_Name(),
+				candidate.getAge(), candidate.getNationality(),
+				candidate.getCity_of_residence(), salary,
+				id, candidate.getSsn()));
+		FileWriter writer = new FileWriter("WorkersDatabase.json");
+		writer.write(list_of_employees.toJSONString());
+		writer.flush();  
+        writer.close();
 	}
+	/*
+	 * Create static method getEmployeeObjects
+	 */
 }
