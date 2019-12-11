@@ -1,43 +1,67 @@
-import java.util.Scanner;
-public class test {
-	public static void main (String [] args ){
-		Employee sc = new Employee ();//*//
-		Evaluation ev = new Evaluation(sc.getId());
-		Scanner input = new Scanner(System.in);
-		int a=52;
-		do{
-			System.out.println("Καλώς ήλθες στην εφαρμογή για την αξιολόγηση του Manager σου! \n Για να συνεχίσεις πατα 1!");
-			int an=input.nextInt();
-			if(an!=1){
-				break;
-			}else {
 
-				System.out.println("Δώσε το id: ");
-					int id=input.nextInt();
-				while(!ev.yparxid(id)){
-					System.out.println("Δεν υπάρχει το id. Αν θες να ξαναπροσπαθήσεις δώσε το id \n αλλιώς δώσε τιμή 0");
-					id=input.nextInt();
-					if(id==0){
-						break;
+import java.util.*;
+import java.io.*;
+
+public class test {
+	public static void main(String[] args) throws IOException {
+		int w = 0;
+		idMaker sc = new idMaker();
+		Evaluation ev = new Evaluation(sc.getIdEmployee());
+		Scanner input = new Scanner(System.in);
+		int id;
+		char an = 'n';
+		do {
+			System.out.println("To continue please press Y(Yes) otherwise N(No)!");
+			try {
+				an = input.next().charAt(0);
+				if (an != 'Y' && an != 'N') {
+					throw new Exception();
+				}
+			} catch (Exception e) {
+				System.out.println("Sorry wrong input!!!");
+				input.nextLine();
+				continue;
+			}
+			if (an == 'N') {
+				break;
+			} else {
+				System.out.println("Please insert you id: ");
+				try {
+					id = input.nextInt();
+				} catch (InputMismatchException e) {
+					System.out.println("Sorry wrong input!!!");
+					input.nextLine();
+					continue;
+				}
+				if (!ev.yparxid(id)) {
+					System.out.println("There's no id like this one!");
+					continue;
+				}
+				if (ev.idExist(id)) {
+					System.out.println(
+							"Sorry you already have evaluated! Do you want to re-evaluate?\nIf so press Y(Yes) otherwise N(No)! ");
+					an = 'w';
+					while (an != 'Y' && an != 'N') {
+						try {
+							an = input.next().charAt(0);
+							if (an != 'Y' && an != 'N') {
+								throw new Exception();
+							}
+						} catch (Exception e) {
+							System.out.println("Sorry wrong input!!!");
+							input.nextLine();
+						}
 					}
 				}
-				if(id==0){
+				if (an == 'Y' || (ev.idExist(id) == false)) {
+					ev.questions(id);
+				} else {
 					break;
 				}
-				if(ev.idExist(id)){
-					System.out.println("Συγγνώμη έχει ήδη υποβάλει αξιολόγηση!" +"\n Θες να ακυρώσεις και να ξανα υποβάλεις (1/2) ; ");
-					a=input.nextInt();
-				}
-				if ( a==1 || (ev.idExist(id )==false)){
-					ev.questions(id);
-				}
 			}
-
-		}while(true); //η επανάληψη υπάρχει για το αρχικό μενού. Θ αβροθμε μια συνθηκή όλοι μαζι ή θα σβήσοθμε τη επνάληψη//
+		} while (true);
 	}
 }
-
-
 
 
 
