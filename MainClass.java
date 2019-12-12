@@ -6,8 +6,8 @@ public class MainClass {
 		Scanner in = new Scanner(System.in);
 		CurrentUser user = new CurrentUser();
 		System.out.println("Who are you?");
-		user.setId(in.nextInt());
-		int id = user.getId();
+		user.setId(in.next());
+		String id = user.getId();
 		while(true) {
 			Menu.communicationMenu();
 			double a;
@@ -18,7 +18,7 @@ public class MainClass {
 				}
 				a = in.nextDouble();
 				counter++;
-			}while(a != 0 && a != 1 && a != 2 && a != 3);
+			}while(a != 0 && a != 1 && a != 2 && a != 3 && a != 4);
 			if(a == 0) {
 				break;
 			} else {
