@@ -10,7 +10,7 @@ public class Employee {
 	private String ssn;
 	private double salary;
 	private String id;
-	private String department; 
+	private String department;
 	
 	public Employee() {
 
@@ -24,7 +24,7 @@ public class Employee {
 		this.ssn = (String) searchPersonalDataInFile(employee, "ssn");
 		this.salary = (double) searchPersonalDataInFile(employee, "salary");
 		this.id = (String) searchPersonalDataInFile(employee, "id");
-		this.department = findDepartment();
+		this.department = findDepartment(id);
 	}
 
 	protected Object searchPersonalDataInFile(JSONObject employee, String keywords)  {
@@ -38,7 +38,7 @@ public class Employee {
 		return department;
 	}
 
-	private String findDepartment() {
+	public static String findDepartment(String id) {
 		String dep = "";
 		int dep_number = Integer.parseInt((String.valueOf(id)).substring(0, 1));
 		switch(dep_number) {
