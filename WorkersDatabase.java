@@ -1,19 +1,21 @@
-package ExerciseProgram2;
-
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Random;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class WorkersDatabase {
+	private static JSONArray employeeList = new JSONArray();
 	private static String [] letters = {"A","a","B","b","C","c","D","d","E","e","F","f","G","g","H","h","I","i",
 			"J","j","K","k","L","l","M","m","N","n","O","o","P","p","Q","q","R","r",
-			"S","s","T","t","U","u","V","v","W","w","X","x","Y","y","Z","z","!","@","#","$","%","^","&","*","?"};
-	
-
-	public static String[][] attributes = {{"George Washington", "27", "Serbian", "London", "110000", "15653278","392457389"},
+			"S","s","T","t","U","u","V","v","W","w","X","x","Y","y","Z","z","!","@","#","$","%","^","&","*","?"};	
+	private static String[][] attributes = {{"George Washington", "27", "Serbian", "London", "110000", "15653278","392457389"},
 										   {"Manos Amanatidis", "33", "Greek", "Athens", "70000", "35463189","566137267"},
 										   {"Mohammed Salah", "25", "Egyptian", "New York", "150000", "43564318","431654757"},
 										   {"Shergeh Staikovski", "45", "Russian", "San Diego", "80000", "25455543","436895270"},
@@ -33,40 +35,34 @@ public class WorkersDatabase {
 										   {"Charles Carter", "39", "USA", "New York", "58000", "16587085","124378589"},
 										   {"Mario Bellineli", "41", "Italian", "London", "64000", "25867074","321467432"},
 										   {"Giannis Karampelas", "43", "Greek", "San Diego", "79000", "46798701","547547987"},
-										   {"Nigel Farage", "36", "British", "Athens", "175000", "16821400","432675876"},
-										   {"Anthony Hopkins", "33", "USA", "London", "150000", "24366876","437856467"},
-										   {"Dimitris Papanastasiou", "34", "Greek", "New York", "190000", "35765900","472813865"},
-										   {"Matt Barnes", "38", "USA", "Athens", "110000", "44375480","798765320"},
+										   {"Nigel Farage", "36", "British", "Athens", "175000", "56821400","432675876"},
+										   {"Emily Blunt", "33", "USA", "London", "150000", "64366876","437856467"},
+										   {"Dimitris Papanastasiou", "34", "Greek", "New York", "190000", "75765900","472813865"},
+										   {"Matt Barnes", "38", "USA", "Athens", "110000", "84375480","798765320"},
 										   {"John White", "35", "USA", "San Diego", "170000", "02142362","413653421"},
 										  };
-	private static JSONArray employeeList = new JSONArray();
 	@SuppressWarnings("unchecked")
-	
-	public static void createDatabase(String name) {
+	public static void createDatabase() {
 		try {
 			for(String[] attribute : attributes ) {
 				employeeList.add(createEmployee(attribute[0], Integer.parseInt(attribute[1]), attribute[2], 
-						attribute[3], Double.parseDouble(attribute[4]), Integer.parseInt(attribute[5]), Integer.parseInt(attribute[6])));
+						attribute[3], Double.parseDouble(attribute[4]), attribute[5], attribute[6]));
 			}
 
-			File file=new File(name);  
+			File file = new File("WorkersDatabase.json");  
 			file.createNewFile();  
 			FileWriter fileWriter = new FileWriter(file); 
 			fileWriter.write(employeeList.toJSONString());  
-			fileWriter.flush();  
-	        fileWriter.close();  
-		
+			fileWriter.flush();
+	        fileWriter.close();
 		} catch(IOException e) {
 			System.out.println(e);
 		}
 	}
-	private static String generatePassword() {
-		
-		return"l"; 
-	}
+
 	@SuppressWarnings("unchecked")
-	public static JSONObject createEmployee(String full_name, int age, String nationality,
-			String city_of_residence, double salary, int ssn) {
+	private static JSONObject createEmployee(String full_name, long age, String nationality,
+			String city_of_residence, double salary, String id, String ssn) {
 		JSONObject employee = new JSONObject();
 		
 		employee.put("full_name", full_name);
@@ -75,8 +71,51 @@ public class WorkersDatabase {
 		employee.put("city_of_residence", city_of_residence);
 		employee.put("salary",salary);
 		employee.put("ssn",ssn);
-		employee.put("id",generateId);
-		employee.put("password",generatePassword);
+		employee.put("id",id);
+		employee.put("department", Employee.findDepartment(id));
+		employee.put("username", id);
+		employee.put("password", generatepassword());
 		return employee;
 	}
+	private static String generateId(int dep) {
+		Random r = new Random();
+		String id = String.valueOf(dep);
+		for(int i = 0; i <= 6; i++) {
+			id += String.valueOf(r.nextInt(10));
+		}
+		return id;
+	}
+	private static String generatepassword() {
+		Random r = new Random();
+		String passwd = null;
+		int n = 0;
+		for (int i = 0; i < 12; i++) {
+			n = r.nextInt(62);
+			if (n == 61) {
+				passwd += r.nextInt(10);
+			} else {
+				passwd += letters[n];
+			}
+		}
+		return passwd;
+	}
+
+	@SuppressWarnings({ "unchecked" })
+	public static void addEmployeeToEmployeeList(Candidate candidate, double salary)
+			throws FileNotFoundException, IOException, ParseException, ClassNotFoundException {
+		String id = generateId(candidate.getDepartmentId());
+		JSONParser parser = new JSONParser();
+		JSONArray list_of_employees = (JSONArray) parser.parse(new FileReader("WorkersDatabase.json"));
+		list_of_employees.add(createEmployee(candidate.getFull_Name(),
+				candidate.getAge(), candidate.getNationality(),
+				candidate.getCity_of_residence(), salary,
+				id, candidate.getSsn()));
+		FileWriter writer = new FileWriter("WorkersDatabase.json");
+		writer.write(list_of_employees.toJSONString());
+		writer.flush();  
+        writer.close();
+	}
+	/*
+	 * Create static method getEmployeeObjects
+	 */
 }
