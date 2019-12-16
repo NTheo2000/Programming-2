@@ -87,7 +87,7 @@ public class WorkersDatabase {
 	}
 	private static String generatepassword() {
 		Random r = new Random();
-		String passwd = null;
+		String passwd = "";
 		int n = 0;
 		for (int i = 0; i < 12; i++) {
 			n = r.nextInt(62);
@@ -99,7 +99,25 @@ public class WorkersDatabase {
 		}
 		return passwd;
 	}
-
+	@SuppressWarnings("unchecked")
+	public static boolean changeUsernameorPassword(Employee employee, String element, String value)
+			throws FileNotFoundException, IOException, ParseException {
+		boolean update = false;
+		JSONParser parser = new JSONParser();
+		JSONArray list = (JSONArray) parser.parse(new FileReader("WorkersDatabase.json"));
+		for (Object obj : list) {
+			if (((JSONObject) obj).get("id").equals(employee.getId())) {
+				((JSONObject) obj).replace(element, value);
+				FileWriter writer = new FileWriter("WorkersDatabase.json");
+				writer.write(list.toJSONString());
+				writer.flush();
+				writer.close();
+				update = true;
+				break;
+			}
+		}
+		return update;
+	}
 	@SuppressWarnings({ "unchecked" })
 	public static void addEmployeeToEmployeeList(Candidate candidate, double salary)
 			throws FileNotFoundException, IOException, ParseException, ClassNotFoundException {
