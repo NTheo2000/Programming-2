@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 import org.json.simple.JSONArray;
@@ -133,7 +134,28 @@ public class WorkersDatabase {
 		writer.flush();  
         writer.close();
 	}
-	/*
-	 * Create static method getEmployeeObjects
-	 */
+	public static ArrayList<Employee> getEmployeesbyDirectorsDepartment(String id)
+			throws FileNotFoundException, IOException, ParseException {
+		int dept_code = Integer.valueOf(id.substring(0, 1));
+		JSONParser parser = new JSONParser();
+		JSONArray employees = (JSONArray) parser.parse(new FileReader("WorkersDatabase.json"));
+		ArrayList<Employee> dep_employees = new ArrayList<Employee>();
+		for (Object obj : employees) {
+			 // subtract 4 from the director's dept_code in the if statement to refer to the equivalent employee's department
+			if (((String) ((JSONObject) obj).get("id")).startsWith(String.valueOf(dept_code - 4))) {
+				dep_employees.add(new Employee((JSONObject) obj));
+			}
+		}
+		return dep_employees;
+	}
+	public static ArrayList<Employee> getAllEmployeeObjects()
+			throws FileNotFoundException, IOException, ParseException {
+		JSONParser parser = new JSONParser();
+		JSONArray employees = (JSONArray) parser.parse(new FileReader("WorkersDatabase.json"));
+		ArrayList<Employee> dep_employees = new ArrayList<Employee>();
+		for (Object obj : employees) {
+			dep_employees.add(new Employee((JSONObject) obj));
+		}
+		return dep_employees;
+	}
 }
