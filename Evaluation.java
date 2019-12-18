@@ -9,16 +9,11 @@ public class Evaluation {
 	private boolean apan = true;
 	private ArrayList<Integer> id_employee = new ArrayList<Integer>();
 	private Integer[] arrayId_Scores = new Integer[11];
-	String q1 = "1. How is your cooperation with your manager?\n";
-	String q2 = "2. How happy you are in our organization?\n";
-	String q3 = "3. Do you think that your manager deserves his possition?\n";
-	String q4 = "4. How hard or easily you're considering to leave?\n";
-	String q5 = "5. Is your manager sympahetic with you?\n";
-	String q6 = "6. Do you think that other departments have better managers?\n";
-	String q7 = "7. Does your manager behave nice to you and to your colleagues?\n";
-	String q8 = "8. Is your manager fair?\n";
-	String q9 = "9. Does you manager have the same behavior to your f/m collegues?\n";
-	String q10 = "10. Do you think that you manager has the skills to be leader?\n";
+	private String[] questions ={"1. How is your cooperation with your manager?\n","\n2. How happy you are in our organization?\n",
+											"\n3. Do you think that your manager deserves his possition?\n","\n4. How hard or easily you're considering to leave?\n",
+											"\n4. How hard or easily you're considering to leave?\n","\n5. Is your manager sympahetic with you?\n","\n6. Do you think that other departments have better managers?\n",
+											"\n7. Does your manager behave nice to you and to your colleagues?\n","\n8. Is your manager fair?\n","\n9. Does you manager have the same behavior to your f/m collegues?\n",
+											"\n10. Do you think that you manager has the skills to be leader?\n"};
 
 	public Evaluation(ArrayList<Integer> id_employee) {
 		this.id_employee = id_employee;
@@ -35,17 +30,6 @@ public class Evaluation {
 		} catch (ClassNotFoundException e) {
 		}
 	}
-
-	public boolean yparxid(int id) {
-		boolean a = false;
-		for (int i = 0; i < id_employee.size(); i++) {
-			if (id_employee.get(i) == id) {
-				a = true;
-			}
-		}
-		return a;
-	}
-
 	public boolean idExist(int ids) throws IOException { // μεδοοσ 1//
 		start();
 		for (int i = 0; i < id_scores.size(); i++) {
@@ -66,19 +50,9 @@ public class Evaluation {
 		int a;
 		do {
 			w = 'T';
-			System.out.println(
-					"Right below are the questions of the evaluation. The valid answers are !!Integers!! 1 to 5\n");
-			System.out.println(q1);
-			System.out.println(q2);
-			System.out.println(q3);
-			System.out.println(q4);
-			System.out.println(q5);
-			System.out.println(q6);
-			System.out.println(q7);
-			System.out.println(q8);
-			System.out.println(q9);
-			System.out.println(q10 + "\n\n");
+			System.out.println("Right below are the questions of the evaluation. The valid answers are !!Integers!! 1 to 5\n");
 			for (int i = 0; i < answers.length; i++) {
+				System.out.println(questions[i]);
 				a = 0;
 				System.out.println("Answer to question no." + (i + 1));
 				while (a < 1 || a > 5) {

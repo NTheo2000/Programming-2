@@ -5,10 +5,12 @@ import java.io.*;
 public class test {
 	public static void main(String[] args) throws IOException {
 		int w = 0;
-		idMaker sc = new idMaker();
-		Evaluation ev = new Evaluation(sc.getIdEmployee());
+		WorkersDatabase sc = new WorkersDatabase();
+		ArrayList<Integer> ids = new ArrayList<Integer>();
+		ids=sc.getAllEmployeeObjects();
+		Evaluation ev = new Evaluation(ids));
 		Scanner input = new Scanner(System.in);
-		int id;
+		int id=8180060;
 		char an = 'n';
 		do {
 			System.out.println("To continue please press Y(Yes) otherwise N(No)!");
@@ -25,18 +27,6 @@ public class test {
 			if (an == 'N') {
 				break;
 			} else {
-				System.out.println("Please insert you id: ");
-				try {
-					id = input.nextInt();
-				} catch (InputMismatchException e) {
-					System.out.println("Sorry wrong input!!!");
-					input.nextLine();
-					continue;
-				}
-				if (!ev.yparxid(id)) {
-					System.out.println("There's no id like this one!");
-					continue;
-				}
 				if (ev.idExist(id)) {
 					System.out.println(
 							"Sorry you already have evaluated! Do you want to re-evaluate?\nIf so press Y(Yes) otherwise N(No)! ");

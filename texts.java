@@ -2,12 +2,11 @@ import java.util.*;
 import java.io.*;
 public class texts {
 	 public static void main (String[] args){
-		idMaker ids = new idMaker();
+		WorkersDatabase ids = new WorkersDatabase();
 		ArrayList<Integer> id = new ArrayList<Integer>();
-		id=ids.getIdEmployee();
-		mkTextEmployee (  id );
-
-	  }
+		id_employee=ids.getAllEmployeeObjects();
+		mkTextEmployee(id);
+	}
 	public static ArrayList<Integer[]> id_scores = new ArrayList<Integer[]>();
 	public static void mkTextEmployee ( ArrayList<Integer> id_employee ){
 		for(int i=0 ; i<id_employee.size();i++){
