@@ -20,7 +20,7 @@ public class Marketing_Employee_Candidate extends Candidate{
 
 	public Marketing_Employee_Candidate(JSONObject candidate) {
 		super(candidate);
-		this.level_of_languages= super.searchLevel_of_languages(candidate);
+		this.level_of_languages = super.searchLevel_of_languages(candidate);
 		this.level_of_computer_handling = super.searchLevel_of_computer_handling(candidate);
 		this.former_experience = super.searchFormer_experience(candidate);
 		this.recommendation_letter = super.searchRecommendation_letter(candidate);
@@ -39,13 +39,14 @@ public class Marketing_Employee_Candidate extends Candidate{
 
 	protected int total_points() {
 		int sum = 0;
-		for(int i : level_of_languages) {
+		if (level_of_languages != null) {
+			for (int i : level_of_languages) {
 			sum += i * MULTIPLIER_FOR_EACH_LANGUAGE;
+			}
 		}
 		sum += level_of_computer_handling * MULTIPLIER_FOR_COMPUTER_COMPETENCE + 
 				former_experience * MULTIPLIER_FOR_EACH_YEAR_OF_EXPERIENCE + 
 				(recommendation_letter == true ? 1 : 0) * EXTRA_POINTS_FOR_RECOMMENDATION_LETTER;
-
 		return sum;
 	}
 

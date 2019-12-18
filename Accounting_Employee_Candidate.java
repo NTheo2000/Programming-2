@@ -39,8 +39,10 @@ public class Accounting_Employee_Candidate extends Candidate {
 
 	protected int total_points() {
 		int sum = 0;
-		for(int i : level_of_languages) {
+		if (level_of_languages != null) {
+			for (int i : level_of_languages) {
 			sum += i * MULTIPLIER_FOR_EACH_LANGUAGE;
+			}
 		}
 		sum += level_of_computer_handling * MULTIPLIER_FOR_COMPUTER_COMPETENCE + 
 				former_experience * MULTIPLIER_FOR_EACH_YEAR_OF_EXPERIENCE + 

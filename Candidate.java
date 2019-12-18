@@ -1,5 +1,5 @@
-
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -53,16 +53,13 @@ public abstract class Candidate implements Comparator<Candidate> {
 	protected Object searchPersonalDataInFile(JSONObject candidate, String keywords)  {
 		return candidate.get(keywords);
 	}
-
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected int[] searchLevel_of_languages(JSONObject candidate) {
-		@SuppressWarnings("rawtypes")
-		Map languages = (Map) candidate.get("languages");
+		Map languages = (HashMap) candidate.get("languages");
 		int[] level = new int[languages.size()];
 		int i = 0;
-		 @SuppressWarnings({ "unchecked", "rawtypes" })
 			Iterator<Map.Entry> itr1 = languages.entrySet().iterator(); 
 	        while (itr1.hasNext()) { 
-	            @SuppressWarnings("rawtypes")
 				Map.Entry pair = itr1.next(); 
 	            level[i++] = (int) pair.getValue();
 	        }
@@ -86,54 +83,53 @@ public abstract class Candidate implements Comparator<Candidate> {
 			return false;
 		}
 	}
-	
 	protected int giveBoostByBachelor(JSONObject candidate, String field) {
-		if(candidate.get("bachelor_field").equals(field)) {
+		if(candidate.get("bachelor_field") == null || !candidate.get("bachelor_field").equals(field)) {
 			return 50;
 		} else {
 			return 0;
 		}
 	}
-	
 	public int getDepartmentId() throws ClassNotFoundException {
 		int id = 0;
-		if (this.getClass().equals(Class.forName("Marketing_Employee_Candidate")))
+		if (this.getClass().equals(Class.forName("Marketing_Employee_Candidate"))) {
 			id = 1;
-		else if (this.getClass().equals(Class.forName("Accounting_Employee_Candidate")))
+		} else if (this.getClass().equals(Class.forName("Accounting_Employee_Candidate"))) {
 			id = 2;
-		else if (this.getClass().equals(Class.forName("IT_Employee_Candidate")))
+		} else if (this.getClass().equals(Class.forName("IT_Employee_Candidate"))) {
 			id = 3;
-		else if (this.getClass().equals(Class.forName("HR_Employee_Candidate")))
+		} else if (this.getClass().equals(Class.forName("HR_Employee_Candidate"))) {
 			id = 4;
-		else if (this.getClass().equals(Class.forName("Marketing_Director_Candidate")))
+		} else if (this.getClass().equals(Class.forName("Marketing_Director_Candidate"))) {
 			id = 5;
-		else if (this.getClass().equals(Class.forName("Accounting_Director_Candidate")))
+		} else if (this.getClass().equals(Class.forName("Accounting_Director_Candidate"))) {
 			id = 6;
-		else if (this.getClass().equals(Class.forName("IT_Director_Candidate")))
+		} else if (this.getClass().equals(Class.forName("IT_Director_Candidate"))) {
 			id = 7;
-		else if (this.getClass().equals(Class.forName("HR_Director_Candidate")))
+		} else if (this.getClass().equals(Class.forName("HR_Director_Candidate"))) {
 			id = 8;
-		else 
+		} else {
 			assert id<=8 && id >=1 : "Unidentified departmnet";
+		}
 		return id;
 	}
 
 	protected double[] findDegreeAndField(JSONObject candidate, String degree, 
-			String field, boolean this_field_or_other) {		
+		String field, boolean this_field) {		
 		//Assume that a HashMap is created to the json file 
 		@SuppressWarnings("rawtypes")
-		Map diplomas = (Map) candidate.get(degree); 
+		Map diplomas = (HashMap) candidate.get(degree);
 		int i = 0;
 		double[] grades = new double[diplomas.size()];
         // iterating address Map 
-        @SuppressWarnings({ "unchecked", "rawtypes" })
+        @SuppressWarnings({"unchecked", "rawtypes"})
 		Iterator<Map.Entry> itr1 = diplomas.entrySet().iterator(); 
         while (itr1.hasNext()) { 
             @SuppressWarnings("rawtypes")
 			Map.Entry pair = itr1.next(); 
-            if(field.contains(pair.getKey().toString()) && this_field_or_other == true) {
+            if(field.contains(pair.getKey().toString()) && this_field == true) {
     			grades[i++] = (double) pair.getValue();
-            } else if(!(field.contains(pair.getKey().toString())) && this_field_or_other == false) {
+            } else if(!(field.contains(pair.getKey().toString())) && this_field == false) {
     			grades[i++] = (double) pair.getValue();
             }
         }

@@ -43,8 +43,10 @@ public class IT_Employee_Candidate extends Candidate {
 
 	protected int total_points() {
 		int sum = 0;
-		for(int i : level_of_languages) {
+		if (level_of_languages != null) {
+			for (int i : level_of_languages) {
 			sum += i * MULTIPLIER_FOR_EACH_LANGUAGE;
+			}
 		}
 		sum += level_of_computer_handling * MULTIPLIER_FOR_COMPUTER_COMPETENCE + 
 				number_of_programming_languages * MULTIPLIER_FOR_EACH_PROGRAMMING_LANGUAGE +
