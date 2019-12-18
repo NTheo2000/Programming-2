@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class CreateCandidate {
 	protected static String[] full_name = new String[100];
-	protected static int[] age = new int[30];
+	protected static long[] age = new long[30];
 	protected static String[] nationality = new String[10];
 	protected static String[] city_of_residence = new String[10];
 	protected static String[] ssn = new String[100];
@@ -62,7 +62,7 @@ public class CreateCandidate {
 		CreateCandidate.full_name[i] = full_name;
 	}
 
-	public int getAge(int i) {
+	public long getAge(int i) {
 		return age[i];
 	}
 
@@ -348,7 +348,7 @@ public class CreateCandidate {
 			phd_in_main_field[i] = 5 + i / 10;
 			phd_in_other_field[i] = 5 + i / 10;
 		}
-		int rand51,rand30,rand10,rand5,rand4,rand2;
+		int rand51, rand30, rand10, rand5, rand4, rand2;
 		try {
 			for (i = 0; i < 100; i++) {
 				rand51 = new Random().nextInt(phd_in_other_field.length);
@@ -357,9 +357,11 @@ public class CreateCandidate {
 				rand5 = new Random().nextInt(level_of_languages.length);
 				rand4 = new Random().nextInt(field.length);
 				rand2 = new Random().nextInt(recommendation_letter.length);
-				candidateList.add(createCandidate(full_name[i],ssn[i],email[i], master_in_main_field[rand51], master_in_other_field[rand51],
-						phd_in_main_field[rand51],phd_in_other_field[rand51],age[rand30],former_experience[rand30],nationality[rand10],city_of_residence[rand10],
-						level_of_languages[rand5],number_of_languages[rand5],level_of_computer_handling[rand5],number_of_programming_languages[rand5],field[rand4],recommendation_letter[rand2]));
+				candidateList.add(createCandidate(full_name[i], ssn[i], email[i], master_in_main_field[rand51],
+						master_in_other_field[rand51], phd_in_main_field[rand51], phd_in_other_field[rand51],
+						age[rand30], former_experience[rand30], nationality[rand10], city_of_residence[rand10],
+						level_of_languages[rand5], number_of_languages[rand5], level_of_computer_handling[rand5],
+						number_of_programming_languages[rand5], field[rand4], recommendation_letter[rand2]));
 			}
 
 			File file = new File(name);
@@ -375,34 +377,30 @@ public class CreateCandidate {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static JSONObject createCandidate(String full_name, String ssn, String email, double master_in_main_field, 
-			double master_in_other_field, double phd_in_main_field,
-			double phd_in_other_field, int age, int former_experience, String nationality, String city_of_residence,
-			int level_of_languages, int number_of_languages,
-			int level_of_computer_handling, int number_of_programming_languages, String field, boolean recommendation_letter) {
+	public static JSONObject createCandidate(String full_name, String ssn, String email, double master_in_main_field,
+			double master_in_other_field, double phd_in_main_field, double phd_in_other_field, long age,
+			int former_experience, String nationality, String city_of_residence, int level_of_languages,
+			int number_of_languages, int level_of_computer_handling, int number_of_programming_languages, String field,
+			boolean recommendation_letter) {
 		JSONObject candidate = new JSONObject();
 
 		candidate.put("full_name", full_name);
-		candidate.put("email",email);
+		candidate.put("email", email);
 		candidate.put("ssn", ssn);
-		candidate.put("master_in_main_field",master_in_main_field);
-		candidate.put("master_in_other_field",master_in_other_field);
-		candidate.put("phd_in_main_field",phd_in_main_field);
-		candidate.put("phd_in_other_field",phd_in_other_field);
+		candidate.put("master_in_main_field", master_in_main_field);
+		candidate.put("master_in_other_field", master_in_other_field);
+		candidate.put("phd_in_main_field", phd_in_main_field);
+		candidate.put("phd_in_other_field", phd_in_other_field);
 		candidate.put("age", age);
-		candidate.put("former_experience",former_experience);
+		candidate.put("former_experience", former_experience);
 		candidate.put("nationality", nationality);
 		candidate.put("city_of_residence", city_of_residence);
-		candidate.put("level_of_languages",level_of_languages);
-		candidate.put("number_of_languages",number_of_languages);
-		candidate.put("level_of_computer_handling",level_of_computer_handling);
-		candidate.put("number_of_programming_languages",number_of_programming_languages);
-		candidate.put("field",field);
-		candidate.put("recommendation_letter",recommendation_letter);
-		
-		
-		
-		
+		candidate.put("level_of_languages", level_of_languages);
+		candidate.put("number_of_languages", number_of_languages);
+		candidate.put("level_of_computer_handling", level_of_computer_handling);
+		candidate.put("number_of_programming_languages", number_of_programming_languages);
+		candidate.put("field", field);
+		candidate.put("recommendation_letter", recommendation_letter);
 
 		return candidate;
 	}
