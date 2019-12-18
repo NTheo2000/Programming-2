@@ -7,6 +7,8 @@ import java.io.IOException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class CreateCandidate {
@@ -25,10 +27,7 @@ public class CreateCandidate {
 	protected static boolean[] recommendation_letter = new boolean[2];
 	protected static int[] number_of_programming_languages = new int[5];
 
-	protected static double[] master_in_main_field = new double[51];
-	protected static double[] master_in_other_field = new double[51];
-	protected static double[] phd_in_main_field = new double[51];
-	protected static double[] phd_in_other_field = new double[51];
+	protected static double[] grade_inmaster_or_phd = new double[51];
 
 	public CreateCandidate() {
 
@@ -158,36 +157,12 @@ public class CreateCandidate {
 		CreateCandidate.number_of_programming_languages[i] = number_of_programming_languages;
 	}
 
-	public double getMaster_in_main_field(int i) {
-		return master_in_main_field[i];
+	public double getGrade_inmaster_or_phd(int i) {
+		return grade_inmaster_or_phd[i];
 	}
 
-	public void setMaster_in_main_field(double master_in_main_field, int i) {
-		CreateCandidate.master_in_main_field[i] = master_in_main_field;
-	}
-
-	public double getMaster_in_other_field(int i) {
-		return master_in_other_field[i];
-	}
-
-	public void setMaster_in_other_field(double master_in_other_field, int i) {
-		CreateCandidate.master_in_other_field[i] = master_in_other_field;
-	}
-
-	public double getPhd_in_main_field(int i) {
-		return phd_in_main_field[i];
-	}
-
-	public void setPhd_in_main_field(double phd_in_main_field, int i) {
-		CreateCandidate.phd_in_main_field[i] = phd_in_main_field;
-	}
-
-	public double getPhd_in_other_field(int i) {
-		return phd_in_other_field[i];
-	}
-
-	public void setPhd_in_other_field(double phd_in_other_field, int i) {
-		CreateCandidate.phd_in_other_field[i] = phd_in_other_field;
+	public void setGrade_inmaster_or_phdd(double grade_inmaster_or_phd, int i) {
+		CreateCandidate.grade_inmaster_or_phd[i] = grade_inmaster_or_phd;
 	}
 
 	protected static JSONArray candidateList = new JSONArray();
@@ -343,23 +318,20 @@ public class CreateCandidate {
 		recommendation_letter[0] = false;
 		recommendation_letter[1] = true;
 		for (i = 0; i < 51; i++) {
-			master_in_main_field[i] = 5 + i / 10;
-			master_in_other_field[i] = 5 + i / 10;
-			phd_in_main_field[i] = 5 + i / 10;
-			phd_in_other_field[i] = 5 + i / 10;
+			grade_inmaster_or_phd[i] = 5 + i / 10;
+
 		}
-		int rand51, rand30, rand10, rand5, rand4, rand2;
+
+		int rand30, rand10, rand5, rand4, rand2;
 		try {
 			for (i = 0; i < 100; i++) {
-				rand51 = new Random().nextInt(phd_in_other_field.length);
 				rand30 = new Random().nextInt(age.length);
 				rand10 = new Random().nextInt(nationality.length);
 				rand5 = new Random().nextInt(level_of_languages.length);
 				rand4 = new Random().nextInt(field.length);
 				rand2 = new Random().nextInt(recommendation_letter.length);
-				candidateList.add(createCandidate(full_name[i], ssn[i], email[i], master_in_main_field[rand51],
-						master_in_other_field[rand51], phd_in_main_field[rand51], phd_in_other_field[rand51],
-						age[rand30], former_experience[rand30], nationality[rand10], city_of_residence[rand10],
+				candidateList.add(createCandidate(full_name[i], ssn[i], email[i], age[rand30],
+						former_experience[rand30], nationality[rand10], city_of_residence[rand10],
 						level_of_languages[rand5], number_of_languages[rand5], level_of_computer_handling[rand5],
 						number_of_programming_languages[rand5], field[rand4], recommendation_letter[rand2]));
 			}
@@ -376,9 +348,22 @@ public class CreateCandidate {
 		}
 	}
 
+	@SuppressWarnings({ "rawtypes" })
+	private static Map create_maps() {
+		Random rand = new Random();
+		Map<String, Double> diploma = new HashMap<String, Double>();
+		int count = rand.nextInt(5);
+		for (int i = 0; i <= count; i++) {
+			int count1 = rand.nextInt(4);
+			int count2 = rand.nextInt(52);
+			diploma.put(field[count1], grade_inmaster_or_phd[count2]);
+		}
+		return diploma;
+
+	}
+
 	@SuppressWarnings("unchecked")
-	public static JSONObject createCandidate(String full_name, String ssn, String email, double master_in_main_field,
-			double master_in_other_field, double phd_in_main_field, double phd_in_other_field, long age,
+	public static JSONObject createCandidate(String full_name, String ssn, String email, long age,
 			int former_experience, String nationality, String city_of_residence, int level_of_languages,
 			int number_of_languages, int level_of_computer_handling, int number_of_programming_languages, String field,
 			boolean recommendation_letter) {
@@ -387,18 +372,16 @@ public class CreateCandidate {
 		candidate.put("full_name", full_name);
 		candidate.put("email", email);
 		candidate.put("ssn", ssn);
-		candidate.put("master_in_main_field", master_in_main_field);
-		candidate.put("master_in_other_field", master_in_other_field);
-		candidate.put("phd_in_main_field", phd_in_main_field);
-		candidate.put("phd_in_other_field", phd_in_other_field);
+		candidate.put("Master", create_maps());
+		candidate.put("PhD", create_maps());
 		candidate.put("age", age);
 		candidate.put("former_experience", former_experience);
 		candidate.put("nationality", nationality);
 		candidate.put("city_of_residence", city_of_residence);
-		candidate.put("level_of_languages", level_of_languages);
+		candidate.put("languages", level_of_languages);
 		candidate.put("number_of_languages", number_of_languages);
 		candidate.put("level_of_computer_handling", level_of_computer_handling);
-		candidate.put("number_of_programming_languages", number_of_programming_languages);
+		candidate.put("programming_languages", number_of_programming_languages);
 		candidate.put("field", field);
 		candidate.put("recommendation_letter", recommendation_letter);
 
