@@ -19,9 +19,7 @@ public class CreateCandidate {
 	protected static String[] ssn = new String[100];
 	protected static String[] field = new String[4];
 	protected static String[] email = new String[100];
-
-	protected static int[] level_of_languages = new int[5];
-	protected static int[] number_of_languages = new int[5];
+	protected static String[] name_of_languages = new String[10];
 	protected static int[] level_of_computer_handling = new int[5];
 	protected static int[] former_experience = new int[30];
 	protected static boolean[] recommendation_letter = new boolean[2];
@@ -109,20 +107,12 @@ public class CreateCandidate {
 		CreateCandidate.email[i] = email;
 	}
 
-	public int getLevel_of_languages(int i) {
-		return level_of_languages[i];
+	public String getName_of_languages(int i) {
+		return name_of_languages[i];
 	}
 
-	public void setLevel_of_languages(int level_of_languages, int i) {
-		CreateCandidate.level_of_languages[i] = level_of_languages;
-	}
-
-	public int getNumber_of_languages(int i) {
-		return number_of_languages[i];
-	}
-
-	public void setNumber_of_languages(int number_of_languages, int i) {
-		CreateCandidate.number_of_languages[i] = number_of_languages;
+	public void setNumber_of_languages(String name_of_languages, int i) {
+		CreateCandidate.name_of_languages[i] = name_of_languages;
 	}
 
 	public int getLevel_of_computer_handling(int i) {
@@ -296,6 +286,17 @@ public class CreateCandidate {
 		field[i++] = "Accounting";
 		field[i++] = "HR";
 		field[i++] = "IT";
+		i = 0;
+		name_of_languages[i++] = "English";
+		name_of_languages[i++] = "French";
+		name_of_languages[i++] = "Greek";
+		name_of_languages[i++] = "Arabic";
+		name_of_languages[i++] = "German";
+		name_of_languages[i++] = "Italian";
+		name_of_languages[i++] = "Russian";
+		name_of_languages[i++] = "Turkish";
+		name_of_languages[i++] = "Spanish";
+		name_of_languages[i++] = "Korean";
 		for (i = 0; i < 30; i++) {
 			age[i] = i + 20;
 			former_experience[i] = i;
@@ -310,15 +311,13 @@ public class CreateCandidate {
 			email[i] = "c" + ssn[i] + "@gmail.com";
 		}
 		for (i = 0; i < 5; i++) {
-			level_of_languages[i] = i;
-			number_of_languages[i] = i;
 			level_of_computer_handling[i] = i;
 			number_of_programming_languages[i] = i;
 		}
 		recommendation_letter[0] = false;
 		recommendation_letter[1] = true;
-		for (i = 0; i < 51; i++) {
-			grade_inmaster_or_phd[i] = 5 + i / 10;
+		for (int i1 = 0; i1 < 51; i1++) {
+			grade_inmaster_or_phd[i1] = 5 + (double) i1 / 10;
 
 		}
 
@@ -327,13 +326,13 @@ public class CreateCandidate {
 			for (i = 0; i < 100; i++) {
 				rand30 = new Random().nextInt(age.length);
 				rand10 = new Random().nextInt(nationality.length);
-				rand5 = new Random().nextInt(level_of_languages.length);
+				rand5 = new Random().nextInt(level_of_computer_handling.length);
 				rand4 = new Random().nextInt(field.length);
 				rand2 = new Random().nextInt(recommendation_letter.length);
-				candidateList.add(createCandidate(full_name[i], ssn[i], email[i], age[rand30],
-						former_experience[rand30], nationality[rand10], city_of_residence[rand10],
-						level_of_languages[rand5], number_of_languages[rand5], level_of_computer_handling[rand5],
-						number_of_programming_languages[rand5], field[rand4], recommendation_letter[rand2]));
+				candidateList
+						.add(createCandidate(full_name[i], ssn[i], email[i], age[rand30], former_experience[rand30],
+								nationality[rand10], city_of_residence[rand10], level_of_computer_handling[rand5],
+								number_of_programming_languages[rand5], field[rand4], recommendation_letter[rand2]));
 			}
 
 			File file = new File(name);
@@ -348,10 +347,9 @@ public class CreateCandidate {
 		}
 	}
 
-	@SuppressWarnings({ "rawtypes" })
-	private static Map create_maps() {
+	private static HashMap<String, Double> create_maps() {
 		Random rand = new Random();
-		Map<String, Double> diploma = new HashMap<String, Double>();
+		HashMap<String, Double> diploma = new HashMap<String, Double>();
 		int count = rand.nextInt(5);
 		for (int i = 0; i <= count; i++) {
 			int count1 = rand.nextInt(4);
@@ -359,14 +357,25 @@ public class CreateCandidate {
 			diploma.put(field[count1], grade_inmaster_or_phd[count2]);
 		}
 		return diploma;
+	}
+
+	private static HashMap<String, Integer> create_Language() {
+		Random rand = new Random();
+		HashMap<String, Integer> language = new HashMap<String, Integer>();
+		int number = rand.nextInt(7);
+		for (int i = 0; i <= number; i++) {
+			int count1 = rand.nextInt(5) + 1;
+			int count2 = rand.nextInt(7);
+			language.put(name_of_languages[count2], count1);
+		}
+		return language;
 
 	}
 
 	@SuppressWarnings("unchecked")
 	public static JSONObject createCandidate(String full_name, String ssn, String email, long age,
-			int former_experience, String nationality, String city_of_residence, int level_of_languages,
-			int number_of_languages, int level_of_computer_handling, int number_of_programming_languages, String field,
-			boolean recommendation_letter) {
+			int former_experience, String nationality, String city_of_residence, int level_of_computer_handling,
+			int number_of_programming_languages, String field, boolean recommendation_letter) {
 		JSONObject candidate = new JSONObject();
 
 		candidate.put("full_name", full_name);
@@ -378,8 +387,7 @@ public class CreateCandidate {
 		candidate.put("former_experience", former_experience);
 		candidate.put("nationality", nationality);
 		candidate.put("city_of_residence", city_of_residence);
-		candidate.put("languages", level_of_languages);
-		candidate.put("number_of_languages", number_of_languages);
+		candidate.put("languages", create_Language());
 		candidate.put("level_of_computer_handling", level_of_computer_handling);
 		candidate.put("programming_languages", number_of_programming_languages);
 		candidate.put("field", field);
