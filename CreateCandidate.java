@@ -1,3 +1,5 @@
+package ExerciseProgram2;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,11 +21,8 @@ public class CreateCandidate {
 	protected static String[] email = new String[100];
 
 	protected static String[] name_of_languages = new String[10];
-	protected static int[] level_of_computer_handling = new int[5];
 	protected static int[] former_experience = new int[30];
 	protected static boolean[] recommendation_letter = new boolean[2];
-	protected static int[] number_of_programming_languages = new int[5];
-
 	protected static double[] grade_inmaster_or_phd = new double[51];
 
 	public CreateCandidate() {
@@ -105,13 +104,6 @@ public class CreateCandidate {
 	public void setEmail(String email, int i) {
 		CreateCandidate.email[i] = email;
 	}
-	public int getLevel_of_computer_handling(int i) {
-		return level_of_computer_handling[i];
-	}
-
-	public void setLevel_of_computer_handling(int level_of_computer_handling, int i) {
-		CreateCandidate.level_of_computer_handling[i] = level_of_computer_handling;
-	}
 
 	public int getFormer_experience(int i) {
 		return former_experience[i];
@@ -127,14 +119,6 @@ public class CreateCandidate {
 
 	public void setRecommendation_letter(boolean recommendation_letter, int i) {
 		CreateCandidate.recommendation_letter[i] = recommendation_letter;
-	}
-
-	public int getNumber_of_programming_languages(int i) {
-		return number_of_programming_languages[i];
-	}
-
-	public void setNumber_of_programming_languages(int number_of_programming_languages, int i) {
-		CreateCandidate.number_of_programming_languages[i] = number_of_programming_languages;
 	}
 
 	public double getGrade_inmaster_or_phd(int i) {
@@ -306,17 +290,18 @@ public class CreateCandidate {
 			grade_inmaster_or_phd[i] = 5 + (double) i / 10;
 		}
 
-		int rand30, rand10, rand5, rand4, rand2;
+		int rand1, rand5, rand4, rand2,rand3;
 		try {
 			for (i = 0; i < 100; i++) {
-				rand5 = new Random().nextInt(5);
-				rand30 = new Random().nextInt(age.length);
-				rand10 = new Random().nextInt(nationality.length);
+				rand4 = new Random().nextInt(5);
+				rand3 = new Random().nextInt(5);
+				rand1 = new Random().nextInt(age.length);
+				rand5 = new Random().nextInt(nationality.length);
 				rand4 = new Random().nextInt(field.length);
 				rand2 = new Random().nextInt(recommendation_letter.length);
-				candidateList.add(createCandidate(full_name[i], ssn[i], email[i], age[rand30],
-						former_experience[rand30], nationality[rand10], city_of_residence[rand10], rand5,
-						field[rand4], number_of_programming_languages[rand5], recommendation_letter[rand2]));
+				candidateList.add(createCandidate(full_name[i], ssn[i], email[i], age[rand1],
+						former_experience[rand1], nationality[rand5], city_of_residence[rand5], rand4,
+						rand3, recommendation_letter[rand2]));
 			}
 
 			File file = new File(name);
@@ -358,7 +343,7 @@ public class CreateCandidate {
 
 	@SuppressWarnings("unchecked")
 	public static JSONObject createCandidate(String full_name, String ssn, String email, long age,
-			int former_experience, String nationality, String city_of_residence, int level_of_computer_handling, String field,
+			int former_experience, String nationality, String city_of_residence, int level_of_computer_handling,
 			int number_of_programming_languages, boolean recommendation_letter) {
 		JSONObject candidate = new JSONObject();
 
@@ -374,7 +359,6 @@ public class CreateCandidate {
 		candidate.put("languages", create_language_map());
 		candidate.put("level_of_computer_handling", level_of_computer_handling);
 		candidate.put("programming_languages", number_of_programming_languages);
-		candidate.put("field", field);
 		candidate.put("recommendation_letter", recommendation_letter);
 
 		return candidate;
