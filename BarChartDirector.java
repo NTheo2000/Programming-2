@@ -11,8 +11,10 @@ public class BarChartDirector extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+		int id=7485;
+		dataForCharts da = new dataForCharts();
         primaryStage.setTitle("Director question scores");
-        double[] mscore = { 3.7, 3, 4, 4.3, 2.3, 2.8, 3.4,4,4.3,2.3 }; // avg of each question for 10 questions
+        double[] mscore =da.getDataForBarChart(id); // avg of each question for 10 questions
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setLabel("Questions");
 

@@ -14,13 +14,15 @@ public class PieChartEmployee extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+		dataForCharts data = new dataForCharts();
+		int id=818;
         double [] d;
             int z=0;
             int b=0;
             int r=0;
             int w=0;
             int t=0;
-            d = new double[] {3.5,4,5,3.2,4.3,2.3,1.3,3.4,4.3,4.5,3.7};
+            d = data.getDataForPieChart(id);
             for(int i=0; i<d.length;i++) { //calulating how many employees are satisfied etc
                 if(d[i]>0 && d[i]<=1) {
                     z=z+1;
