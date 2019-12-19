@@ -100,6 +100,13 @@ public class WorkersDatabase {
 		}
 		return passwd;
 	}
+	public ArrayList<String> getIdlist (){
+		ArrayList<String>id = new ArrayList<String>();
+		for(int i=0;i<25;i++) {
+			id.add(i, attributes[i][6]);
+		}
+		return id;
+	}
 	@SuppressWarnings("unchecked")
 	public static boolean changeUsernameorPassword(Employee employee, String element, String value)
 			throws FileNotFoundException, IOException, ParseException {
