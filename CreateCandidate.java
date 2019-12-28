@@ -1,5 +1,3 @@
-package ExerciseProgram2;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,7 +19,7 @@ public class CreateCandidate {
 	protected static String[] email = new String[100];
 
 	protected static String[] name_of_languages = new String[10];
-	protected static int[] former_experience = new int[30];
+	protected static long[] former_experience = new long[30];
 	protected static boolean[] recommendation_letter = new boolean[2];
 	protected static double[] grade_inmaster_or_phd = new double[51];
 
@@ -105,11 +103,11 @@ public class CreateCandidate {
 		CreateCandidate.email[i] = email;
 	}
 
-	public int getFormer_experience(int i) {
+	public long getFormer_experience(int i) {
 		return former_experience[i];
 	}
 
-	public void setFormer_experience(int former_experience, int i) {
+	public void setFormer_experience(long former_experience, int i) {
 		CreateCandidate.former_experience[i] = former_experience;
 	}
 
@@ -318,11 +316,11 @@ public class CreateCandidate {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private static Map create_language_map() {
 		Random rand = new Random();
-		Map languages = new HashMap<String, Integer>();
+		Map languages = new HashMap<String, Long>();
 		int number = rand.nextInt(7);
 		for (int i = 0; i <= number; i++) {
 			int count1 = rand.nextInt(10);
-			int level_of_language = rand.nextInt(5) + 1;
+			long level_of_language = rand.nextInt(5) + 1;
 			languages.put(name_of_languages[count1], level_of_language);
 		}
 		return languages;
@@ -343,8 +341,8 @@ public class CreateCandidate {
 
 	@SuppressWarnings("unchecked")
 	public static JSONObject createCandidate(String full_name, String ssn, String email, long age,
-			int former_experience, String nationality, String city_of_residence, int level_of_computer_handling,
-			int number_of_programming_languages, boolean recommendation_letter) {
+			long former_experience, String nationality, String city_of_residence, long level_of_computer_handling,
+			long number_of_programming_languages, boolean recommendation_letter) {
 		JSONObject candidate = new JSONObject();
 
 		candidate.put("full_name", full_name);

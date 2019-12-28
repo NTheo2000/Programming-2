@@ -54,27 +54,27 @@ public abstract class Candidate implements Comparator<Candidate> {
 		return candidate.get(keywords);
 	}
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	protected int[] searchLevel_of_languages(JSONObject candidate) {
+	protected long[] searchLevel_of_languages(JSONObject candidate) {
 		Map languages = (HashMap) candidate.get("languages");
-		int[] level = new int[languages.size()];
+		long[] level = new long[languages.size()];
 		int i = 0;
 			Iterator<Map.Entry> itr1 = languages.entrySet().iterator(); 
 	        while (itr1.hasNext()) { 
 				Map.Entry pair = itr1.next(); 
-	            level[i++] = (int) pair.getValue();
+	            level[i++] = (long) pair.getValue();
 	        }
 		return level;
 	}
-	protected int searchLevel_of_computer_handling(JSONObject candidate) {
-		return (int) candidate.get("level_of_computer_handling");
+	protected long searchLevel_of_computer_handling(JSONObject candidate) {
+		return (long) candidate.get("level_of_computer_handling");
 	}
-	protected int searchNumber_of_programming_languages(JSONObject candidate) {
+	protected long searchNumber_of_programming_languages(JSONObject candidate) {
 		@SuppressWarnings("rawtypes")
 		Map languages = (Map) candidate.get("programming_languages");
 		return languages.size();
 	}
-	protected int searchFormer_experience(JSONObject candidate) {
-		return (int) candidate.get("former_experience");
+	protected long searchFormer_experience(JSONObject candidate) {
+		return (long) candidate.get("former_experience");
 	}
 	protected boolean searchRecommendation_letter(JSONObject candidate) {
 		if(candidate.containsKey("recommendation_letter")) {

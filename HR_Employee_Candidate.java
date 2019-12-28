@@ -7,9 +7,9 @@ public class HR_Employee_Candidate extends Candidate {
 	private static final int MULTIPLIER_FOR_EACH_YEAR_OF_EXPERIENCE=2;
 	private static final int EXTRA_POINTS_FOR_RECOMMENDATION_LETTER=5;
 
-	private int[] level_of_languages;
-	private int level_of_computer_handling;
-	private int former_experience;
+	private long[] level_of_languages;
+	private long level_of_computer_handling;
+	private long former_experience;
 	private boolean recommendation_letter;
 	private int total_points;
 
@@ -40,7 +40,7 @@ public class HR_Employee_Candidate extends Candidate {
 	protected int total_points() {
 		int sum = 0;
 		if (level_of_languages != null) {
-			for (int i : level_of_languages) {
+			for (long i : level_of_languages) {
 			sum += i * MULTIPLIER_FOR_EACH_LANGUAGE;
 			}
 		}
