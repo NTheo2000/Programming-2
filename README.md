@@ -1,1 +1,1 @@
-# This branch is responsible fro the evaluation process of the company
+# This branch is responsible for the evaluation process of the company
