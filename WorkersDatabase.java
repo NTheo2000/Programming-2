@@ -103,7 +103,7 @@ public class WorkersDatabase {
 	public ArrayList<String> getIdlist (){
 		ArrayList<String>id = new ArrayList<String>();
 		for(int i=0;i<25;i++) {
-			id.add(i, attributes[i][6]);
+			id.add(i, attributes[i][7]);
 		}
 		return id;
 	}
