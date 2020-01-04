@@ -1,3 +1,4 @@
+package EvaluateCandidates;
 import org.json.simple.JSONObject;
 
 public class Accounting_Employee_Candidate extends Candidate {
@@ -12,7 +13,9 @@ public class Accounting_Employee_Candidate extends Candidate {
 	private long former_experience;
 	private boolean recommendation_letter;
 	private int total_points;
-
+	private String master;
+	private String phd;
+	private String languages;
 	
 	public Accounting_Employee_Candidate() {
 		super();
@@ -26,8 +29,37 @@ public class Accounting_Employee_Candidate extends Candidate {
 		this.recommendation_letter = super.searchRecommendation_letter(candidate);
 		total_points += giveBoostByBachelor(candidate, "Accounting");
 		setTotal_points();
+		languages = super.languagesAsString(candidate);
+		master = super.diplomaAsString(candidate, "Master");
+		phd = super.diplomaAsString(candidate, "PhD");
+	}
+
+	@Override
+	public String getLanguages() {
+		return languages;
+	}
+	@Override
+	public String getMaster() {
+		return master;
+	}
+	@Override
+	public String getPhD() {
+		return phd;
+	}	
+	@Override
+	public long getLevel_of_computer_handling() {
+		return level_of_computer_handling;
 	}
 	
+	@Override
+	public long getFormer_experience() {
+		return former_experience;
+	}
+	
+	@Override
+	public boolean isRecommendation_letter() {
+		return recommendation_letter;
+	}
 	@Override
 	public int getTotal_points() {
 		return total_points;

@@ -1,3 +1,4 @@
+package EvaluateCandidates;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -14,11 +15,13 @@ public class Rankings {
 			String position) throws IOException, InstantiationException, IllegalAccessException, 
 	IllegalArgumentException, InvocationTargetException, ClassNotFoundException,
 	NoSuchMethodException, SecurityException {
-		Class<? extends Candidate> Dep = (Class<? extends Candidate>) Class.forName(position);
+		Class<? extends Candidate> Dep = (Class<? extends Candidate>) Class.forName("EvaluateCandidates." + position);
 		ArrayList<Dep> list = createListFromFile(candidates, Dep);
 		Constructor<? extends Candidate> con = Dep.getConstructor();
-
 		list.sort((Comparator<? super Dep>) con.newInstance());
+		while (list.size() > 10) {
+			list.remove(10);
+		}
 		return list;
 	}
 	
@@ -30,7 +33,7 @@ public class Rankings {
 					NoSuchMethodException, SecurityException {
 		ArrayList<Dep> list = new ArrayList<Dep>();
 		Constructor<? extends Candidate> con = Dep.getConstructor(JSONObject.class);
-		for(Object candidate : candidates) {
+		for (Object candidate : candidates) {
 			list.add((Dep) con.newInstance((JSONObject) candidate));
 		}
 		//separate each candidate from the file and store him to an ArrayList.
