@@ -1,3 +1,4 @@
+package EvaluateCandidates;
 import org.json.simple.JSONObject;
 
 public class IT_Director_Candidate extends IT_Employee_Candidate {
@@ -6,6 +7,7 @@ public class IT_Director_Candidate extends IT_Employee_Candidate {
 	private static final int MULTIPLIER_FOR_EACH_PHD_IN_IT = 15;
 	private static final int MULTIPLIER_FOR_EACH_MASTER_IN_OTHER_FIELD = 5;
 	private static final int MULTIPLIER_FOR_EACH_PHD_IN_OTHER_FIELD = 10;
+	private static final double STARTING_SALARY = 110000;
 
 	private double[] master_in_IT;
 	private double[] master_in_other_field;
@@ -26,6 +28,10 @@ public class IT_Director_Candidate extends IT_Employee_Candidate {
 		setTotal_points();
 	}
 
+	@Override
+	public double getSTARTING_SALARY() {
+		return STARTING_SALARY;
+	}
 	@Override
 	public int getTotal_points() {
 		return total_points;

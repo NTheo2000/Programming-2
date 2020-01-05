@@ -19,7 +19,7 @@ public abstract class Candidate implements Comparator<Candidate> {
 	private String nationality;
 	private String city_of_residence;
 	private String ssn;
-	private String email;	
+	private String email;
 	
 	protected Candidate() {
 		
@@ -33,6 +33,7 @@ public abstract class Candidate implements Comparator<Candidate> {
 		this.ssn = (String) searchPersonalDataInFile(candidate, "ssn");
 	}
 
+	public abstract double getSTARTING_SALARY();
 	public abstract long getLevel_of_computer_handling();
 	public abstract long getFormer_experience();
 	public abstract boolean isRecommendation_letter();

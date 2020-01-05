@@ -3,10 +3,11 @@ import org.json.simple.JSONObject;
 
 public class Accounting_Employee_Candidate extends Candidate {
 	
-	private static final int MULTIPLIER_FOR_EACH_LANGUAGE=2;
-	private static final int MULTIPLIER_FOR_COMPUTER_COMPETENCE=3;
-	private static final int MULTIPLIER_FOR_EACH_YEAR_OF_EXPERIENCE=3;
-	private static final int EXTRA_POINTS_FOR_RECOMMENDATION_LETTER=5;
+	private static final int MULTIPLIER_FOR_EACH_LANGUAGE = 2;
+	private static final int MULTIPLIER_FOR_COMPUTER_COMPETENCE = 3;
+	private static final int MULTIPLIER_FOR_EACH_YEAR_OF_EXPERIENCE = 3;
+	private static final int EXTRA_POINTS_FOR_RECOMMENDATION_LETTER = 5;
+	private static final double STARTING_SALARY = 80000;
 
 	private long[] level_of_languages;
 	private long level_of_computer_handling;
@@ -34,6 +35,10 @@ public class Accounting_Employee_Candidate extends Candidate {
 		phd = super.diplomaAsString(candidate, "PhD");
 	}
 
+	@Override
+	public double getSTARTING_SALARY() {
+		return STARTING_SALARY;
+	}
 	@Override
 	public String getLanguages() {
 		return languages;
