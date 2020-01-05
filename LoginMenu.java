@@ -1,3 +1,5 @@
+package GUI_Classes;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -6,7 +8,12 @@ import javax.swing.JLayeredPane;
 
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
+
+import EvaluateCandidates.Employee;
+import EvaluateCandidates.WorkersDatabase;
+
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.JPanel;
@@ -16,6 +23,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class LoginMenu {
@@ -52,16 +60,20 @@ public class LoginMenu {
 	 * Create the application.
 	 */
 	public LoginMenu() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		initialize();
 	}
 
+	public LoginMenu(JFrame frame) {
+		this.frame = frame;
+		initialize();
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panel.setBackground(SystemColor.menu);
 		panel.setForeground(SystemColor.menuText);
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
@@ -115,6 +127,8 @@ public class LoginMenu {
 					panel.add(guiCorrection);
 				}
 				if (usernameField.getText().isEmpty() || passwordField.getPassword().length == 0) {
+					usernameField.setText(null);
+					passwordField.setText(null);
 					nullerror = new JLabel("You must type at least one caracter in every field.");
 					nullerror.setBounds(70, 44, 320, 30);
 					panel.add(nullerror);
@@ -168,34 +182,34 @@ public class LoginMenu {
 					switch (dep_id) {
 					case 0 :
 						panel.setVisible(false);
-						HRMenu hrmenu = new HRMenu(name[0]);
-						JLayeredPane hrpanel = hrmenu.initialize();
-						frame.getContentPane().add(hrpanel, BorderLayout.CENTER);
-						hrpanel.setVisible(true);
+						new HRMenu(name[0], frame, employee);
 						break;
 					case 1 :
 					case 2 :
 					case 3 :
 					case 4 :
 						panel.setVisible(false);
-						DirectorMenu directormenu = new DirectorMenu(name[0]);
-						JLayeredPane directorpanel = directormenu.initialize();
-						frame.getContentPane().add(directorpanel, BorderLayout.CENTER);
-						directorpanel.setVisible(true);
+						new DirectorMenu(name[0]);
 						break;
 					case 5 :
 					case 6 :
 					case 7 :
 					case 8 :
 						panel.setVisible(false);
-						EmployeeMenu employeemenu = new EmployeeMenu(name[0]);
-						JLayeredPane employeepanel = employeemenu.initialize();
-						frame.getContentPane().add(employeepanel, BorderLayout.CENTER);
-						employeepanel.setVisible(true);
+						new EmployeeMenu(name[0]);
 						break;
 					}
 				}
 			}
 		});
+	}
+	public JButton setBackButton(JPanel headlinePanel) {
+		JButton backButton = new JButton("Back");
+		backButton.setIconTextGap(6);
+		backButton.setHorizontalAlignment(SwingConstants.LEFT);
+		backButton.setIcon(new ImageIcon(Settings.class.getResource("/com/sun/javafx/scene/control/skin/caspian/images/backspace-icon.png")));
+		backButton.setPreferredSize(new Dimension(100, 23));
+		headlinePanel.add(backButton, BorderLayout.WEST);
+		return backButton;
 	}
 }
