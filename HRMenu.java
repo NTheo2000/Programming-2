@@ -48,7 +48,7 @@ public class HRMenu extends LoginMenu{
 		panel.add(headlinePanel, BorderLayout.NORTH);
 		headlinePanel.setLayout(new BorderLayout(0, 0));
 		
-		JLabel welcomeLabel = new JLabel("Welcome, " + firstname);
+		JLabel welcomeLabel = new JLabel("Welcome, " + firstname + "!");
 		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		welcomeLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		headlinePanel.add(welcomeLabel, BorderLayout.CENTER);
