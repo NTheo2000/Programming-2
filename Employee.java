@@ -1,3 +1,4 @@
+package EvaluateCandidates;
 
 import org.json.simple.JSONObject;;
 
@@ -31,13 +32,21 @@ public class Employee {
 		return employee.get(keywords);
 	}
 
+	public String getFull_name() {
+		return full_name;
+	}
 	public double getSalary() {
 		return salary;
 	}
 	public String getDepartment() {
 		return department;
 	}
-
+	public String getId() {
+		return id;
+	}
+	public int getDepartmentId() {
+		return Integer.parseInt((String.valueOf(id)).substring(0, 1));
+	}
 	public static String findDepartment(String id) {
 		String dep = "";
 		int dep_number = Integer.parseInt((String.valueOf(id)).substring(0, 1));
@@ -77,7 +86,7 @@ public class Employee {
 	}
 	@Override
 	public String toString() {
-		return "Employee [full_name=" + full_name + ", age=" + age + ", nationality=" + nationality
+		return "Employee [id=" + id + ", full_name=" + full_name + ", age=" + age + ", nationality=" + nationality
 				+ ", city_of_residence=" + city_of_residence + ", ssn=" + ssn + ", salary=" + salary + "] "
 						+ "works as " + department;
 	}	
