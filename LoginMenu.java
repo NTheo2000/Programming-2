@@ -189,14 +189,14 @@ public class LoginMenu {
 					case 3 :
 					case 4 :
 						panel.setVisible(false);
-						new DirectorMenu(name[0]);
+						new EmployeeMenu(name[0], frame, employee);
 						break;
 					case 5 :
 					case 6 :
 					case 7 :
 					case 8 :
 						panel.setVisible(false);
-						new EmployeeMenu(name[0]);
+						new DirectorMenu(name[0], frame, employee);
 						break;
 					}
 				}
