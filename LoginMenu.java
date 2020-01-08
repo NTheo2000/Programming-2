@@ -13,6 +13,7 @@ import EvaluateCandidates.Employee;
 import EvaluateCandidates.WorkersDatabase;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 
@@ -23,6 +24,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -33,6 +35,7 @@ public class LoginMenu {
 	private final JLayeredPane blockedpanel = new JLayeredPane();
 	private JTextField usernameField;
 	private JPasswordField passwordField;
+	private String firstname;
 	private Employee employee;
 	private JLabel error;
 	private JLabel blockmessage;
@@ -40,6 +43,7 @@ public class LoginMenu {
 	private JLabel nullerror;
 	private JLabel guiCorrection;
 	private int count = 4;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -179,24 +183,25 @@ public class LoginMenu {
 				} else {
 					int dep_id = employee.getDepartmentId();
 					String[] name = employee.getFull_name().split("\\s");
+					firstname = name[0];
 					switch (dep_id) {
 					case 0 :
 						panel.setVisible(false);
-						new HRMenu(name[0], frame, employee);
+						new HRMenu(firstname, frame, employee);
 						break;
 					case 1 :
 					case 2 :
 					case 3 :
 					case 4 :
 						panel.setVisible(false);
-						new EmployeeMenu(name[0], frame, employee);
+						new EmployeeMenu(firstname, frame, employee);
 						break;
 					case 5 :
 					case 6 :
 					case 7 :
 					case 8 :
 						panel.setVisible(false);
-						new DirectorMenu(name[0], frame, employee);
+						new DirectorMenu(firstname, frame, employee);
 						break;
 					}
 				}
@@ -211,5 +216,69 @@ public class LoginMenu {
 		backButton.setPreferredSize(new Dimension(100, 23));
 		headlinePanel.add(backButton, BorderLayout.WEST);
 		return backButton;
+	}
+	public void endMessage(String message, String errorinMenu, JFrame frame) {		
+		JLayeredPane errorPane = new JLayeredPane();
+		frame.getContentPane().add(errorPane, BorderLayout.CENTER);
+		errorPane.setLayout(new BorderLayout(0, 0));
+		errorPane.setVisible(true);
+		frame.validate();
+
+		JPanel showMessagePanel = new JPanel();
+		errorPane.add(showMessagePanel, BorderLayout.CENTER);
+		showMessagePanel.setLayout(new BorderLayout(0, 0));
+		
+		JPanel headlinepanel = new JPanel();
+		showMessagePanel.add(headlinepanel, BorderLayout.NORTH);
+		headlinepanel.setLayout(new BorderLayout(0, 0));
+		
+		JLabel messageLabel = new JLabel(message + "\r\n");
+		messageLabel.setForeground(Color.BLACK);
+		messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		messageLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		headlinepanel.add(messageLabel, BorderLayout.CENTER);
+		
+		Component verticalStrut = Box.createVerticalStrut(50);
+		headlinepanel.add(verticalStrut, BorderLayout.NORTH);
+		
+		JLabel returnLabel = new JLabel("Press go Back to return to the initial Menu");
+		headlinepanel.add(returnLabel, BorderLayout.SOUTH);
+		returnLabel.setForeground(Color.DARK_GRAY);
+		returnLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		returnLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		JPanel enterPanel = new JPanel();
+		showMessagePanel.add(enterPanel, BorderLayout.CENTER);
+		enterPanel.setLayout(new BorderLayout(0, 0));
+		
+		JButton returnButton = new JButton("Go Back\r\n");
+		returnButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		enterPanel.add(returnButton, BorderLayout.CENTER);
+		returnButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				errorPane.setVisible(false);
+				if (errorinMenu.equals("HRMenu")) {
+					new HRMenu(firstname, frame, employee);
+				} else if (errorinMenu.equals("EmployeeMenu")) {
+					new EmployeeMenu(firstname, frame, employee);
+				} else if (errorinMenu.equals("DirectorMenu")) {
+					new DirectorMenu(firstname, frame, employee);
+				} else {
+					System.exit(0);
+				}
+			}
+		});
+		
+		Component horizontalStrut_1 = Box.createHorizontalStrut(168);
+		enterPanel.add(horizontalStrut_1, BorderLayout.EAST);
+		
+		Component verticalStrut_1 = Box.createVerticalStrut(111);
+		enterPanel.add(verticalStrut_1, BorderLayout.SOUTH);
+		
+		Component verticalStrut_2 = Box.createVerticalStrut(12);
+		enterPanel.add(verticalStrut_2, BorderLayout.NORTH);
+		
+		Component horizontalStrut = Box.createHorizontalStrut(172);
+		enterPanel.add(horizontalStrut, BorderLayout.WEST);
 	}
 }
