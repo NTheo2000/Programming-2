@@ -65,7 +65,6 @@ public class EvCandMenu extends LoginMenu{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		System.out.println();
 		frame.setVisible(true);
 
 		depMenuPane = new JLayeredPane();
@@ -409,7 +408,7 @@ public class EvCandMenu extends LoginMenu{
 			Component verticalStrut_2 = Box.createVerticalStrut(11);
 			headlinePanel.add(verticalStrut_2, BorderLayout.SOUTH);
 		} catch (Exception e) {
-			endMessage("An error has occured.");
+			endMessage("An error has occured.", "HRMenu", frame);
 		}	
 	}
 	public void hireOrCall(ArrayList<Candidate> candidates, int[] rows) {
@@ -665,9 +664,9 @@ public class EvCandMenu extends LoginMenu{
 							MakeCandidateEmployee.hire(candidates.get(i), Double.valueOf(data[i][2]), department);
 						}
 		        	}
-					endMessage("The actions have been successfully executed!");
+					endMessage("The actions have been successfully executed!", "HRMenu", frame);
 				} catch (Exception e1) {
-						endMessage("An error has occured");
+						endMessage("An error has occured", "HRMenu", frame);
 				}
 			}
 		});
@@ -710,62 +709,5 @@ public class EvCandMenu extends LoginMenu{
 		
 		Component verticalStrut_3 = Box.createVerticalStrut(20);
 		cancelPanel.add(verticalStrut_3, BorderLayout.SOUTH);
-
-	}
-	public void endMessage(String message) {
-		JLayeredPane errorPane = new JLayeredPane();
-		frame.getContentPane().add(errorPane, BorderLayout.CENTER);
-		errorPane.setLayout(new BorderLayout(0, 0));
-		errorPane.setVisible(true);
-		frame.validate();
-		
-		JPanel showMessagePanel = new JPanel();
-		errorPane.add(showMessagePanel, BorderLayout.CENTER);
-		showMessagePanel.setLayout(new BorderLayout(0, 0));
-		
-		JPanel headlinepanel = new JPanel();
-		showMessagePanel.add(headlinepanel, BorderLayout.NORTH);
-		headlinepanel.setLayout(new BorderLayout(0, 0));
-		
-		JLabel messageLabel = new JLabel(message + "\r\n");
-		messageLabel.setForeground(Color.BLACK);
-		messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		messageLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		headlinepanel.add(messageLabel, BorderLayout.CENTER);
-		
-		Component verticalStrut = Box.createVerticalStrut(50);
-		headlinepanel.add(verticalStrut, BorderLayout.NORTH);
-		
-		JLabel returnLabel = new JLabel("Press go Back to return to the initial Menu");
-		headlinepanel.add(returnLabel, BorderLayout.SOUTH);
-		returnLabel.setForeground(Color.DARK_GRAY);
-		returnLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		returnLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
-		JPanel enterPanel = new JPanel();
-		showMessagePanel.add(enterPanel, BorderLayout.CENTER);
-		enterPanel.setLayout(new BorderLayout(0, 0));
-		
-		JButton returnButton = new JButton("Go Back\r\n");
-		returnButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		enterPanel.add(returnButton, BorderLayout.CENTER);
-		returnButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				errorPane.setVisible(false);
-				new HRMenu(firstname, frame, employee);
-			}
-		});
-		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(168);
-		enterPanel.add(horizontalStrut_1, BorderLayout.EAST);
-		
-		Component verticalStrut_1 = Box.createVerticalStrut(111);
-		enterPanel.add(verticalStrut_1, BorderLayout.SOUTH);
-		
-		Component verticalStrut_2 = Box.createVerticalStrut(12);
-		enterPanel.add(verticalStrut_2, BorderLayout.NORTH);
-		
-		Component horizontalStrut = Box.createHorizontalStrut(172);
-		enterPanel.add(horizontalStrut, BorderLayout.WEST);
 	}
 }
