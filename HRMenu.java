@@ -109,7 +109,8 @@ public class HRMenu extends LoginMenu{
 		ev_empButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		ev_empButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				panel.setVisible(false);
+				new EvEmpMenuforHR(firstname, frame, employee);
 			}
 		});
 		
