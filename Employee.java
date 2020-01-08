@@ -38,6 +38,15 @@ public class Employee {
 	public double getSalary() {
 		return salary;
 	}
+	public long getAge() {
+		return age;
+	}
+	public String getCity_of_residence() {
+		return city_of_residence;
+	}
+	public String getNationality() {
+		return nationality;
+	}
 	public String getDepartment() {
 		return department;
 	}
@@ -89,5 +98,5 @@ public class Employee {
 		return "Employee [id=" + id + ", full_name=" + full_name + ", age=" + age + ", nationality=" + nationality
 				+ ", city_of_residence=" + city_of_residence + ", ssn=" + ssn + ", salary=" + salary + "] "
 						+ "works as " + department;
-	}	
+	}
 }
