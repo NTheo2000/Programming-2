@@ -1,3 +1,4 @@
+package EvaluateCandidates;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,7 +14,7 @@ import org.json.simple.parser.ParseException;
 
 public class WorkersDatabase {
 	private static JSONArray employeeList = new JSONArray();
-	private static String [] letters = {"A","a","B","b","C","c","D","d","E","e","F","f","G","g","H","h","I","i",
+	private static String[] letters = {"A","a","B","b","C","c","D","d","E","e","F","f","G","g","H","h","I","i",
 			"J","j","K","k","L","l","M","m","N","n","O","o","P","p","Q","q","R","r",
 			"S","s","T","t","U","u","V","v","W","w","X","x","Y","y","Z","z","!","@","#","$","%","^","&","*","?"};	
 	private static String[][] attributes = {{"George Washington", "27", "Serbian", "London", "110000", "15653278","392457389"},
@@ -88,34 +89,28 @@ public class WorkersDatabase {
 	}
 	private static String generatepassword() {
 		Random r = new Random();
+		int length = r.nextInt(8) + 8;
 		String passwd = "";
 		int n = 0;
-		for (int i = 0; i < 12; i++) {
+		for (int i = 0; i < length; i++) {
 			n = r.nextInt(62);
 			if (n == 61) {
-				passwd += r.nextInt(10);
+				passwd += (char) r.nextInt(10);
 			} else {
 				passwd += letters[n];
 			}
 		}
 		return passwd;
 	}
-	public ArrayList<String> getIdlist (){
-		ArrayList<String>id = new ArrayList<String>();
-		for(int i=0;i<25;i++) {
-			id.add(i, attributes[i][7]);
-		}
-		return id;
-	}
 	@SuppressWarnings("unchecked")
-	public static boolean changeUsernameorPassword(Employee employee, String element, String value)
+	public static boolean changeUsernameorPassword(Employee employee, String key, String value)
 			throws FileNotFoundException, IOException, ParseException {
 		boolean update = false;
 		JSONParser parser = new JSONParser();
 		JSONArray list = (JSONArray) parser.parse(new FileReader("WorkersDatabase.json"));
 		for (Object obj : list) {
 			if (((JSONObject) obj).get("id").equals(employee.getId())) {
-				((JSONObject) obj).replace(element, value);
+				((JSONObject) obj).replace(key, value);
 				FileWriter writer = new FileWriter("WorkersDatabase.json");
 				writer.write(list.toJSONString());
 				writer.flush();
@@ -125,6 +120,35 @@ public class WorkersDatabase {
 			}
 		}
 		return update;
+	}
+	public static Employee checkCredentials(String username, char[] password) {
+		JSONParser parser = new JSONParser();
+		Employee obj = new Employee();
+		String passwd = "";
+		boolean flag = true;
+		if (!username.isEmpty() && !password.equals(null)) {
+			try {
+				JSONArray list = (JSONArray) parser.parse(new FileReader("WorkersDatabase.json"));
+				for (Object o : list) {
+					JSONObject employee = (JSONObject) o;
+					passwd = (String) employee.get("password");
+					if (employee.get("username").equals(username) && passwd.length() == password.length) {
+						for (int i = 0; i < passwd.length(); i++) {
+							if (password[i] != passwd.charAt(i)) {
+								flag = false;
+								break;
+							}
+						}
+						if (flag) {
+							obj = new Employee(employee);
+							break;
+						}
+					}
+				}
+			} catch (Exception e) {
+			}
+		}
+		return obj;
 	}
 	@SuppressWarnings({ "unchecked" })
 	public static void addEmployeeToEmployeeList(Candidate candidate, double salary)
@@ -164,5 +188,21 @@ public class WorkersDatabase {
 			dep_employees.add(new Employee((JSONObject) obj));
 		}
 		return dep_employees;
+	}
+
+	public static boolean isUsernameUnique(String username) {
+		boolean unique = false;
+		JSONParser parser = new JSONParser();
+		try {
+			JSONArray employees = (JSONArray) parser.parse(new FileReader("WorkersDatabase.json"));
+			for (Object employee : employees) {
+				if (((JSONObject) employee).get("username").equals(username)) {
+					throw new Exception();
+				}
+			}
+			unique = true;
+		} catch (Exception e) {
+		}
+		return unique;
 	}
 }
