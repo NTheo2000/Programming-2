@@ -87,6 +87,13 @@ public class WorkersDatabase {
 		}
 		return id;
 	}
+	protected static ArrayList<String> getId() {
+		ArrayList<String> id = new ArrayList<String>();
+		for(int i=0;i<=24;i++) {
+			id.add(attributes[i][7]);
+		}
+		return id;
+	}
 	private static String generatepassword() {
 		Random r = new Random();
 		int length = r.nextInt(8) + 8;
