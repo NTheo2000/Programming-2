@@ -89,14 +89,14 @@ public class WorkersDatabase {
 	}
 	protected static ArrayList<String> getId() {
 		ArrayList<String> id = new ArrayList<String>();
-		for(int i=0;i<=24;i++) {
-			id.add(attributes[i][7]);
+		for(int i=0;i<25;i++) {
+			id.add(attributes[i][5]);
 		}
 		return id;
 	}
 	private static String generatepassword() {
 		Random r = new Random();
-		int length = r.nextInt(8) + 8;
+		int length = r.nextInt(8) + 8;s
 		String passwd = "";
 		int n = 0;
 		for (int i = 0; i < length; i++) {
