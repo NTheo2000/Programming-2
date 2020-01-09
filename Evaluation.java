@@ -1,5 +1,13 @@
-import java.util.*;
-import java.io.*;
+package evaluationEmployees;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Evaluation {
 	private int[] answers = new int[10];
@@ -9,11 +17,15 @@ public class Evaluation {
 	private boolean apan = true;
 	private ArrayList<Integer> id_employee = new ArrayList<Integer>();
 	private Integer[] arrayId_Scores = new Integer[11];
-	private String[] questions ={"1. How is your cooperation with your manager?\n","\n2. How happy you are in our organization?\n",
-											"\n3. Do you think that your manager deserves his possition?\n","\n4. How hard or easily you're considering to leave?\n",
-											"\n4. How hard or easily you're considering to leave?\n","\n5. Is your manager sympahetic with you?\n","\n6. Do you think that other departments have better managers?\n",
-											"\n7. Does your manager behave nice to you and to your colleagues?\n","\n8. Is your manager fair?\n","\n9. Does you manager have the same behavior to your f/m collegues?\n",
-											"\n10. Do you think that you manager has the skills to be leader?\n"};
+	private String[] questions = { "1. How is your cooperation with your manager?\n",
+			"\n2. How happy you are in our organization?\n",
+			"\n3. Do you think that your manager deserves his possition?\n",
+			"\n4. How hard or easily you're considering to leave?\n",
+			"\n4. How hard or easily you're considering to leave?\n", "\n5. Is your manager sympahetic with you?\n",
+			"\n6. Do you think that other departments have better managers?\n",
+			"\n7. Does your manager behave nice to you and to your colleagues?\n", "\n8. Is your manager fair?\n",
+			"\n9. Does you manager have the same behavior to your f/m collegues?\n",
+			"\n10. Do you think that you manager has the skills to be leader?\n" };
 
 	public Evaluation(ArrayList<Integer> id_employee) {
 		this.id_employee = id_employee;
@@ -21,8 +33,7 @@ public class Evaluation {
 
 	public void start() throws IOException {
 		try {
-			FileInputStream fis = new FileInputStream(
-					"C:\\Users\\AGGELOS\\Desktop\\Εργασία προγραμματισμού ΙΙ\\id_scores.txt");
+			FileInputStream fis = new FileInputStream("id_scores.txt");
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			id_scores = (ArrayList<Integer[]>) ois.readObject();
 			ois.close();
@@ -30,7 +41,8 @@ public class Evaluation {
 		} catch (ClassNotFoundException e) {
 		}
 	}
-	public boolean idExist(int ids) throws IOException { // μεδοοσ 1//
+
+	public boolean idExist(int ids) throws IOException { // ΞΌΞµΞ΄ΞΏΞΏΟƒ 1//
 		start();
 		for (int i = 0; i < id_scores.size(); i++) {
 			arrayId_Scores = id_scores.get(i);
@@ -45,12 +57,13 @@ public class Evaluation {
 		return apan;
 	}
 
-	public void questions(int ids) throws IOException { // μεθοδος 2//
+	public void questions(int ids) throws IOException { // ΞΌΞµΞΈΞΏΞ΄ΞΏΟ‚ 2//
 		char w;
 		int a;
 		do {
 			w = 'T';
-			System.out.println("Right below are the questions of the evaluation. The valid answers are !!Integers!! 1 to 5\n");
+			System.out.println(
+					"Right below are the questions of the evaluation. The valid answers are !!Integers!! 1 to 5\n");
 			for (int i = 0; i < answers.length; i++) {
 				System.out.println(questions[i]);
 				a = 0;
@@ -96,38 +109,12 @@ public class Evaluation {
 		}
 		id_scores.set(c, arrayId_Scores);
 		try {
-			FileOutputStream fos = new FileOutputStream(
-					"C:\\Users\\AGGELOS\\Desktop\\Εργασία προγραμματισμού ΙΙ\\id_scores.txt");
+			FileOutputStream fos = new FileOutputStream("id_scores.txt");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(id_scores);
 			oos.close();
 		} catch (FileNotFoundException e) {
 		}
 	}
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
