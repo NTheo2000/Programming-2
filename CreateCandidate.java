@@ -1,5 +1,4 @@
 package EvaluateCandidates;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -132,7 +131,8 @@ public class CreateCandidate {
 	protected static JSONArray candidateList = new JSONArray();
 
 	@SuppressWarnings("unchecked")
-	public static void createDatabase(String name) {
+	public static void createDatabase() {
+		String name = "Candidates.json";
 		int i = 0;
 		full_name[i++] = "Catrice Heiman";
 		full_name[i++] = "Kermit Durrell";
