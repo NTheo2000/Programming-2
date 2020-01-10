@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
@@ -217,25 +216,6 @@ public class LoginMenu {
 		backButton.setPreferredSize(new Dimension(100, 23));
 		headlinePanel.add(backButton, BorderLayout.WEST);
 		return backButton;
-	}	
-	public void logout(JPanel currentPanel, JPanel eastPanel) {
-		JButton logoutButton = new JButton("Log Out");
-		logoutButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		eastPanel.add(logoutButton, BorderLayout.NORTH);
-		logoutButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				  int choice = JOptionPane.showOptionDialog(null, 
-					      "Are you sure you want to log out?", 
-					      "Log Out", 
-					      JOptionPane.YES_NO_OPTION, 
-					      JOptionPane.QUESTION_MESSAGE, 
-					      null, null, null);
-				  if (choice == JOptionPane.YES_OPTION) {
-					  currentPanel.setVisible(false);
-					  new LoginMenu(frame);
-				  }
-			}
-		});
 	}
 	public void endMessage(String message, String errorinMenu, JFrame frame) {
 		JLayeredPane errorPane = new JLayeredPane();
