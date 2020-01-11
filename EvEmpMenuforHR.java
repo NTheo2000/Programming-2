@@ -9,6 +9,7 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -33,7 +34,7 @@ public class EvEmpMenuforHR extends LoginMenu {
 	private JFrame frame;
 	private String name;
 	private Employee employee;
-	private int[] rows;
+	ArrayList<Employee> employees = new ArrayList<Employee>();
 
 	/**
 	 * Create the application.
@@ -50,7 +51,6 @@ public class EvEmpMenuforHR extends LoginMenu {
 	 */
 	private void initialize() {
 		frame.setVisible(true);
-
 		JSONParser parser = new JSONParser();
 		try {
 			JSONArray json_employees = (JSONArray) parser.parse(new FileReader("WorkersDatabase.json"));
@@ -61,6 +61,7 @@ public class EvEmpMenuforHR extends LoginMenu {
 			for (Object obj : json_employees) {
 				worker = new Employee((JSONObject) obj);
 				if (worker.getDepartment().equals("HR Manager")) continue;
+				employees.add(worker);
 				data[i][0] = worker.getFull_name();
 				data[i][1] = worker.getNationality();
 				data[i][2] = String.valueOf(worker.getAge());
@@ -99,7 +100,7 @@ public class EvEmpMenuforHR extends LoginMenu {
 			tablePanel.add(scrollPane, BorderLayout.CENTER);
 			
 			ListSelectionModel select = jt.getSelectionModel();
-			select.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+			select.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			
 			JPanel buttonPanel = new JPanel();
 			buttonPanel.setBackground(SystemColor.control);
@@ -124,10 +125,15 @@ public class EvEmpMenuforHR extends LoginMenu {
 			buttonPanel.add(verticalStrut_1, BorderLayout.NORTH);
 			okButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					rows = jt.getSelectedRows();
-					if (rows.length != 0) {
+					int row = jt.getSelectedRow();
+					if (row != -1) {
 						tablePane.setVisible(false);
-						//
+						String[] dep = employees.get(row).getDepartment().split("\\s");
+						if (dep[1].equals("Director")) {
+							new WindowDirectorCharts(name, frame, employee);
+						} else {
+							new EmployeeWindowForCharts(name, frame, employee);
+						}
 					}
 				}
 			});
