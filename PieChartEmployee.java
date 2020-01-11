@@ -1,15 +1,14 @@
 package GUI_Classes;
 
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.scene.Group;
 import java.text.NumberFormat;
+
+import evaluateEmployees.DataForCharts;
+
 import java.math.RoundingMode;
 public class PieChartEmployee {
 	
@@ -21,7 +20,7 @@ public class PieChartEmployee {
 	}
 
 	public Scene generateChart() throws Exception {
-		dataForCharts data = new dataForCharts();
+		DataForCharts data = new DataForCharts();
         double [] d;
             int z=0;
             int b=0;
