@@ -104,7 +104,7 @@ public class HRMenu extends LoginMenu{
 		Component horizontalStrut_3 = Box.createHorizontalStrut(0);
 		empPanel.add(horizontalStrut_3, BorderLayout.WEST);
 		
-		JButton ev_empButton = new JButton("Evaluate Employees");
+		JButton ev_empButton = new JButton("Employees Charts");
 		empPanel.add(ev_empButton, BorderLayout.CENTER);
 		ev_empButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		ev_empButton.addActionListener(new ActionListener() {
