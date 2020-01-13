@@ -1,4 +1,5 @@
-package EvaluateCandidates;
+package src.RunHumanMasteR;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -16,7 +17,8 @@ public class WorkersDatabase {
 	private static JSONArray employeeList = new JSONArray();
 	private static String[] letters = {"A","a","B","b","C","c","D","d","E","e","F","f","G","g","H","h","I","i",
 			"J","j","K","k","L","l","M","m","N","n","O","o","P","p","Q","q","R","r",
-			"S","s","T","t","U","u","V","v","W","w","X","x","Y","y","Z","z","!","@","#","$","%","^","&","*","?"};	
+			"S","s","T","t","U","u","V","v","W","w","X","x","Y","y","Z","z","!","@","#","$","%","^","&","*","?"};
+	
 	private static String[][] attributes = {{"George Washington", "27", "Serbian", "London", "110000", "15653278","392457389"},
 										   {"Manos Amanatidis", "33", "Greek", "Athens", "70000", "35463189","566137267"},
 										   {"Mohammed Salah", "25", "Egyptian", "New York", "150000", "43564318","431654757"},
@@ -58,7 +60,6 @@ public class WorkersDatabase {
 			fileWriter.flush();
 	        fileWriter.close();
 		} catch(IOException e) {
-			System.out.println(e);
 		}
 	}
 
@@ -87,16 +88,9 @@ public class WorkersDatabase {
 		}
 		return id;
 	}
-	protected static ArrayList<String> getId() {
-		ArrayList<String> id = new ArrayList<String>();
-		for(int i=0;i<25;i++) {
-			id.add(attributes[i][5]);
-		}
-		return id;
-	}
 	private static String generatepassword() {
 		Random r = new Random();
-		int length = r.nextInt(8) + 8;s
+		int length = r.nextInt(8) + 8;
 		String passwd = "";
 		int n = 0;
 		for (int i = 0; i < length; i++) {
@@ -172,6 +166,13 @@ public class WorkersDatabase {
 		writer.flush();  
         writer.close();
 	}
+	protected static ArrayList<String> getId() {
+		ArrayList<String> id = new ArrayList<String>();
+		for(int i=0;i<25;i++) {
+			id.add(attributes[i][5]);
+		}
+		return id;
+	}
 	public static ArrayList<Employee> getEmployeesbyDirectorsDepartment(String id)
 			throws FileNotFoundException, IOException, ParseException {
 		int dept_code = Integer.valueOf(id.substring(0, 1));
@@ -186,16 +187,7 @@ public class WorkersDatabase {
 		}
 		return dep_employees;
 	}
-	public static ArrayList<Employee> getAllEmployeeObjects()
-			throws FileNotFoundException, IOException, ParseException {
-		JSONParser parser = new JSONParser();
-		JSONArray employees = (JSONArray) parser.parse(new FileReader("WorkersDatabase.json"));
-		ArrayList<Employee> dep_employees = new ArrayList<Employee>();
-		for (Object obj : employees) {
-			dep_employees.add(new Employee((JSONObject) obj));
-		}
-		return dep_employees;
-	}
+
 
 	public static boolean isUsernameUnique(String username) {
 		boolean unique = false;

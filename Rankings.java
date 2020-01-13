@@ -1,4 +1,5 @@
-package EvaluateCandidates;
+package src.RunHumanMasteR;
+
 
 import java.util.ArrayList;
 import java.util.Comparator;

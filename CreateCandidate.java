@@ -1,4 +1,5 @@
-package EvaluateCandidates;
+package src.RunHumanMasteR;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

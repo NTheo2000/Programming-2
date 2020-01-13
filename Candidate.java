@@ -1,4 +1,5 @@
-package EvaluateCandidates;
+package src.RunHumanMasteR;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -21,13 +22,13 @@ public abstract class Candidate implements Comparator<Candidate> {
 	private String ssn;
 	private String email;
 	
-	protected Candidate() {
+	public Candidate() {
 		
 	}
 	
-	protected Candidate(JSONObject candidate) {
+	public Candidate(JSONObject candidate) {
 		this.full_name = (String) searchPersonalDataInFile(candidate, "full_name");
-		this.age = (long) searchPersonalDataInFile(candidate, "age");
+		this.age = (Long) searchPersonalDataInFile(candidate, "age");
 		this.nationality = (String) searchPersonalDataInFile(candidate, "nationality");
 		this.city_of_residence = (String) searchPersonalDataInFile(candidate, "city_of_residence");
 		this.ssn = (String) searchPersonalDataInFile(candidate, "ssn");
@@ -81,13 +82,13 @@ public abstract class Candidate implements Comparator<Candidate> {
 		return level;
 	}
 	protected long searchLevel_of_computer_handling(JSONObject candidate) {
-		return (long) candidate.get("level_of_computer_handling");
+		return (Long) candidate.get("level_of_computer_handling");
 	}
 	protected long searchNumber_of_programming_languages(JSONObject candidate) {
-		return (long) candidate.get("programming_languages");
+		return (Long) candidate.get("programming_languages");
 	}
 	protected long searchFormer_experience(JSONObject candidate) {
-		return (long) candidate.get("former_experience");
+		return (Long) candidate.get("former_experience");
 	}
 	protected boolean searchRecommendation_letter(JSONObject candidate) {
 		if(candidate.containsKey("recommendation_letter")) {
@@ -209,8 +210,7 @@ public abstract class Candidate implements Comparator<Candidate> {
 		return "Candidate [full_name=" + full_name + ", age=" + age + ", nationality=" + nationality
 				+ ", city_of_residence=" + city_of_residence + ", ssn=" + ssn + "]";
 	}
-    @Override
-	public int compare(Candidate o1, Candidate o2) {
+    public int compare(Candidate o1, Candidate o2) {
 	       return (int) (o2.getTotal_points() - o1.getTotal_points());
 	}
 	public abstract int getTotal_points();

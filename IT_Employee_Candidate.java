@@ -1,4 +1,5 @@
-package EvaluateCandidates;
+package src.RunHumanMasteR;
+
 import org.json.simple.JSONObject;
 
 public class IT_Employee_Candidate extends Candidate {

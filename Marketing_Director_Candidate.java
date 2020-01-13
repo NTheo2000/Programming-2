@@ -1,4 +1,5 @@
-package EvaluateCandidates;
+package src.RunHumanMasteR;
+
 import org.json.simple.JSONObject;
 
 public class Marketing_Director_Candidate extends Marketing_Employee_Candidate {

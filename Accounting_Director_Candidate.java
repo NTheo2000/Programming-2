@@ -1,4 +1,5 @@
-package EvaluateCandidates;
+package src.RunHumanMasteR;
+
 import org.json.simple.JSONObject;
 
 public class Accounting_Director_Candidate extends Accounting_Employee_Candidate {
