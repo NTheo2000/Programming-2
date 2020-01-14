@@ -8,8 +8,16 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.VBox;
 
+/**
+ * Loads data and creates the chart for the performance of the director creates
+ * a bar chart
+ * 
+ * @author Michalis Dontas
+ * @version 2.1 14 Jan 2020
+ *
+ */
 public class BarChartDirector {
-	
+
 	/** Contains the ID of an employee. */
 	private static String id2;
 
@@ -17,35 +25,39 @@ public class BarChartDirector {
 		id2 = id;
 	}
 
-
-	
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+	/**
+	 * Creates the chart
+	 * 
+	 * @return the bar chart
+	 * @throws Exception
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Scene generateChart() throws Exception {
 		DataForCharts da = new DataForCharts();
-        double[] mscore = da.getDataForBarChart(id2);// avg of each question for 10 questions
-       System.out.println("Ok here");
-        CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("Questions");
+		double[] mscore = da.getDataForBarChart(id2);// avg of each question for 10 questions
+		System.out.println("Ok here");
+		CategoryAxis xAxis = new CategoryAxis();
+		xAxis.setLabel("Questions");
 
-        NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("Score");
+		NumberAxis yAxis = new NumberAxis();
+		yAxis.setLabel("Score");
 
-        BarChart barChart = new BarChart(xAxis, yAxis);
-        
-    	barChart.setTitle("Director question scores");
+		BarChart barChart = new BarChart(xAxis, yAxis);
 
-        XYChart.Series dataSeries1 = new XYChart.Series();
-         dataSeries1.setName("2014");
-        for (int i = 0; i < 11; i++) {
-            dataSeries1.getData().add(new XYChart.Data("Question " + (i + 1), mscore[i]));
-        }
+		barChart.setTitle("Director question scores");
 
-        barChart.getData().add(dataSeries1);
+		XYChart.Series dataSeries1 = new XYChart.Series();
+		dataSeries1.setName("2014");
+		for (int i = 0; i < 11; i++) {
+			dataSeries1.getData().add(new XYChart.Data("Question " + (i + 1), mscore[i]));
+		}
 
-        VBox vbox = new VBox(barChart);
+		barChart.getData().add(dataSeries1);
 
-        Scene scene = new Scene(vbox, 400, 200);
+		VBox vbox = new VBox(barChart);
 
-        return scene;
-    }
+		Scene scene = new Scene(vbox, 400, 200);
+
+		return scene;
+	}
 }
