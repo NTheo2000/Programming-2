@@ -22,7 +22,7 @@
 	          <archive>
 	            <manifest>
 	              <addClasspath>true</addClasspath>
-	              <mainClass>src.RunHumanMasteR.LoginMenu</mainClass>
+	              <mainClass>GUI_Classes.LoginMenu</mainClass>
 	            </manifest>
 	          </archive>
 	        </configuration>
@@ -48,7 +48,7 @@
 					<!-- MainClass in mainfest make a executable jar -->
 					<archive>
 					  <manifest>
-						<mainClass>src.RunHumanMasteR.LoginMenu</mainClass>
+						<mainClass>GUI_Classes.LoginMenu</mainClass>
 					  </manifest>
 					</archive>
 				</configuration>
