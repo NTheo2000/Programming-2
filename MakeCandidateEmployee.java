@@ -1,5 +1,4 @@
-package src.RunHumanMasteR;
-
+package evaluationCandidate;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,17 +6,17 @@ import java.io.IOException;
 import org.json.simple.parser.ParseException;
 
 /**
- * This class helps the manager at hiring a candidate or calling him for an interview.
+ * This class makes the candidate employee by when the candidate is hired.
  * 
- * Contains 
- * @author MICHAEL
+ * @version 2.1 14 Jan 2020
+ * @author MICHAEL Dontas
  *
  */
 
-
 public class MakeCandidateEmployee {
-	
-	public static void hire(Candidate candidate, double salary, String dep) throws FileNotFoundException, ClassNotFoundException, IOException, ParseException {
+
+	public static void hire(Candidate candidate, double salary, String dep)
+			throws FileNotFoundException, ClassNotFoundException, IOException, ParseException {
 		candidate.deleteCandidate(dep);
 		WorkersDatabase.addEmployeeToEmployeeList(candidate, salary);
 	}
