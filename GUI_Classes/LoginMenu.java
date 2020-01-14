@@ -28,6 +28,13 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+/**
+ * Creates the first menu and includes the main method of the project
+ * 
+ * @author Michalis Dontas
+ * @version 5.1 14 Jan 2020
+ *
+ */
 public class LoginMenu {
 
 	protected JFrame frame;
@@ -43,7 +50,7 @@ public class LoginMenu {
 	private JLabel nullerror;
 	private JLabel guiCorrection;
 	private int count = 4;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -74,6 +81,7 @@ public class LoginMenu {
 		this.frame = frame;
 		initialize();
 	}
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -83,38 +91,38 @@ public class LoginMenu {
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		panel.setVisible(true);
-		
+
 		JLabel lblNewLabel = new JLabel("Welcome to HumanMasteR");
 		lblNewLabel.setBounds(107, 52, 286, 36);
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel.setForeground(Color.DARK_GRAY);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		
+
 		JLabel username = new JLabel("Username");
 		username.setHorizontalAlignment(SwingConstants.LEFT);
 		username.setForeground(Color.BLACK);
 		username.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		username.setBounds(136, 138, 78, 14);
 		panel.add(username);
-		
+
 		usernameField = new JTextField();
 		usernameField.setHorizontalAlignment(SwingConstants.LEFT);
 		usernameField.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		usernameField.setBounds(244, 135, 104, 20);
 		panel.add(usernameField);
 		usernameField.setColumns(10);
-		
+
 		JLabel password = new JLabel("Password");
 		password.setForeground(Color.BLACK);
 		password.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		password.setBounds(136, 196, 78, 14);
 		panel.add(password);
-		
+
 		passwordField = new JPasswordField();
 		passwordField.setBounds(244, 195, 104, 20);
 		panel.add(passwordField);
-		
+
 		JButton loginButton = new JButton("Login");
 		loginButton.setForeground(Color.BLACK);
 		loginButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -122,7 +130,8 @@ public class LoginMenu {
 		panel.add(loginButton);
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (error != null) panel.remove(error);
+				if (error != null)
+					panel.remove(error);
 				if (nullerror != null) {
 					nullerror.setText(null);
 					panel.remove(nullerror);
@@ -146,20 +155,20 @@ public class LoginMenu {
 					count--;
 					if (count == 0) {
 						panel.setVisible(false);
-						
+
 						blockedpanel.setBackground(SystemColor.menu);
 						blockedpanel.setForeground(SystemColor.menuText);
 						frame.getContentPane().add(blockedpanel, BorderLayout.CENTER);
 						blockedpanel.setLayout(null);
 						blockedpanel.setVisible(true);
-						
+
 						errorHeadline = new JLabel("You have exceeded all remaining attempts");
 						blockedpanel.add(errorHeadline);
 						errorHeadline.setBounds(52, 99, 400, 30);
 						errorHeadline.setFont(new Font("Tahoma", Font.BOLD, 18));
 						errorHeadline.setForeground(Color.BLACK);
 						errorHeadline.setHorizontalAlignment(SwingConstants.CENTER);
-							
+
 						blockmessage = new JLabel("Your access has been blocked");
 						blockedpanel.add(blockmessage);
 						blockmessage.setBounds(79, 140, 330, 30);
@@ -171,7 +180,7 @@ public class LoginMenu {
 					if (count == 1) {
 						error = new JLabel("Login failed.You have " + count + " attempt remaining.");
 					} else {
-							error = new JLabel("Login failed.You have " + count + " attempts remaining.");
+						error = new JLabel("Login failed.You have " + count + " attempts remaining.");
 					}
 					error.setBounds(105, 86, 270, 30);
 					panel.add(error);
@@ -185,21 +194,21 @@ public class LoginMenu {
 					String[] name = employee.getFull_name().split("\\s");
 					firstname = name[0];
 					switch (dep_id) {
-					case 0 :
+					case 0:
 						panel.setVisible(false);
 						new HRMenu(firstname, frame, employee);
 						break;
-					case 1 :
-					case 2 :
-					case 3 :
-					case 4 :
+					case 1:
+					case 2:
+					case 3:
+					case 4:
 						panel.setVisible(false);
 						new EmployeeMenu(firstname, frame, employee);
 						break;
-					case 5 :
-					case 6 :
-					case 7 :
-					case 8 :
+					case 5:
+					case 6:
+					case 7:
+					case 8:
 						panel.setVisible(false);
 						new DirectorMenu(firstname, frame, employee);
 						break;
@@ -208,16 +217,20 @@ public class LoginMenu {
 			}
 		});
 	}
+
 	public JButton setBackButton(JPanel headlinePanel) {
 		JButton backButton = new JButton("Back");
 		backButton.setIconTextGap(6);
 		backButton.setHorizontalAlignment(SwingConstants.LEFT);
-		backButton.setIcon(new ImageIcon(Settings.class.getResource("/com/sun/javafx/scene/control/skin/caspian/images/backspace-icon.png")));
+		backButton.setIcon(new ImageIcon(
+				Settings.class.getResource("/com/sun/javafx/scene/control/skin/caspian/images/backspace-icon.png")));
 		backButton.setPreferredSize(new Dimension(100, 23));
 		headlinePanel.add(backButton, BorderLayout.WEST);
 		return backButton;
 	}
-	public void endMessage(String message, final String errorinMenu, final String firstname, final JFrame frame, final Employee employee) {
+
+	public void endMessage(String message, final String errorinMenu, final String firstname, final JFrame frame,
+			final Employee employee) {
 		final JLayeredPane errorPane = new JLayeredPane();
 		frame.getContentPane().add(errorPane, BorderLayout.CENTER);
 		errorPane.setLayout(new BorderLayout(0, 0));
@@ -225,30 +238,30 @@ public class LoginMenu {
 		JPanel showMessagePanel = new JPanel();
 		errorPane.add(showMessagePanel, BorderLayout.CENTER);
 		showMessagePanel.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel headlinepanel = new JPanel();
 		showMessagePanel.add(headlinepanel, BorderLayout.NORTH);
 		headlinepanel.setLayout(new BorderLayout(0, 0));
-		
+
 		JLabel messageLabel = new JLabel(message + "\r\n");
 		messageLabel.setForeground(Color.BLACK);
 		messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		messageLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		headlinepanel.add(messageLabel, BorderLayout.CENTER);
-		
+
 		Component verticalStrut = Box.createVerticalStrut(65);
 		headlinepanel.add(verticalStrut, BorderLayout.NORTH);
-		
+
 		JLabel returnLabel = new JLabel("Press go Back to return to the initial Menu");
 		headlinepanel.add(returnLabel, BorderLayout.SOUTH);
 		returnLabel.setForeground(Color.DARK_GRAY);
 		returnLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		returnLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		
+
 		JPanel enterPanel = new JPanel();
 		showMessagePanel.add(enterPanel, BorderLayout.CENTER);
 		enterPanel.setLayout(new BorderLayout(0, 0));
-		
+
 		JButton returnButton = new JButton("Go Back\r\n");
 		returnButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		enterPanel.add(returnButton, BorderLayout.CENTER);
@@ -266,16 +279,16 @@ public class LoginMenu {
 				}
 			}
 		});
-		
+
 		Component horizontalStrut_1 = Box.createHorizontalStrut(168);
 		enterPanel.add(horizontalStrut_1, BorderLayout.EAST);
-		
+
 		Component verticalStrut_1 = Box.createVerticalStrut(159);
 		enterPanel.add(verticalStrut_1, BorderLayout.SOUTH);
-		
+
 		Component verticalStrut_2 = Box.createVerticalStrut(13);
 		enterPanel.add(verticalStrut_2, BorderLayout.NORTH);
-		
+
 		Component horizontalStrut = Box.createHorizontalStrut(172);
 		enterPanel.add(horizontalStrut, BorderLayout.WEST);
 	}
