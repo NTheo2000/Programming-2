@@ -12,8 +12,6 @@ import javax.swing.SwingConstants;
 import evaluateCandidates.Employee;
 import evaluateCandidates.WorkersDatabase;
 
-//import org.json.simple.parser.JSONParser;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -23,11 +21,6 @@ import javax.swing.JPanel;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-/*import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;*/
 
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -55,38 +48,6 @@ public class LoginMenu {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		/*try {
-			(new JSONParser()).parse(new FileReader("WorkersDatabase.json"));
-		} catch (IOException e) {
-			System.exit(0);
-		} catch (Exception e) {
-			WorkersDatabase.createDatabase();
-		}
-		try {
-			(new JSONParser()).parse(new FileReader("Candidates.json"));
-		} catch (IOException e) {
-			System.exit(0);
-		} catch (Exception e) {
-			CreateCandidate.createDatabase();
-		}
-		try {
-			new FileInputStream("MarketingDepartment.txt").close();
-		} catch (FileNotFoundException e1) {
-			CreatingFiles.main(null);
-		} catch (IOException e) {
-			System.exit(0);
-		}
-		try {
-			new FileInputStream("id_scores.json").close();
-		} catch (FileNotFoundException e1) {
-			try {
-				new File("id_scores.json").createNewFile();
-			} catch (IOException e) {
-				System.exit(0);
-			}
-		} catch (IOException e) {
-			System.exit(0);
-		}*/
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -272,17 +233,17 @@ public class LoginMenu {
 		JLabel messageLabel = new JLabel(message + "\r\n");
 		messageLabel.setForeground(Color.BLACK);
 		messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		messageLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		messageLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		headlinepanel.add(messageLabel, BorderLayout.CENTER);
 		
-		Component verticalStrut = Box.createVerticalStrut(50);
+		Component verticalStrut = Box.createVerticalStrut(65);
 		headlinepanel.add(verticalStrut, BorderLayout.NORTH);
 		
 		JLabel returnLabel = new JLabel("Press go Back to return to the initial Menu");
 		headlinepanel.add(returnLabel, BorderLayout.SOUTH);
 		returnLabel.setForeground(Color.DARK_GRAY);
 		returnLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		returnLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		returnLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		JPanel enterPanel = new JPanel();
 		showMessagePanel.add(enterPanel, BorderLayout.CENTER);
@@ -309,10 +270,10 @@ public class LoginMenu {
 		Component horizontalStrut_1 = Box.createHorizontalStrut(168);
 		enterPanel.add(horizontalStrut_1, BorderLayout.EAST);
 		
-		Component verticalStrut_1 = Box.createVerticalStrut(111);
+		Component verticalStrut_1 = Box.createVerticalStrut(159);
 		enterPanel.add(verticalStrut_1, BorderLayout.SOUTH);
 		
-		Component verticalStrut_2 = Box.createVerticalStrut(12);
+		Component verticalStrut_2 = Box.createVerticalStrut(13);
 		enterPanel.add(verticalStrut_2, BorderLayout.NORTH);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(172);

@@ -51,7 +51,6 @@ public class EvCandMenu extends LoginMenu{
 	private int[] rows;
 	HashMap<Candidate, Double> chosens = new HashMap<Candidate, Double>(); // a list for the candidates chosen by the HR Manager
 																		   //The key represents the candidate and the value the starting salary
-
 	/**
 	 * Create the application.
 	 */
@@ -101,16 +100,16 @@ public class EvCandMenu extends LoginMenu{
 		depMenuPane.add(optionsPanel, BorderLayout.CENTER);
 		optionsPanel.setLayout(new BorderLayout(0, 0));
 		
-		Component verticalStrut_1 = Box.createVerticalStrut(79);
+		Component verticalStrut_1 = Box.createVerticalStrut(96);
 		optionsPanel.add(verticalStrut_1, BorderLayout.SOUTH);
 		
-		Component verticalStrut_2 = Box.createVerticalStrut(29);
+		Component verticalStrut_2 = Box.createVerticalStrut(35);
 		optionsPanel.add(verticalStrut_2, BorderLayout.NORTH);
 		
-		Component horizontalStrut = Box.createHorizontalStrut(107);
+		Component horizontalStrut = Box.createHorizontalStrut(112);
 		optionsPanel.add(horizontalStrut, BorderLayout.WEST);
 		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(106);
+		Component horizontalStrut_1 = Box.createHorizontalStrut(111);
 		optionsPanel.add(horizontalStrut_1, BorderLayout.EAST);
 		
 		JPanel buttonPanel = new JPanel();
@@ -125,7 +124,7 @@ public class EvCandMenu extends LoginMenu{
 		marketingButton.setMinimumSize(new Dimension(95, 35));
 		marketingButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		marketingButton.setMaximumSize(new Dimension(95, 35));
-		marketingButton.setPreferredSize(new Dimension(95, 35));
+		marketingButton.setPreferredSize(new Dimension(120, 50));
 		buttonPanel1.add(marketingButton, BorderLayout.NORTH);
 		marketingButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -139,7 +138,7 @@ public class EvCandMenu extends LoginMenu{
 		accountingButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		accountingButton.setMinimumSize(new Dimension(95, 35));
 		accountingButton.setMaximumSize(new Dimension(95, 35));
-		accountingButton.setPreferredSize(new Dimension(95, 35));
+		accountingButton.setPreferredSize(new Dimension(120, 50));
 		buttonPanel1.add(accountingButton, BorderLayout.SOUTH);
 		accountingButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -156,7 +155,7 @@ public class EvCandMenu extends LoginMenu{
 		JButton itButton = new JButton("IT");
 		itButton.setMinimumSize(new Dimension(95, 35));
 		itButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		itButton.setPreferredSize(new Dimension(95, 35));
+		itButton.setPreferredSize(new Dimension(120, 50));
 		itButton.setMaximumSize(new Dimension(95, 35));
 		buttonPanel2.add(itButton, BorderLayout.NORTH);
 		itButton.addActionListener(new ActionListener() {
@@ -171,7 +170,7 @@ public class EvCandMenu extends LoginMenu{
 		hrButton.setMinimumSize(new Dimension(95, 35));
 		hrButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		hrButton.setMaximumSize(new Dimension(95, 35));
-		hrButton.setPreferredSize(new Dimension(95, 35));
+		hrButton.setPreferredSize(new Dimension(120, 50));
 		buttonPanel2.add(hrButton, BorderLayout.SOUTH);
 		hrButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -182,7 +181,6 @@ public class EvCandMenu extends LoginMenu{
 		});
 	}
 	public void posMenu() {
-		
 		final JLayeredPane posMenuPane = new JLayeredPane();
 		frame.getContentPane().add(posMenuPane, BorderLayout.CENTER);
 		posMenuPane.setLayout(new BorderLayout(0, 0));
@@ -210,7 +208,7 @@ public class EvCandMenu extends LoginMenu{
 			}
 		});
 		
-		Component verticalStrut = Box.createVerticalStrut(30);
+		Component verticalStrut = Box.createVerticalStrut(33);
 		topPanel.add(verticalStrut, BorderLayout.SOUTH);
 		
 		JPanel optionsPanel = new JPanel();
@@ -223,7 +221,7 @@ public class EvCandMenu extends LoginMenu{
 		
 		JButton directorButton = new JButton("Director");
 		directorButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		directorButton.setPreferredSize(new Dimension(95, 35));
+		directorButton.setPreferredSize(new Dimension(95, 50));
 		directorButton.setMaximumSize(new Dimension(95, 35));
 		directorButton.setMinimumSize(new Dimension(95, 35));
 		optionsPanel1.add(directorButton, BorderLayout.CENTER);
@@ -241,7 +239,7 @@ public class EvCandMenu extends LoginMenu{
 		Component horizontalStrut_3 = Box.createHorizontalStrut(143);
 		optionsPanel1.add(horizontalStrut_3, BorderLayout.EAST);
 		
-		Component verticalStrut_2 = Box.createVerticalStrut(27);
+		Component verticalStrut_2 = Box.createVerticalStrut(37);
 		optionsPanel1.add(verticalStrut_2, BorderLayout.NORTH);
 		
 		JPanel optionsPanel2 = new JPanel();
@@ -252,7 +250,7 @@ public class EvCandMenu extends LoginMenu{
 		employeeButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		employeeButton.setMinimumSize(new Dimension(95, 35));
 		employeeButton.setMaximumSize(new Dimension(95, 35));
-		employeeButton.setPreferredSize(new Dimension(95, 35));
+		employeeButton.setPreferredSize(new Dimension(95, 50));
 		optionsPanel2.add(employeeButton, BorderLayout.CENTER);
 		employeeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -262,7 +260,7 @@ public class EvCandMenu extends LoginMenu{
 			}
 		});
 		
-		Component verticalStrut_1 = Box.createVerticalStrut(75);
+		Component verticalStrut_1 = Box.createVerticalStrut(107);
 		optionsPanel2.add(verticalStrut_1, BorderLayout.SOUTH);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(139);
@@ -270,6 +268,7 @@ public class EvCandMenu extends LoginMenu{
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(144);
 		optionsPanel2.add(horizontalStrut_1, BorderLayout.EAST);
+
 	}
 	public void showList() {
 		JSONParser parser = new JSONParser();
@@ -363,13 +362,13 @@ public class EvCandMenu extends LoginMenu{
 			buttonPanel.add(okButton, BorderLayout.CENTER);
 			okButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			
-			Component horizontalStrut = Box.createHorizontalStrut(151);
+			Component horizontalStrut = Box.createHorizontalStrut(165);
 			buttonPanel.add(horizontalStrut, BorderLayout.WEST);
 			
 			Component verticalStrut = Box.createVerticalStrut(17);
 			buttonPanel.add(verticalStrut, BorderLayout.SOUTH);
 			
-			Component horizontalStrut_1 = Box.createHorizontalStrut(152);
+			Component horizontalStrut_1 = Box.createHorizontalStrut(176);
 			buttonPanel.add(horizontalStrut_1, BorderLayout.EAST);
 			
 			Component verticalStrut_1 = Box.createVerticalStrut(11);
@@ -426,7 +425,7 @@ public class EvCandMenu extends LoginMenu{
 		
 		JLabel candidateLabel = new JLabel(candidate.getFull_Name() + ", " + candidate.getTotal_points() + " points");
 		candidateLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		candidateLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		candidateLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		menuPanel.add(candidateLabel, BorderLayout.NORTH);
 		
 		JPanel interviewPanel = new JPanel();
@@ -434,6 +433,7 @@ public class EvCandMenu extends LoginMenu{
 		interviewPanel.setLayout(new BorderLayout(0, 0));
 		
 		final JButton interviewButton = new JButton("Call for Interview");
+		interviewButton.setPreferredSize(new Dimension(145, 23));
 		interviewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		interviewPanel.add(interviewButton, BorderLayout.CENTER);
 		interviewButton.addActionListener(new ActionListener() {
@@ -456,10 +456,10 @@ public class EvCandMenu extends LoginMenu{
 		Component horizontalStrut = Box.createHorizontalStrut(82);
 		interviewPanel.add(horizontalStrut, BorderLayout.WEST);
 		
-		Component verticalStrut_1 = Box.createVerticalStrut(38);
+		Component verticalStrut_1 = Box.createVerticalStrut(54);
 		interviewPanel.add(verticalStrut_1, BorderLayout.SOUTH);
 		
-		Component verticalStrut_2 = Box.createVerticalStrut(26);
+		Component verticalStrut_2 = Box.createVerticalStrut(36);
 		interviewPanel.add(verticalStrut_2, BorderLayout.NORTH);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(17);
@@ -470,7 +470,7 @@ public class EvCandMenu extends LoginMenu{
 		hirePanel.setLayout(new BorderLayout(0, 0));
 		
 		final JButton hireButton = new JButton("Hire");
-		hireButton.setPreferredSize(new Dimension(115, 23));
+		hireButton.setPreferredSize(new Dimension(145, 23));
 		hireButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		hirePanel.add(hireButton, BorderLayout.CENTER);
 		
@@ -480,10 +480,10 @@ public class EvCandMenu extends LoginMenu{
 		Component horizontalStrut_3 = Box.createHorizontalStrut(91);
 		hirePanel.add(horizontalStrut_3, BorderLayout.EAST);
 		
-		Component verticalStrut_3 = Box.createVerticalStrut(38);
+		Component verticalStrut_3 = Box.createVerticalStrut(55);
 		hirePanel.add(verticalStrut_3, BorderLayout.SOUTH);
 		
-		Component verticalStrut_4 = Box.createVerticalStrut(26);
+		Component verticalStrut_4 = Box.createVerticalStrut(37);
 		hirePanel.add(verticalStrut_4, BorderLayout.NORTH);
 		
 		JPanel setSalaryPanel = new JPanel();
@@ -678,7 +678,7 @@ public class EvCandMenu extends LoginMenu{
 		
 		JLabel headlineLabel = new JLabel("State of the candidates");
 		headlineLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		headlineLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		headlineLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		headlinePanel.add(headlineLabel, BorderLayout.CENTER);
 		
 		Component verticalStrut_2 = Box.createVerticalStrut(14);

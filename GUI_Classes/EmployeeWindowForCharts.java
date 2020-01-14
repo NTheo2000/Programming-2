@@ -52,7 +52,7 @@ public class EmployeeWindowForCharts extends LoginMenu {
 		headlinePanel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel headlineLabel = new JLabel("Select the first and the last semester to see your peformance");
-		headlineLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		headlineLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		headlineLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		headlinePanel.add(headlineLabel, BorderLayout.CENTER);
 		
@@ -77,7 +77,7 @@ public class EmployeeWindowForCharts extends LoginMenu {
 			}
 		});
 		
-		Component verticalStrut_1 = Box.createVerticalStrut(22);
+		Component verticalStrut_1 = Box.createVerticalStrut(31);
 		topPanel.add(verticalStrut_1, BorderLayout.SOUTH);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
@@ -121,7 +121,7 @@ public class EmployeeWindowForCharts extends LoginMenu {
 		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
 		textPanel1.add(horizontalStrut_3, BorderLayout.EAST);
 		
-		Component verticalStrut_3 = Box.createVerticalStrut(20);
+		Component verticalStrut_3 = Box.createVerticalStrut(27);
 		textPanel1.add(verticalStrut_3, BorderLayout.NORTH);
 		
 		JPanel numberPanel1 = new JPanel();
@@ -134,15 +134,16 @@ public class EmployeeWindowForCharts extends LoginMenu {
 		numberPanel1.add(spinner1);
 		
 		Component horizontalStrut_4 = Box.createHorizontalStrut(10);
+		horizontalStrut_4.setPreferredSize(new Dimension(34, 0));
 		numberPanel1.add(horizontalStrut_4, BorderLayout.WEST);
 		
-		Component verticalStrut_4 = Box.createVerticalStrut(20);
+		Component verticalStrut_4 = Box.createVerticalStrut(41);
 		numberPanel1.add(verticalStrut_4, BorderLayout.NORTH);
 		
-		Component horizontalStrut_5 = Box.createHorizontalStrut(133);
+		Component horizontalStrut_5 = Box.createHorizontalStrut(173);
 		numberPanel1.add(horizontalStrut_5, BorderLayout.EAST);
 		
-		Component verticalStrut_5 = Box.createVerticalStrut(11);
+		Component verticalStrut_5 = Box.createVerticalStrut(28);
 		numberPanel1.add(verticalStrut_5, BorderLayout.SOUTH);
 		
 		JPanel secondPanel = new JPanel();
@@ -163,7 +164,7 @@ public class EmployeeWindowForCharts extends LoginMenu {
 		Component horizontalStrut_7 = Box.createHorizontalStrut(20);
 		textPanel2.add(horizontalStrut_7, BorderLayout.EAST);
 		
-		Component verticalStrut_6 = Box.createVerticalStrut(24);
+		Component verticalStrut_6 = Box.createVerticalStrut(35);
 		verticalStrut_6.setPreferredSize(new Dimension(0, 23));
 		textPanel2.add(verticalStrut_6, BorderLayout.SOUTH);
 		
@@ -176,19 +177,19 @@ public class EmployeeWindowForCharts extends LoginMenu {
 		
 		final JSpinner spinner2 = new JSpinner();
 		spinner2.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
-		spinner2.setPreferredSize(new Dimension(29, 22));
+		spinner2.setPreferredSize(new Dimension(29, 24));
 		numberPanel2.add(spinner2);
 		
-		Component horizontalStrut_8 = Box.createHorizontalStrut(10);
+		Component horizontalStrut_8 = Box.createHorizontalStrut(34);
 		numberPanel2.add(horizontalStrut_8, BorderLayout.WEST);
 		
-		Component horizontalStrut_9 = Box.createHorizontalStrut(134);
+		Component horizontalStrut_9 = Box.createHorizontalStrut(173);
 		numberPanel2.add(horizontalStrut_9, BorderLayout.EAST);
 		
-		Component verticalStrut_7 = Box.createVerticalStrut(24);
+		Component verticalStrut_7 = Box.createVerticalStrut(42);
 		numberPanel2.add(verticalStrut_7, BorderLayout.SOUTH);
 		
-		Component verticalStrut_9 = Box.createVerticalStrut(11);
+		Component verticalStrut_9 = Box.createVerticalStrut(26);
 		numberPanel2.add(verticalStrut_9, BorderLayout.NORTH);
 		
 		JPanel buttonPanel = new JPanel();
@@ -196,6 +197,7 @@ public class EmployeeWindowForCharts extends LoginMenu {
 		buttonPanel.setLayout(new BorderLayout(0, 0));
 		
 		JButton okButton = new JButton("Ok");
+		okButton.setPreferredSize(new Dimension(45, 30));
 		buttonPanel.add(okButton, BorderLayout.CENTER);
 		okButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -241,13 +243,13 @@ public class EmployeeWindowForCharts extends LoginMenu {
 			}
 		});
 		
-		Component horizontalStrut_10 = Box.createHorizontalStrut(172);
+		Component horizontalStrut_10 = Box.createHorizontalStrut(180);
 		buttonPanel.add(horizontalStrut_10, BorderLayout.WEST);
 		
-		Component verticalStrut_10 = Box.createVerticalStrut(37);
+		Component verticalStrut_10 = Box.createVerticalStrut(42);
 		buttonPanel.add(verticalStrut_10, BorderLayout.SOUTH);
 		
-		Component horizontalStrut_11 = Box.createHorizontalStrut(165);
+		Component horizontalStrut_11 = Box.createHorizontalStrut(176);
 		buttonPanel.add(horizontalStrut_11, BorderLayout.EAST);
 		
 		Component verticalStrut_11 = Box.createVerticalStrut(2);

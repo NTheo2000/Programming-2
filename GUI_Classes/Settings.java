@@ -63,7 +63,7 @@ public class Settings extends LoginMenu{
 		headlinePanel.add(topPanel, BorderLayout.NORTH);
 		topPanel.setLayout(new BorderLayout(0, 0));
 		
-		Component verticalStrut_5 = Box.createVerticalStrut(28);
+		Component verticalStrut_5 = Box.createVerticalStrut(38);
 		topPanel.add(verticalStrut_5);
 		
 		JLabel lblNewLabel = new JLabel("Settings");
@@ -106,7 +106,7 @@ public class Settings extends LoginMenu{
 		Component horizontalStrut_1 = Box.createHorizontalStrut(53);
 		usernamePanel.add(horizontalStrut_1, BorderLayout.WEST);
 		
-		Component verticalStrut_2 = Box.createVerticalStrut(47);
+		Component verticalStrut_2 = Box.createVerticalStrut(40);
 		usernamePanel.add(verticalStrut_2, BorderLayout.NORTH);
 		
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
@@ -132,7 +132,7 @@ public class Settings extends LoginMenu{
 		Component verticalStrut_3 = Box.createVerticalStrut(138);
 		passwordPanel.add(verticalStrut_3, BorderLayout.SOUTH);
 		
-		Component verticalStrut_4 = Box.createVerticalStrut(47);
+		Component verticalStrut_4 = Box.createVerticalStrut(40);
 		passwordPanel.add(verticalStrut_4, BorderLayout.NORTH);
 		passwordButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -235,10 +235,10 @@ public class Settings extends LoginMenu{
 		Component horizontalStrut_2 = Box.createHorizontalStrut(30);
 		passwordBoxPanel.add(horizontalStrut_2, BorderLayout.WEST);
 		
-		Component verticalStrut_2 = Box.createVerticalStrut(56);
+		Component verticalStrut_2 = Box.createVerticalStrut(47);
 		passwordBoxPanel.add(verticalStrut_2, BorderLayout.NORTH);
 		
-		Component verticalStrut_1 = Box.createVerticalStrut(64);
+		Component verticalStrut_1 = Box.createVerticalStrut(51);
 		passwordBoxPanel.add(verticalStrut_1, BorderLayout.SOUTH);
 		
 		JPanel enterPanel = new JPanel();
@@ -297,7 +297,7 @@ public class Settings extends LoginMenu{
 					errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
 					errorPanel.add(errorLabel, BorderLayout.CENTER);
 					
-					Component verticalStrut_4 = Box.createVerticalStrut(16);
+					Component verticalStrut_4 = Box.createVerticalStrut(28);
 					errorPanel.add(verticalStrut_4, BorderLayout.NORTH);
 					
 					JPanel menuPanel = new JPanel();
@@ -327,7 +327,7 @@ public class Settings extends LoginMenu{
 					Component horizontalStrut = Box.createHorizontalStrut(54);
 					credentialboxPanel.add(horizontalStrut, BorderLayout.EAST);
 					
-					Component rigidArea = Box.createRigidArea(new Dimension(31, 22));
+					Component rigidArea = Box.createRigidArea(new Dimension(31, 28));
 					credentialboxPanel.add(rigidArea, BorderLayout.WEST);
 					
 					JPanel confirmPanel = new JPanel();
@@ -354,23 +354,23 @@ public class Settings extends LoginMenu{
 					Component horizontalStrut_2 = Box.createHorizontalStrut(30);
 					confirmBoxPanel.add(horizontalStrut_2, BorderLayout.WEST);
 					
-					Component verticalStrut_2 = Box.createVerticalStrut(39);
+					Component verticalStrut_2 = Box.createVerticalStrut(59);
 					confirmBoxPanel.add(verticalStrut_2, BorderLayout.NORTH);
 					
-					Component verticalStrut_1 = Box.createVerticalStrut(41);
+					Component verticalStrut_1 = Box.createVerticalStrut(52);
 					confirmBoxPanel.add(verticalStrut_1, BorderLayout.SOUTH);
 					
 					JPanel enterPanel = new JPanel();
 					menuPanel.add(enterPanel, BorderLayout.SOUTH);
 					enterPanel.setLayout(new BorderLayout(0, 0));
 					
-					Component rigidArea_1 = Box.createRigidArea(new Dimension(180, 33));
+					Component rigidArea_1 = Box.createRigidArea(new Dimension(180, 52));
 					enterPanel.add(rigidArea_1, BorderLayout.WEST);
 					
-					Component horizontalStrut_3 = Box.createHorizontalStrut(170);
+					Component horizontalStrut_3 = Box.createHorizontalStrut(183);
 					enterPanel.add(horizontalStrut_3, BorderLayout.EAST);
 					
-					Component verticalStrut_3 = Box.createVerticalStrut(32);
+					Component verticalStrut_3 = Box.createVerticalStrut(60);
 					enterPanel.add(verticalStrut_3, BorderLayout.SOUTH);
 					
 					JButton enterButton = new JButton("Enter");

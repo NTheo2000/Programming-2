@@ -129,15 +129,15 @@ public class EvaluateOperation extends LoginMenu {
 					}
 				});
 	
-				Component horizontalStrut = Box.createHorizontalStrut(151);
+				Component horizontalStrut = Box.createHorizontalStrut(164);
 				buttonPanel.add(horizontalStrut, BorderLayout.WEST);
-	
+
 				Component verticalStrut = Box.createVerticalStrut(17);
 				buttonPanel.add(verticalStrut, BorderLayout.SOUTH);
-	
-				Component horizontalStrut_1 = Box.createHorizontalStrut(152);
+
+				Component horizontalStrut_1 = Box.createHorizontalStrut(175);
 				buttonPanel.add(horizontalStrut_1, BorderLayout.EAST);
-	
+
 				Component verticalStrut_1 = Box.createVerticalStrut(11);
 				buttonPanel.add(verticalStrut_1, BorderLayout.NORTH);
 	
@@ -153,6 +153,9 @@ public class EvaluateOperation extends LoginMenu {
 				JPanel topPanel = new JPanel();
 				headlinePanel.add(topPanel, BorderLayout.WEST);
 				topPanel.setLayout(new BorderLayout(0, 0));
+				
+				Component horizontalStrut_2 = Box.createHorizontalStrut(92);
+				headlinePanel.add(horizontalStrut_2, BorderLayout.EAST);
 	
 				JButton backButton = setBackButton(topPanel);
 				backButton.addActionListener(new ActionListener() {
@@ -197,7 +200,7 @@ public class EvaluateOperation extends LoginMenu {
 		JLabel lblNewLabel = new JLabel(questions[0]);
 		lblNewLabel.setPreferredSize(new Dimension(353, 35));
 		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel.add(lblNewLabel, BorderLayout.CENTER);
 
 		Component horizontalStrut = Box.createHorizontalStrut(10);
@@ -215,7 +218,7 @@ public class EvaluateOperation extends LoginMenu {
 		
 		JLabel topLabel = new JLabel("Question " + count + " of " + total_questions);
 		topLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		topLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		topLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		topPanel.add(topLabel, BorderLayout.CENTER);
 		
 		JButton backButton = setBackButton(topPanel);
@@ -230,10 +233,10 @@ public class EvaluateOperation extends LoginMenu {
 			}
 		});
 		
-		Component verticalStrut = Box.createVerticalStrut(20);
+		Component verticalStrut = Box.createVerticalStrut(28);
 		topPanel.add(verticalStrut, BorderLayout.SOUTH);
 		
-		Component horizontalStrut_11 = Box.createHorizontalStrut(78);
+		Component horizontalStrut_11 = Box.createHorizontalStrut(95);
 		topPanel.add(horizontalStrut_11, BorderLayout.EAST);
 
 		JPanel panel_1 = new JPanel();
@@ -245,7 +248,7 @@ public class EvaluateOperation extends LoginMenu {
 		panel_2.setLayout(new BorderLayout(0, 0));
 
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("1 (Absolutely Disagree)");
-		rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		rdbtnNewRadioButton.setPreferredSize(new Dimension(100, 25));
 		panel_2.add(rdbtnNewRadioButton, BorderLayout.CENTER);
 		rdbtnNewRadioButton.addActionListener(new ActionListener() {
@@ -281,10 +284,10 @@ public class EvaluateOperation extends LoginMenu {
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
 		panel_2.add(horizontalStrut_2, BorderLayout.EAST);
 
-		Component verticalStrut_2 = Box.createVerticalStrut(21);
+		Component verticalStrut_2 = Box.createVerticalStrut(34);
 		panel_2.add(verticalStrut_2, BorderLayout.NORTH);
 
-		Component verticalStrut_3 = Box.createVerticalStrut(1);
+		Component verticalStrut_3 = Box.createVerticalStrut(3);
 		panel_2.add(verticalStrut_3, BorderLayout.SOUTH);
 
 		JPanel panel_3 = new JPanel();
@@ -298,12 +301,12 @@ public class EvaluateOperation extends LoginMenu {
 		Component horizontalStrut_4 = Box.createHorizontalStrut(20);
 		panel_3.add(horizontalStrut_4, BorderLayout.EAST);
 
-		Component verticalStrut_4 = Box.createVerticalStrut(4);
+		Component verticalStrut_4 = Box.createVerticalStrut(7);
 		panel_3.add(verticalStrut_4, BorderLayout.NORTH);
 		
 				JRadioButton rdbtnNewRadioButton_4 = new JRadioButton("5 (Absolutely Agree)");
 				panel_3.add(rdbtnNewRadioButton_4, BorderLayout.CENTER);
-				rdbtnNewRadioButton_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				rdbtnNewRadioButton_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
 				rdbtnNewRadioButton_4.setPreferredSize(new Dimension(100, 25));
 				rdbtnNewRadioButton_4.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -332,7 +335,7 @@ public class EvaluateOperation extends LoginMenu {
 					}
 				});
 
-		Component verticalStrut_5 = Box.createVerticalStrut(34);
+		Component verticalStrut_5 = Box.createVerticalStrut(90);
 		panel_3.add(verticalStrut_5, BorderLayout.SOUTH);
 
 		JPanel panel_4 = new JPanel();
@@ -358,7 +361,7 @@ public class EvaluateOperation extends LoginMenu {
 		
 				JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("4 (Agree)");
 				panel_5.add(rdbtnNewRadioButton_3, BorderLayout.CENTER);
-				rdbtnNewRadioButton_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				rdbtnNewRadioButton_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 				rdbtnNewRadioButton_3.setPreferredSize(new Dimension(100, 25));
 				rdbtnNewRadioButton_3.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -399,8 +402,8 @@ public class EvaluateOperation extends LoginMenu {
 						
 								JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("2 (Disagree)");
 								panel_6.add(rdbtnNewRadioButton_1, BorderLayout.CENTER);
-								rdbtnNewRadioButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-								rdbtnNewRadioButton_1.setPreferredSize(new Dimension(100, 25));
+								rdbtnNewRadioButton_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+								rdbtnNewRadioButton_1.setPreferredSize(new Dimension(100, 28));
 								rdbtnNewRadioButton_1.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
 										layeredPane.setVisible(false);
@@ -439,15 +442,15 @@ public class EvaluateOperation extends LoginMenu {
 		Component horizontalStrut_6 = Box.createHorizontalStrut(20);
 		panel_7.add(horizontalStrut_6, BorderLayout.EAST);
 
-		Component verticalStrut_6 = Box.createVerticalStrut(-32);
+		Component verticalStrut_6 = Box.createVerticalStrut(-22);
 		panel_7.add(verticalStrut_6, BorderLayout.NORTH);
 
-		Component verticalStrut_7 = Box.createVerticalStrut(-30);
+		Component verticalStrut_7 = Box.createVerticalStrut(-20);
 		panel_7.add(verticalStrut_7, BorderLayout.SOUTH);
 		
 				JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("3 (Neither Disagree Nor Agree)");
 				panel_7.add(rdbtnNewRadioButton_2, BorderLayout.CENTER);
-				rdbtnNewRadioButton_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				rdbtnNewRadioButton_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 				rdbtnNewRadioButton_2.setPreferredSize(new Dimension(100, 25));
 				rdbtnNewRadioButton_2.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {

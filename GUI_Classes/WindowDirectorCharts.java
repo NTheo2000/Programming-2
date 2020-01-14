@@ -49,7 +49,7 @@ public class WindowDirectorCharts extends LoginMenu {
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblChooseYourChart = new JLabel("Choose the type of Chart");
-		lblChooseYourChart.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblChooseYourChart.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblChooseYourChart.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblChooseYourChart, BorderLayout.CENTER);
 		
@@ -79,7 +79,7 @@ public class WindowDirectorCharts extends LoginMenu {
 			}
 		});
 		
-		Component verticalStrut = Box.createVerticalStrut(31);
+		Component verticalStrut = Box.createVerticalStrut(45);
 		topPanel.add(verticalStrut, BorderLayout.SOUTH);
 		
 		JPanel panel_1 = new JPanel();
@@ -87,7 +87,7 @@ public class WindowDirectorCharts extends LoginMenu {
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
 		JButton btnBarChart = new JButton("Score per question (Bar Chart)");
-		btnBarChart.setPreferredSize(new Dimension(185, 23));
+		btnBarChart.setPreferredSize(new Dimension(195, 23));
 		panel_1.add(btnBarChart, BorderLayout.CENTER);
 		btnBarChart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -96,16 +96,16 @@ public class WindowDirectorCharts extends LoginMenu {
 			}
 		});
 		
-		Component verticalStrut_2 = Box.createVerticalStrut(15);
+		Component verticalStrut_2 = Box.createVerticalStrut(24);
 		panel_1.add(verticalStrut_2, BorderLayout.NORTH);
 		
-		Component verticalStrut_3 = Box.createVerticalStrut(108);
+		Component verticalStrut_3 = Box.createVerticalStrut(122);
 		panel_1.add(verticalStrut_3, BorderLayout.SOUTH);
 		
-		Component horizontalStrut_2 = Box.createHorizontalStrut(15);
+		Component horizontalStrut_2 = Box.createHorizontalStrut(25);
 		panel_1.add(horizontalStrut_2, BorderLayout.WEST);
 		
-		Component horizontalStrut_3 = Box.createHorizontalStrut(0);
+		Component horizontalStrut_3 = Box.createHorizontalStrut(23);
 		panel_1.add(horizontalStrut_3, BorderLayout.EAST);
 		
 		JPanel panel_2 = new JPanel();
@@ -122,16 +122,16 @@ public class WindowDirectorCharts extends LoginMenu {
 			}
 		});
 		
-		Component horizontalStrut_4 = Box.createHorizontalStrut(26);
+		Component horizontalStrut_4 = Box.createHorizontalStrut(17);
 		panel_2.add(horizontalStrut_4, BorderLayout.WEST);
 		
-		Component horizontalStrut_5 = Box.createHorizontalStrut(10);
+		Component horizontalStrut_5 = Box.createHorizontalStrut(23);
 		panel_2.add(horizontalStrut_5, BorderLayout.EAST);
 		
-		Component verticalStrut_4 = Box.createVerticalStrut(16);
+		Component verticalStrut_4 = Box.createVerticalStrut(25);
 		panel_2.add(verticalStrut_4, BorderLayout.NORTH);
 		
-		Component verticalStrut_5 = Box.createVerticalStrut(108);
+		Component verticalStrut_5 = Box.createVerticalStrut(122);
 		panel_2.add(verticalStrut_5, BorderLayout.SOUTH);
 	}
 	public void showChart(String chartType) {

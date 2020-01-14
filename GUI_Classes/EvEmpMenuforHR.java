@@ -114,13 +114,13 @@ public class EvEmpMenuforHR extends LoginMenu {
 			buttonPanel.add(okButton, BorderLayout.CENTER);
 			okButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			
-			Component horizontalStrut = Box.createHorizontalStrut(151);
+			Component horizontalStrut = Box.createHorizontalStrut(165);
 			buttonPanel.add(horizontalStrut, BorderLayout.WEST);
 			
 			Component verticalStrut = Box.createVerticalStrut(17);
 			buttonPanel.add(verticalStrut, BorderLayout.SOUTH);
 			
-			Component horizontalStrut_1 = Box.createHorizontalStrut(152);
+			Component horizontalStrut_1 = Box.createHorizontalStrut(184);
 			buttonPanel.add(horizontalStrut_1, BorderLayout.EAST);
 			
 			Component verticalStrut_1 = Box.createVerticalStrut(11);
