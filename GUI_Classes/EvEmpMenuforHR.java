@@ -1,6 +1,5 @@
 package GUI_Classes;
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -31,6 +30,13 @@ import evaluateCandidates.Employee;
 
 import org.json.simple.JSONObject;
 
+/**
+ * Creates the panel in which the HR manager sees the charts with the
+ * performance
+ * 
+ * @author Michalis Dontas and Dimitris Vougioukos
+ *
+ */
 public class EvEmpMenuforHR extends LoginMenu {
 
 	private JFrame frame;
@@ -56,13 +62,15 @@ public class EvEmpMenuforHR extends LoginMenu {
 		JSONParser parser = new JSONParser();
 		try {
 			JSONArray json_employees = (JSONArray) parser.parse(new FileReader("WorkersDatabase.json"));
-			String[] columnNames = {"Name", "Nationality", "Age", "City", "Salary", "Department"};
-			String data[][] = new String[json_employees.size()-1][6]; // the data must contain all the employees except the HR Manager 
+			String[] columnNames = { "Name", "Nationality", "Age", "City", "Salary", "Department" };
+			String data[][] = new String[json_employees.size() - 1][6]; // the data must contain all the employees
+																		// except the HR Manager
 			Employee worker;
 			int i = 0;
 			for (Object obj : json_employees) {
 				worker = new Employee((JSONObject) obj);
-				if (worker.getDepartment().equals("HR Manager")) continue;
+				if (worker.getDepartment().equals("HR Manager"))
+					continue;
 				employees.add(worker);
 				data[i][0] = worker.getFull_name();
 				data[i][1] = worker.getNationality();
@@ -76,12 +84,12 @@ public class EvEmpMenuforHR extends LoginMenu {
 			frame.getContentPane().add(tablePane, BorderLayout.CENTER);
 			tablePane.setLayout(new BorderLayout(0, 0));
 			tablePane.setVisible(true);
-			
+
 			JPanel tablePanel = new JPanel();
 			tablePanel.setBackground(Color.LIGHT_GRAY);
 			tablePane.add(tablePanel, BorderLayout.CENTER);
 			tablePanel.setLayout(new BorderLayout(0, 0));
-			
+
 			final JTable jt = new JTable(data, columnNames);
 			jt.setBackground(SystemColor.control);
 			jt.setFont(new Font("Trebuchet MS", Font.PLAIN, 11));
@@ -92,7 +100,7 @@ public class EvEmpMenuforHR extends LoginMenu {
 				 * 
 				 */
 				private static final long serialVersionUID = 1L;
-	
+
 				public boolean isCellEditable(int row, int column) {
 					return false;
 				}
@@ -100,29 +108,29 @@ public class EvEmpMenuforHR extends LoginMenu {
 			JScrollPane scrollPane = new JScrollPane(jt);
 			jt.setFillsViewportHeight(true);
 			tablePanel.add(scrollPane, BorderLayout.CENTER);
-			
+
 			ListSelectionModel select = jt.getSelectionModel();
 			select.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			
+
 			JPanel buttonPanel = new JPanel();
 			buttonPanel.setBackground(SystemColor.control);
 			tablePanel.add(buttonPanel, BorderLayout.SOUTH);
 			buttonPanel.setLayout(new BorderLayout(0, 0));
-			
+
 			JButton okButton = new JButton("Ok");
 			okButton.setPreferredSize(new Dimension(45, 35));
 			buttonPanel.add(okButton, BorderLayout.CENTER);
 			okButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
-			
+
 			Component horizontalStrut = Box.createHorizontalStrut(165);
 			buttonPanel.add(horizontalStrut, BorderLayout.WEST);
-			
+
 			Component verticalStrut = Box.createVerticalStrut(17);
 			buttonPanel.add(verticalStrut, BorderLayout.SOUTH);
-			
+
 			Component horizontalStrut_1 = Box.createHorizontalStrut(184);
 			buttonPanel.add(horizontalStrut_1, BorderLayout.EAST);
-			
+
 			Component verticalStrut_1 = Box.createVerticalStrut(11);
 			buttonPanel.add(verticalStrut_1, BorderLayout.NORTH);
 			okButton.addActionListener(new ActionListener() {
@@ -139,20 +147,20 @@ public class EvEmpMenuforHR extends LoginMenu {
 					}
 				}
 			});
-			
+
 			JPanel headlinePanel = new JPanel();
 			tablePane.add(headlinePanel, BorderLayout.NORTH);
 			headlinePanel.setLayout(new BorderLayout(0, 0));
-			
+
 			JLabel headlineLabel = new JLabel("Choose one or more employees to check their performance");
 			headlineLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			headlineLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			headlinePanel.add(headlineLabel, BorderLayout.CENTER);
-			
+
 			JPanel topPanel = new JPanel();
 			headlinePanel.add(topPanel, BorderLayout.WEST);
 			topPanel.setLayout(new BorderLayout(0, 0));
-			
+
 			JButton backButton = setBackButton(topPanel);
 			backButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -160,11 +168,11 @@ public class EvEmpMenuforHR extends LoginMenu {
 					new HRMenu(name, frame, employee);
 				}
 			});
-			
+
 			Component verticalStrut_2 = Box.createVerticalStrut(11);
 			headlinePanel.add(verticalStrut_2, BorderLayout.SOUTH);
 		} catch (Exception e) {
 			endMessage("An error has occured.", "HRMenu", name, frame, employee);
-		}	
+		}
 	}
 }
