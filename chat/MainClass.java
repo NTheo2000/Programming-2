@@ -1,12 +1,10 @@
-package chat;
-
 import java.util.Scanner;
 
 public class MainClass {
-
+	protected static String holdid;
 	public static void messages(String id) {// Caution:Files
+		holdid = id;
 		Scanner in = new Scanner(System.in);
-		CurrentUser user = new CurrentUser();
 		while (true) {
 			Menu.communicationMenu();
 			double a;
