@@ -1,5 +1,6 @@
 package GUI_Classes;
 
+
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -7,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingConstants;
 
-import EvaluateCandidates.Employee;
+import evaluateCandidates.Employee;
 import javafx.embed.swing.JFXPanel;
 
 import java.awt.Component;
@@ -134,13 +135,13 @@ public class WindowDirectorCharts extends LoginMenu {
 		panel_2.add(verticalStrut_5, BorderLayout.SOUTH);
 	}
 	public void showChart(String chartType) {
-		JLayeredPane chartPane = new JLayeredPane();
+		final JLayeredPane chartPane = new JLayeredPane();
 		frame.getContentPane().add(chartPane, BorderLayout.CENTER);
 		chartPane.setLayout(new BorderLayout(0, 0));
 		try {	
-				JFXPanel fxPanel = new JFXPanel();
-				chartPane.add(fxPanel, BorderLayout.CENTER);
-				if (chartType.equals("Bar")) {
+			JFXPanel fxPanel = new JFXPanel();
+			chartPane.add(fxPanel, BorderLayout.CENTER);
+			if (chartType.equals("Bar")) {
 					fxPanel.setScene((new BarChartDirector(employee.getId())).generateChart());
 	        } else {
 				fxPanel.setScene((new PieChartEmployee(employee.getId())).generateChart());
@@ -158,7 +159,8 @@ public class WindowDirectorCharts extends LoginMenu {
 	   			}
 	   		});
 		} catch (Exception e) {
-			endMessage("An error has occured", "DirectorMenu", frame);
+			e.printStackTrace();
+			endMessage("An error has occured", "DirectorMenu", firstname, frame, employee);
 		}
 	}
 }

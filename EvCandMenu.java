@@ -1,5 +1,6 @@
 package GUI_Classes;
 
+
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import java.awt.BorderLayout;
@@ -29,10 +30,10 @@ import javax.swing.table.DefaultTableModel;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 
-import EvaluateCandidates.Candidate;
-import EvaluateCandidates.Employee;
-import EvaluateCandidates.MakeCandidateEmployee;
-import EvaluateCandidates.Rankings;
+import evaluateCandidates.Candidate;
+import evaluateCandidates.Employee;
+import evaluateCandidates.MakeCandidateEmployee;
+import evaluateCandidates.Rankings;
 
 import java.awt.Component;
 import javax.swing.Box;
@@ -182,7 +183,7 @@ public class EvCandMenu extends LoginMenu{
 	}
 	public void posMenu() {
 		
-		JLayeredPane posMenuPane = new JLayeredPane();
+		final JLayeredPane posMenuPane = new JLayeredPane();
 		frame.getContentPane().add(posMenuPane, BorderLayout.CENTER);
 		posMenuPane.setLayout(new BorderLayout(0, 0));
 		
@@ -320,7 +321,7 @@ public class EvCandMenu extends LoginMenu{
 				}
 			}
 
-			JLayeredPane tablePane = new JLayeredPane();
+			final JLayeredPane tablePane = new JLayeredPane();
 			frame.getContentPane().add(tablePane, BorderLayout.CENTER);
 			tablePane.setLayout(new BorderLayout(0, 0));
 			tablePane.setVisible(true);
@@ -330,7 +331,7 @@ public class EvCandMenu extends LoginMenu{
 			tablePane.add(tablePanel, BorderLayout.CENTER);
 			tablePanel.setLayout(new BorderLayout(0, 0));
 			
-			JTable jt = new JTable(data, columnNames);
+			final JTable jt = new JTable(data, columnNames);
 			jt.setBackground(SystemColor.control);
 			jt.setFont(new Font("Trebuchet MS", Font.PLAIN, 11));
 			jt.setColumnSelectionAllowed(false);
@@ -408,13 +409,13 @@ public class EvCandMenu extends LoginMenu{
 			Component verticalStrut_2 = Box.createVerticalStrut(11);
 			headlinePanel.add(verticalStrut_2, BorderLayout.SOUTH);
 		} catch (Exception e) {
-			endMessage("An error has occured.", "HRMenu", frame);
+			endMessage("An error has occured.", "HRMenu", firstname, frame, employee);
 		}	
 	}
-	public void hireOrCall(ArrayList<Candidate> candidates, int[] rows) {
-		Candidate candidate = candidates.get(rows[0]);
+	public void hireOrCall(final ArrayList<Candidate> candidates, final int[] rows) {
+		final Candidate candidate = candidates.get(rows[0]);
 		
-		JLayeredPane hirePane = new JLayeredPane();
+		final JLayeredPane hirePane = new JLayeredPane();
 		frame.getContentPane().add(hirePane, BorderLayout.CENTER);
 		hirePane.setLayout(new BorderLayout(0, 0));
 		hirePane.setVisible(true);
@@ -432,7 +433,7 @@ public class EvCandMenu extends LoginMenu{
 		menuPanel.add(interviewPanel, BorderLayout.WEST);
 		interviewPanel.setLayout(new BorderLayout(0, 0));
 		
-		JButton interviewButton = new JButton("Call for Interview");
+		final JButton interviewButton = new JButton("Call for Interview");
 		interviewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		interviewPanel.add(interviewButton, BorderLayout.CENTER);
 		interviewButton.addActionListener(new ActionListener() {
@@ -468,7 +469,7 @@ public class EvCandMenu extends LoginMenu{
 		menuPanel.add(hirePanel, BorderLayout.EAST);
 		hirePanel.setLayout(new BorderLayout(0, 0));
 		
-		JButton hireButton = new JButton("Hire");
+		final JButton hireButton = new JButton("Hire");
 		hireButton.setPreferredSize(new Dimension(115, 23));
 		hireButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		hirePanel.add(hireButton, BorderLayout.CENTER);
@@ -494,7 +495,7 @@ public class EvCandMenu extends LoginMenu{
 		setSalaryPanel.add(salaryLabelPanel, BorderLayout.WEST);
 		salaryLabelPanel.setLayout(new BorderLayout(0, 0));
 		
-		JLabel salaryLabel = new JLabel("Set initial salary");
+		final JLabel salaryLabel = new JLabel("Set initial salary");
 		salaryLabel.setPreferredSize(new Dimension(90, 19));
 		salaryLabel.setMinimumSize(new Dimension(90, 19));
 		salaryLabel.setMaximumSize(new Dimension(90, 19));
@@ -509,7 +510,7 @@ public class EvCandMenu extends LoginMenu{
 		Component horizontalStrut_5 = Box.createHorizontalStrut(22);
 		salaryLabelPanel.add(horizontalStrut_5, BorderLayout.EAST);
 		
-		JSpinner salarySpinner = new JSpinner();
+		final JSpinner salarySpinner = new JSpinner();
 		double starting_salary = candidate.getSTARTING_SALARY();
 		salarySpinner.setModel(new SpinnerNumberModel(starting_salary, starting_salary, 1000000.0, 50.0));
 		salarySpinner.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -523,7 +524,7 @@ public class EvCandMenu extends LoginMenu{
 		setSalaryPanel.add(buttonPanel, BorderLayout.SOUTH);
 		buttonPanel.setLayout(new BorderLayout(0, 0));
 		
-		JButton okButton = new JButton("Ok");
+		final JButton okButton = new JButton("Ok");
 		okButton.setPreferredSize(new Dimension(45, 27));
 		okButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		buttonPanel.add(okButton, BorderLayout.CENTER);
@@ -567,7 +568,7 @@ public class EvCandMenu extends LoginMenu{
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						hirePane.setVisible(false);
-						double salary = (double) salarySpinner.getValue();
+						double salary = (Double) salarySpinner.getValue();
 						chosens.put(candidate, salary);
 						int[] new_rows = new int[rows.length - 1];
 						if (new_rows.length == 0) {
@@ -586,8 +587,8 @@ public class EvCandMenu extends LoginMenu{
 	public void finalstep(HashMap<Candidate, Double> chosens) {
 		String[] columnNames = {"Name", "State", "Salary"};
 		Iterator<Entry<Candidate, Double>> itr = chosens.entrySet().iterator(); 
-		String[][] data = new String[chosens.size()][3];
-		ArrayList<Candidate> candidates = new ArrayList<Candidate>();
+		final String[][] data = new String[chosens.size()][3];
+		final ArrayList<Candidate> candidates = new ArrayList<Candidate>();
 		int i = 0;
         while (itr.hasNext()) { 
 			Entry<Candidate, Double> pair = itr.next(); 
@@ -604,7 +605,7 @@ public class EvCandMenu extends LoginMenu{
             i++;
         }
 
-        JLayeredPane finalPane = new JLayeredPane();
+        final JLayeredPane finalPane = new JLayeredPane();
 		frame.getContentPane().add(finalPane, BorderLayout.CENTER);
 		finalPane.setLayout(new BorderLayout(0, 0));
 		finalPane.setVisible(true);
@@ -664,9 +665,9 @@ public class EvCandMenu extends LoginMenu{
 							MakeCandidateEmployee.hire(candidates.get(i), Double.valueOf(data[i][2]), department);
 						}
 		        	}
-					endMessage("The actions have been successfully executed!", "HRMenu", frame);
+					endMessage("The actions have been successfully executed!", "HRMenu", firstname, frame, employee);
 				} catch (Exception e1) {
-						endMessage("An error has occured", "HRMenu", frame);
+						endMessage("An error has occured", "HRMenu", firstname, frame, employee);
 				}
 			}
 		});

@@ -1,5 +1,6 @@
 package GUI_Classes;
 
+
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,9 +17,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
 
-
-import EvaluateCandidates.Employee;
-import EvaluateCandidates.WorkersDatabase;
+import evaluateCandidates.Employee;
+import evaluateCandidates.WorkersDatabase;
 
 import javax.swing.JButton;
 import java.awt.Dimension;
@@ -32,7 +32,7 @@ public class Settings extends LoginMenu{
 	private Employee employee;
 	private JLayeredPane settingsPane;
 	private JLabel errorLabel;
-	
+	private String[] dep;
 	/**
 	 * Create the application.
 	 */
@@ -40,6 +40,7 @@ public class Settings extends LoginMenu{
 		this.frame = frame;
 		this.firstname = name;
 		this.employee = employee;
+		this.dep = employee.getDepartment().split("\\s");
 		initialize();
 	}
 
@@ -74,7 +75,13 @@ public class Settings extends LoginMenu{
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				settingsPane.setVisible(false);
-				new HRMenu(firstname, frame, employee);
+				if (dep[1].equals("Manager")) {
+					new HRMenu(firstname, frame, employee);
+				} else if (dep[1].equals("Director")) {
+					new DirectorMenu(firstname, frame, employee);
+				} else {
+					new EmployeeMenu(firstname, frame, employee);
+				}
 			}
 		});
 		
@@ -89,17 +96,17 @@ public class Settings extends LoginMenu{
 		JButton usernameButton = new JButton("Change Username");
 		usernameButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		usernamePanel.add(usernameButton);
-		usernameButton.setPreferredSize(new Dimension(150, 23));
+		usernameButton.setPreferredSize(new Dimension(180, 23));
 		usernameButton.setMinimumSize(new Dimension(218, 23));
 		usernameButton.setMaximumSize(new Dimension(218, 23));
 		
-		Component verticalStrut_1 = Box.createVerticalStrut(107);
+		Component verticalStrut_1 = Box.createVerticalStrut(138);
 		usernamePanel.add(verticalStrut_1, BorderLayout.SOUTH);
 		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(56);
+		Component horizontalStrut_1 = Box.createHorizontalStrut(53);
 		usernamePanel.add(horizontalStrut_1, BorderLayout.WEST);
 		
-		Component verticalStrut_2 = Box.createVerticalStrut(27);
+		Component verticalStrut_2 = Box.createVerticalStrut(47);
 		usernamePanel.add(verticalStrut_2, BorderLayout.NORTH);
 		
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
@@ -114,18 +121,18 @@ public class Settings extends LoginMenu{
 		passwordPanel.add(passwordButton);
 		passwordButton.setMinimumSize(new Dimension(120, 23));
 		passwordButton.setMaximumSize(new Dimension(120, 23));
-		passwordButton.setPreferredSize(new Dimension(150, 23));
+		passwordButton.setPreferredSize(new Dimension(180, 23));
 		
-		Component horizontalStrut_4 = Box.createHorizontalStrut(20);
+		Component horizontalStrut_4 = Box.createHorizontalStrut(43);
 		passwordPanel.add(horizontalStrut_4, BorderLayout.WEST);
 		
-		Component horizontalStrut_3 = Box.createHorizontalStrut(55);
+		Component horizontalStrut_3 = Box.createHorizontalStrut(58);
 		passwordPanel.add(horizontalStrut_3, BorderLayout.EAST);
 		
-		Component verticalStrut_3 = Box.createVerticalStrut(108);
+		Component verticalStrut_3 = Box.createVerticalStrut(138);
 		passwordPanel.add(verticalStrut_3, BorderLayout.SOUTH);
 		
-		Component verticalStrut_4 = Box.createVerticalStrut(28);
+		Component verticalStrut_4 = Box.createVerticalStrut(47);
 		passwordPanel.add(verticalStrut_4, BorderLayout.NORTH);
 		passwordButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -140,8 +147,8 @@ public class Settings extends LoginMenu{
 			}
 		});
 	}
-	public void changeUsernameorPasswordMenu(String usernameOrPassword) {
-		JLayeredPane usernamePane = new JLayeredPane();
+	public void changeUsernameorPasswordMenu(final String usernameOrPassword) {
+		final JLayeredPane usernamePane = new JLayeredPane();
 		frame.getContentPane().add(usernamePane, BorderLayout.CENTER);
 		usernamePane.setLayout(new BorderLayout(0, 0));
 		usernamePane.setVisible(true);
@@ -162,7 +169,7 @@ public class Settings extends LoginMenu{
 		headlinePanel.add(errorPanel, BorderLayout.SOUTH);
 		errorPanel.setLayout(new BorderLayout(0, 0));
 		
-		Component verticalStrut = Box.createVerticalStrut(16);
+		Component verticalStrut = Box.createVerticalStrut(19);
 		errorPanel.add(verticalStrut, BorderLayout.SOUTH);
 		
 		errorLabel = new JLabel("The credentials you provided are not valid. Please try again.");
@@ -171,7 +178,7 @@ public class Settings extends LoginMenu{
 		errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		errorPanel.add(errorLabel, BorderLayout.CENTER);
 		
-		Component verticalStrut_4 = Box.createVerticalStrut(16);
+		Component verticalStrut_4 = Box.createVerticalStrut(47);
 		errorPanel.add(verticalStrut_4, BorderLayout.NORTH);
 		
 		JPanel menuPanel = new JPanel();
@@ -193,7 +200,7 @@ public class Settings extends LoginMenu{
 		usernamePanel.add(usernameboxPanel, BorderLayout.CENTER);
 		usernameboxPanel.setLayout(new BorderLayout(0, 0));
 		
-		JTextField usernameField = new JTextField();
+		final JTextField usernameField = new JTextField();
 		usernameboxPanel.add(usernameField, BorderLayout.CENTER);
 		usernameField.setHorizontalAlignment(SwingConstants.LEFT);
 		usernameField.setColumns(10);
@@ -201,7 +208,7 @@ public class Settings extends LoginMenu{
 		Component horizontalStrut = Box.createHorizontalStrut(54);
 		usernameboxPanel.add(horizontalStrut, BorderLayout.EAST);
 		
-		Component rigidArea = Box.createRigidArea(new Dimension(31, 22));
+		Component rigidArea = Box.createRigidArea(new Dimension(31, 30));
 		usernameboxPanel.add(rigidArea, BorderLayout.WEST);
 		
 		JPanel passwordPanel = new JPanel();
@@ -219,7 +226,7 @@ public class Settings extends LoginMenu{
 		passwordPanel.add(passwordBoxPanel, BorderLayout.CENTER);
 		passwordBoxPanel.setLayout(new BorderLayout(0, 0));
 		
-		JPasswordField passwordField = new JPasswordField();
+		final JPasswordField passwordField = new JPasswordField();
 		passwordBoxPanel.add(passwordField, BorderLayout.CENTER);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(54);
@@ -228,23 +235,23 @@ public class Settings extends LoginMenu{
 		Component horizontalStrut_2 = Box.createHorizontalStrut(30);
 		passwordBoxPanel.add(horizontalStrut_2, BorderLayout.WEST);
 		
-		Component verticalStrut_2 = Box.createVerticalStrut(39);
+		Component verticalStrut_2 = Box.createVerticalStrut(56);
 		passwordBoxPanel.add(verticalStrut_2, BorderLayout.NORTH);
 		
-		Component verticalStrut_1 = Box.createVerticalStrut(41);
+		Component verticalStrut_1 = Box.createVerticalStrut(64);
 		passwordBoxPanel.add(verticalStrut_1, BorderLayout.SOUTH);
 		
 		JPanel enterPanel = new JPanel();
 		menuPanel.add(enterPanel, BorderLayout.SOUTH);
 		enterPanel.setLayout(new BorderLayout(0, 0));
 		
-		Component rigidArea_1 = Box.createRigidArea(new Dimension(180, 33));
+		Component rigidArea_1 = Box.createRigidArea(new Dimension(194, 44));
 		enterPanel.add(rigidArea_1, BorderLayout.WEST);
 		
-		Component horizontalStrut_3 = Box.createHorizontalStrut(170);
+		Component horizontalStrut_3 = Box.createHorizontalStrut(190);
 		enterPanel.add(horizontalStrut_3, BorderLayout.EAST);
 		
-		Component verticalStrut_3 = Box.createVerticalStrut(32);
+		Component verticalStrut_3 = Box.createVerticalStrut(55);
 		enterPanel.add(verticalStrut_3, BorderLayout.SOUTH);
 		
 		JButton enterButton = new JButton("Enter");
@@ -258,7 +265,7 @@ public class Settings extends LoginMenu{
 				if (WorkersDatabase.checkCredentials(username, password).toString().equals(employee.toString())) {
 					password = null; // delete content of variable after checking credentials for security reasons
 					usernamePane.setVisible(false);
-					JLayeredPane newCredentialPane = new JLayeredPane();
+					final JLayeredPane newCredentialPane = new JLayeredPane();
 					frame.getContentPane().add(newCredentialPane, BorderLayout.CENTER);
 					newCredentialPane.setLayout(new BorderLayout(0, 0));
 					newCredentialPane.setVisible(true);
@@ -277,7 +284,7 @@ public class Settings extends LoginMenu{
 						}
 					});
 					
-					JPanel errorPanel = new JPanel();
+					final JPanel errorPanel = new JPanel();
 					headlinePanel.add(errorPanel, BorderLayout.SOUTH);
 					errorPanel.setLayout(new BorderLayout(0, 0));
 					
@@ -312,7 +319,7 @@ public class Settings extends LoginMenu{
 					credentialPanel.add(credentialboxPanel, BorderLayout.CENTER);
 					credentialboxPanel.setLayout(new BorderLayout(0, 0));
 					
-					JPasswordField credentialField = new JPasswordField();
+					final JPasswordField credentialField = new JPasswordField();
 					credentialboxPanel.add(credentialField, BorderLayout.CENTER);
 					credentialField.setHorizontalAlignment(SwingConstants.LEFT);
 					credentialField.setColumns(10);
@@ -338,7 +345,7 @@ public class Settings extends LoginMenu{
 					confirmPanel.add(confirmBoxPanel, BorderLayout.CENTER);
 					confirmBoxPanel.setLayout(new BorderLayout(0, 0));
 					
-					JPasswordField confirmField = new JPasswordField();
+					final JPasswordField confirmField = new JPasswordField();
 					confirmBoxPanel.add(confirmField, BorderLayout.CENTER);
 					
 					Component horizontalStrut_1 = Box.createHorizontalStrut(54);
@@ -379,64 +386,26 @@ public class Settings extends LoginMenu{
 							if (!(cred.toString()).equals(confirmcred.toString())) {
 								errorLabel.setForeground(Color.RED);
 								frame.validate();
+							} else if (usernameOrPassword.equals("username") && !WorkersDatabase.isUsernameUnique(cred.toString())) {
+								errorPanel.remove(errorLabel);
+								errorLabel = new JLabel("This username already exists. Please try again.");
+								errorLabel.setForeground(Color.RED);
+								errorLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+								errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
+								errorPanel.add(errorLabel, BorderLayout.CENTER);
+								frame.validate();
 							} else {
 								try {
 									WorkersDatabase.changeUsernameorPassword(employee, usernameOrPassword, cred.toString());
 									newCredentialPane.setVisible(false);
-									JLayeredPane confirmPane = new JLayeredPane();
-									frame.getContentPane().add(confirmPane, BorderLayout.CENTER);
-									confirmPane.setLayout(new BorderLayout(0, 0));
-									confirmPane.setVisible(true);
-									frame.validate();
-									
-									JPanel showMessagePanel = new JPanel();
-									confirmPane.add(showMessagePanel, BorderLayout.CENTER);
-									showMessagePanel.setLayout(new BorderLayout(0, 0));
-									
-									JPanel headlinepanel = new JPanel();
-									showMessagePanel.add(headlinepanel, BorderLayout.NORTH);
-									headlinepanel.setLayout(new BorderLayout(0, 0));
-									
-									JLabel messageLabel = new JLabel("Your " + usernameOrPassword + " has been changed successfully!\r\n");
-									messageLabel.setForeground(Color.BLACK);
-									messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-									messageLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-									headlinepanel.add(messageLabel, BorderLayout.CENTER);
-									
-									Component verticalStrut = Box.createVerticalStrut(50);
-									headlinepanel.add(verticalStrut, BorderLayout.NORTH);
-									
-									JLabel returnLabel = new JLabel("Press go Back to return to the initial Menu");
-									headlinepanel.add(returnLabel, BorderLayout.SOUTH);
-									returnLabel.setForeground(Color.DARK_GRAY);
-									returnLabel.setHorizontalAlignment(SwingConstants.CENTER);
-									returnLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-									
-									JPanel enterPanel = new JPanel();
-									showMessagePanel.add(enterPanel, BorderLayout.CENTER);
-									enterPanel.setLayout(new BorderLayout(0, 0));
-									
-									JButton returnButton = new JButton("Go Back\r\n");
-									returnButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
-									enterPanel.add(returnButton, BorderLayout.CENTER);
-									returnButton.addActionListener(new ActionListener() {
-										public void actionPerformed(ActionEvent e) {
-											confirmPane.setVisible(false);
-											new HRMenu(firstname, frame, employee);
-										}
-									});
-									
-									Component horizontalStrut_1 = Box.createHorizontalStrut(168);
-									enterPanel.add(horizontalStrut_1, BorderLayout.EAST);
-									
-									Component verticalStrut_1 = Box.createVerticalStrut(111);
-									enterPanel.add(verticalStrut_1, BorderLayout.SOUTH);
-									
-									Component verticalStrut_2 = Box.createVerticalStrut(12);
-									enterPanel.add(verticalStrut_2, BorderLayout.NORTH);
-									
-									Component horizontalStrut = Box.createHorizontalStrut(172);
-									enterPanel.add(horizontalStrut, BorderLayout.WEST);
+									String message = "Your " + usernameOrPassword + " has been changed successfully!";
+									if (dep[1].equals("Manager")) {
+										endMessage(message, "HRMenu", firstname, frame, employee);
+									} else if (dep[1].equals("Director")) {
+										endMessage(message, "DirectorMenu", firstname, frame, employee);
+									} else {
+										endMessage(message, "EmployeeMenu", firstname, frame, employee);
+									}
 								} catch (Exception e1) {
 									errorPanel.remove(errorLabel);
 									errorLabel = new JLabel("An error has occured. Please try again.");

@@ -1,5 +1,6 @@
 package GUI_Classes;
 
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,8 +20,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
 
-import EvaluateCandidates.Employee;
-
+import evaluateCandidates.Employee;
 
 public class EmployeeMenu extends LoginMenu {
 

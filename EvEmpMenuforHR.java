@@ -1,5 +1,6 @@
 package GUI_Classes;
 
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -25,9 +26,10 @@ import javax.swing.table.DefaultTableModel;
 
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.JSONObject;
 
-import EvaluateCandidates.Employee;
+import evaluateCandidates.Employee;
+
+import org.json.simple.JSONObject;
 
 public class EvEmpMenuforHR extends LoginMenu {
 
@@ -70,7 +72,7 @@ public class EvEmpMenuforHR extends LoginMenu {
 				data[i++][5] = worker.getDepartment();
 			}
 
-			JLayeredPane tablePane = new JLayeredPane();
+			final JLayeredPane tablePane = new JLayeredPane();
 			frame.getContentPane().add(tablePane, BorderLayout.CENTER);
 			tablePane.setLayout(new BorderLayout(0, 0));
 			tablePane.setVisible(true);
@@ -80,7 +82,7 @@ public class EvEmpMenuforHR extends LoginMenu {
 			tablePane.add(tablePanel, BorderLayout.CENTER);
 			tablePanel.setLayout(new BorderLayout(0, 0));
 			
-			JTable jt = new JTable(data, columnNames);
+			final JTable jt = new JTable(data, columnNames);
 			jt.setBackground(SystemColor.control);
 			jt.setFont(new Font("Trebuchet MS", Font.PLAIN, 11));
 			jt.setColumnSelectionAllowed(false);
@@ -162,7 +164,7 @@ public class EvEmpMenuforHR extends LoginMenu {
 			Component verticalStrut_2 = Box.createVerticalStrut(11);
 			headlinePanel.add(verticalStrut_2, BorderLayout.SOUTH);
 		} catch (Exception e) {
-			endMessage("An error has occured.", "HRMenu", frame);
+			endMessage("An error has occured.", "HRMenu", name, frame, employee);
 		}	
 	}
 }

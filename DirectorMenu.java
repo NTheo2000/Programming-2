@@ -1,5 +1,6 @@
 package GUI_Classes;
 
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,7 +19,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
 
-import EvaluateCandidates.Employee;
+import evaluateCandidates.Employee;
 
 public class DirectorMenu extends LoginMenu{
 
@@ -38,7 +39,7 @@ public class DirectorMenu extends LoginMenu{
 	public void initialize() {
 		frame.setVisible(true);
 
-		JLayeredPane panel = new JLayeredPane();
+		final JLayeredPane panel = new JLayeredPane();
 		panel.setBounds(10, 5, 382, 25);
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BorderLayout(0, 0));

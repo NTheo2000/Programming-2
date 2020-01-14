@@ -1,5 +1,6 @@
 package GUI_Classes;
 
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -24,8 +25,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import EvaluateCandidates.Employee;
-import EvaluateCandidates.WorkersDatabase;
+import evaluateCandidates.Employee;
+import evaluateCandidates.WorkersDatabase;
 import evaluateEmployees.EvaluationEmployee;
 
 public class EvaluateOperation extends LoginMenu {
@@ -33,8 +34,13 @@ public class EvaluateOperation extends LoginMenu {
 	private JFrame frame;
 	private Employee employee;
 	private String name;
-	private String[] words;
+	private String[] dep;
 	static int sum;
+	private int count = 0; // the number of the current question
+	private int total_questions = 0;
+	private JLayeredPane tablePane;
+	private int[] answers;
+	private int row;
 	/**
 	 * Create the application.
 	 */
@@ -42,7 +48,7 @@ public class EvaluateOperation extends LoginMenu {
 		this.name = name;
 		this.frame = frame;
 		this.employee = employee;
-		words = this.employee.getDepartment().split(" ");
+		dep = employee.getDepartment().split("\\s");
 		sum = 0;
 		initialize();
 	}
@@ -51,17 +57,16 @@ public class EvaluateOperation extends LoginMenu {
 	 */
 	private void initialize() {
 		frame.setVisible(true);
-		String[] dep = employee.getDepartment().split("\\s");
 		if (dep[1].equals("Director")) {
 			try {
 				ArrayList<Employee> employees = WorkersDatabase.getEmployeesbyDirectorsDepartment(employee.getId());
 				String[] columns = { "name", "id" };
-				String[][] data = new String[employees.size()][2];
+				final String[][] data = new String[employees.size()][2];
 				for (int i = 0; i < employees.size(); i++) {
 					data[i][0] = employees.get(i).getFull_name();
 					data[i][1] = employees.get(i).getId();
 				}
-				JLayeredPane tablePane = new JLayeredPane();
+				tablePane = new JLayeredPane();
 				frame.getContentPane().add(tablePane, BorderLayout.CENTER);
 				tablePane.setLayout(new BorderLayout(0, 0));
 				tablePane.setVisible(true);
@@ -71,7 +76,7 @@ public class EvaluateOperation extends LoginMenu {
 				tablePane.add(tablePanel, BorderLayout.CENTER);
 				tablePanel.setLayout(new BorderLayout(0, 0));
 	
-				JTable jt = new JTable(data, columns);
+				final JTable jt = new JTable(data, columns);
 				jt.setBackground(SystemColor.control);
 				jt.setFont(new Font("Trebuchet MS", Font.PLAIN, 11));
 				jt.setColumnSelectionAllowed(false);
@@ -105,8 +110,8 @@ public class EvaluateOperation extends LoginMenu {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						tablePane.setVisible(false);
-						int row = jt.getSelectedRow();
-						if (EvaluationEmployee.check(data[row][1], words[0])) {
+						row = jt.getSelectedRow();
+						if (EvaluationEmployee.check(data[row][1], dep[0])) {
 							  int choice = JOptionPane.showOptionDialog(null, 
 								      "You have already evaluated this employee!! Do you want to change your rating?", 
 								      "Change evaluation", 
@@ -116,7 +121,7 @@ public class EvaluateOperation extends LoginMenu {
 							  if (choice == JOptionPane.YES_OPTION) {
 									questions(EvaluationEmployee.questions);	
 							  } else {
-									endMessage("End of Evaluation", "DirectorMenu", frame);
+									endMessage("End of Evaluation", "DirectorMenu", name, frame, employee);
 							  }
 						} else {
 							questions(EvaluationEmployee.questions);
@@ -158,35 +163,30 @@ public class EvaluateOperation extends LoginMenu {
 				});
 				
 			} catch (Exception e) {
-				endMessage("An error has occured.", "DirectorMenu", frame);
+				endMessage("An error has occured.", "DirectorMenu", name, frame, employee);
 			}
 		} else {
-			//check to see if he has already evaluated
-			/*if (EvaluationEmployee.check(data[row][1], words[0])) {
-				  int choice = JOptionPane.showOptionDialog(null, 
-					      "You have already evaluated your director!! Do you want to change your rating?", 
-					      "Change evaluation", 
-					      JOptionPane.YES_NO_OPTION, 
-					      JOptionPane.QUESTION_MESSAGE, 
-					      null, null, null);
-				  if (choice == JOptionPane.YES_OPTION) {
-						questions(EvaluationEmployee.questions);	
-				  } else {
-						endMessage("End of Evaluation", "EmployeeMenu", frame);
-				  }
-			} else {
-				questions(EvaluationEmployee.questions);
-			}*/
+			try {
+				answers = new int[Evaluationforgui.questions.length];
+				questions(Evaluationforgui.questions);
+			} catch (Exception e) {
+				e.printStackTrace();
+				endMessage("An error has occured.", "EmployeeMenu", name, frame, employee);
+			}
 		}
 	}
 	private void questions(String[] questions) {
-		int new_length = questions.length - 1;
-		String[] new_questions = new String[new_length];
+		count++;
+		if (count == 1) {
+			total_questions = questions.length;
+		}
+		final int new_length = questions.length - 1;
+		final String[] new_questions = new String[new_length];
 		for (int i = 1; i < questions.length; i++) {
 			new_questions[i - 1] = questions[i];
 		}
 		
-		JLayeredPane layeredPane = new JLayeredPane();
+		final JLayeredPane layeredPane = new JLayeredPane();
 		frame.getContentPane().add(layeredPane, BorderLayout.CENTER);
 		layeredPane.setLayout(new BorderLayout(0, 0));
 
@@ -195,21 +195,46 @@ public class EvaluateOperation extends LoginMenu {
 		panel.setLayout(new BorderLayout(0, 0));
 
 		JLabel lblNewLabel = new JLabel(questions[0]);
+		lblNewLabel.setPreferredSize(new Dimension(353, 35));
+		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblNewLabel, BorderLayout.CENTER);
 
-		Component horizontalStrut = Box.createHorizontalStrut(20);
+		Component horizontalStrut = Box.createHorizontalStrut(10);
 		panel.add(horizontalStrut, BorderLayout.WEST);
-
-		Component verticalStrut = Box.createVerticalStrut(20);
-		panel.add(verticalStrut, BorderLayout.NORTH);
 
 		Component verticalStrut_1 = Box.createVerticalStrut(0);
 		panel.add(verticalStrut_1, BorderLayout.SOUTH);
 
 		Box horizontalBox = Box.createHorizontalBox();
 		panel.add(horizontalBox, BorderLayout.EAST);
+		
+		JPanel topPanel = new JPanel();
+		panel.add(topPanel, BorderLayout.NORTH);
+		topPanel.setLayout(new BorderLayout(0, 0));
+		
+		JLabel topLabel = new JLabel("Question " + count + " of " + total_questions);
+		topLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		topLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		topPanel.add(topLabel, BorderLayout.CENTER);
+		
+		JButton backButton = setBackButton(topPanel);
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				layeredPane.setVisible(false);
+				if (dep[1].equals("Employee")) {
+					new EmployeeMenu(name, frame, employee);
+				} else {
+					tablePane.setVisible(true);
+				}
+			}
+		});
+		
+		Component verticalStrut = Box.createVerticalStrut(20);
+		topPanel.add(verticalStrut, BorderLayout.SOUTH);
+		
+		Component horizontalStrut_11 = Box.createHorizontalStrut(78);
+		topPanel.add(horizontalStrut_11, BorderLayout.EAST);
 
 		JPanel panel_1 = new JPanel();
 		layeredPane.add(panel_1, BorderLayout.CENTER);
@@ -225,18 +250,24 @@ public class EvaluateOperation extends LoginMenu {
 		panel_2.add(rdbtnNewRadioButton, BorderLayout.CENTER);
 		rdbtnNewRadioButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String[] dep = employee.getDepartment().split("\\s");
+				layeredPane.setVisible(false);
 				if (dep[1].equals("Employee")) {
-					//liapis defines what happens
+					answers[count - 1] = 1;
 					if (new_length == 0) {
-						endMessage("End of Evaluation", "EmployeeMenu", frame);
+						try {
+							Evaluationforgui.saveAnswers(answers, employee.getDirectorId());
+							endMessage("End of Evaluation", "EmployeeMenu", name, frame, employee);
+						} catch (Exception e1) {
+							endMessage("An error has occured.", "EmployeeMenu", name, frame, employee);
+						}
 					} else {
 						questions(new_questions);
 					}
 				} else {
 					sum++;
 					if (new_length == 0) {
-						endMessage("End of Evaluation", "DirectorMenu", frame);
+						EvaluationEmployee.saving(sum, employee.getId(), dep[0]);
+						endMessage("End of Evaluation", "DirectorMenu", name, frame, employee);
 					} else {
 						questions(new_questions);
 					}
@@ -250,7 +281,7 @@ public class EvaluateOperation extends LoginMenu {
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
 		panel_2.add(horizontalStrut_2, BorderLayout.EAST);
 
-		Component verticalStrut_2 = Box.createVerticalStrut(64);
+		Component verticalStrut_2 = Box.createVerticalStrut(21);
 		panel_2.add(verticalStrut_2, BorderLayout.NORTH);
 
 		Component verticalStrut_3 = Box.createVerticalStrut(1);
@@ -261,41 +292,47 @@ public class EvaluateOperation extends LoginMenu {
 		panel_1.add(panel_3, BorderLayout.SOUTH);
 		panel_3.setLayout(new BorderLayout(0, 0));
 
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("2 (Disagree)");
-		rdbtnNewRadioButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnNewRadioButton_1.setPreferredSize(new Dimension(100, 25));
-		panel_3.add(rdbtnNewRadioButton_1, BorderLayout.CENTER);
-		rdbtnNewRadioButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String[] dep = employee.getDepartment().split("\\s");
-				if (dep[1].equals("Employee")) {
-					//liapis defines what happens
-					if (new_length == 0) {
-						endMessage("End of Evaluation", "EmployeeMenu", frame);
-					} else {
-						questions(new_questions);
-					}
-				} else {
-					sum += 2;
-					if (new_length == 0) {
-						endMessage("End of Evaluation", "DirectorMenu", frame);
-					} else {
-						questions(new_questions);
-					}
-				}
-			}
-		});
-
 		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
 		panel_3.add(horizontalStrut_3, BorderLayout.WEST);
 
 		Component horizontalStrut_4 = Box.createHorizontalStrut(20);
 		panel_3.add(horizontalStrut_4, BorderLayout.EAST);
 
-		Component verticalStrut_4 = Box.createVerticalStrut(0);
+		Component verticalStrut_4 = Box.createVerticalStrut(4);
 		panel_3.add(verticalStrut_4, BorderLayout.NORTH);
+		
+				JRadioButton rdbtnNewRadioButton_4 = new JRadioButton("5 (Absolutely Agree)");
+				panel_3.add(rdbtnNewRadioButton_4, BorderLayout.CENTER);
+				rdbtnNewRadioButton_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				rdbtnNewRadioButton_4.setPreferredSize(new Dimension(100, 25));
+				rdbtnNewRadioButton_4.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						layeredPane.setVisible(false);
+						if (dep[1].equals("Employee")) {
+							answers[count - 1] = 5;
+							if (new_length == 0) {
+								try {
+									Evaluationforgui.saveAnswers(answers, employee.getDirectorId());
+									endMessage("End of Evaluation", "EmployeeMenu", name, frame, employee);
+								} catch (Exception e1) {
+									endMessage("An error has occured.", "EmployeeMenu", name, frame, employee);
+								}
+							} else {
+								questions(new_questions);
+							}
+						} else {
+							sum += 5;
+							if (new_length == 0) {
+								EvaluationEmployee.saving(sum, employee.getId(), dep[0]);
+								endMessage("End of Evaluation", "DirectorMenu", name, frame, employee);
+							} else {
+								questions(new_questions);
+							}
+						}
+					}
+				});
 
-		Component verticalStrut_5 = Box.createVerticalStrut(60);
+		Component verticalStrut_5 = Box.createVerticalStrut(34);
 		panel_3.add(verticalStrut_5, BorderLayout.SOUTH);
 
 		JPanel panel_4 = new JPanel();
@@ -306,31 +343,6 @@ public class EvaluateOperation extends LoginMenu {
 		panel_5.setMaximumSize(new Dimension(32762, 32756));
 		panel_4.add(panel_5, BorderLayout.SOUTH);
 		panel_5.setLayout(new BorderLayout(0, 0));
-
-		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("3 (Neither Disagree Nor Agree)");
-		rdbtnNewRadioButton_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnNewRadioButton_2.setPreferredSize(new Dimension(100, 25));
-		panel_5.add(rdbtnNewRadioButton_2, BorderLayout.CENTER);
-		rdbtnNewRadioButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String[] dep = employee.getDepartment().split("\\s");
-				if (dep[1].equals("Employee")) {
-					//liapis defines what happens
-					if (new_length == 0) {
-						endMessage("End of Evaluation", "EmployeeMenu", frame);
-					} else {
-						questions(new_questions);
-					}
-				} else {
-					sum += 3;
-					if (new_length == 0) {
-						endMessage("End of Evaluation", "DirectorMenu", frame);
-					} else {
-						questions(new_questions);
-					}
-				}
-			}
-		});
 
 		Component verticalStrut_9 = Box.createVerticalStrut(20);
 		panel_5.add(verticalStrut_9, BorderLayout.EAST);
@@ -343,71 +355,83 @@ public class EvaluateOperation extends LoginMenu {
 
 		Component verticalStrut_8 = Box.createVerticalStrut(1);
 		panel_5.add(verticalStrut_8, BorderLayout.NORTH);
+		
+				JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("4 (Agree)");
+				panel_5.add(rdbtnNewRadioButton_3, BorderLayout.CENTER);
+				rdbtnNewRadioButton_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				rdbtnNewRadioButton_3.setPreferredSize(new Dimension(100, 25));
+				rdbtnNewRadioButton_3.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						layeredPane.setVisible(false);
+						if (dep[1].equals("Employee")) {
+							answers[count - 1] = 4;
+							if (new_length == 0) {
+								try {
+									Evaluationforgui.saveAnswers(answers, employee.getDirectorId());
+									endMessage("End of Evaluation", "EmployeeMenu", name, frame, employee);
+								} catch (Exception e1) {
+									endMessage("An error has occured.", "EmployeeMenu", name, frame, employee);
+								}
+							} else {
+								questions(new_questions);
+							}
+						} else {
+							sum += 4;
+							if (new_length == 0) {
+								EvaluationEmployee.saving(sum, employee.getId(), dep[0]);
+								endMessage("End of Evaluation", "DirectorMenu", name, frame, employee);
+							} else {
+								questions(new_questions);
+							}
+						}
+					}
+				});
 
 		JPanel panel_6 = new JPanel();
 		panel_4.add(panel_6, BorderLayout.NORTH);
 		panel_6.setLayout(new BorderLayout(0, 0));
-
-		JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("4 (Agree)");
-		rdbtnNewRadioButton_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnNewRadioButton_3.setPreferredSize(new Dimension(100, 25));
-		panel_6.add(rdbtnNewRadioButton_3, BorderLayout.CENTER);
-		rdbtnNewRadioButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String[] dep = employee.getDepartment().split("\\s");
-				if (dep[1].equals("Employee")) {
-					//liapis defines what happens
-					if (new_length == 0) {
-						endMessage("End of Evaluation", "EmployeeMenu", frame);
-					} else {
-						questions(new_questions);
-					}
-				} else {
-					sum += 4;
-					if (new_length == 0) {
-						endMessage("End of Evaluation", "DirectorMenu", frame);
-					} else {
-						questions(new_questions);
-					}
-				}
-			}
-		});
 
 		Component horizontalStrut_9 = Box.createHorizontalStrut(20);
 		panel_6.add(horizontalStrut_9, BorderLayout.WEST);
 
 		Component horizontalStrut_10 = Box.createHorizontalStrut(20);
 		panel_6.add(horizontalStrut_10, BorderLayout.EAST);
+						
+								JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("2 (Disagree)");
+								panel_6.add(rdbtnNewRadioButton_1, BorderLayout.CENTER);
+								rdbtnNewRadioButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+								rdbtnNewRadioButton_1.setPreferredSize(new Dimension(100, 25));
+								rdbtnNewRadioButton_1.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										layeredPane.setVisible(false);
+										if (dep[1].equals("Employee")) {
+											answers[count - 1] = 2;
+											if (new_length == 0) {
+												try {
+													Evaluationforgui.saveAnswers(answers, employee.getDirectorId());
+													endMessage("End of Evaluation", "EmployeeMenu", name, frame, employee);
+												} catch (Exception e1) {
+													endMessage("An error has occured.", "EmployeeMenu", name, frame, employee);
+												}
+											} else {
+												questions(new_questions);
+											}
+										} else {
+											sum += 2;
+											if (new_length == 0) {
+												EvaluationEmployee.saving(sum, employee.getId(), dep[0]);
+												endMessage("End of Evaluation", "DirectorMenu", name, frame, employee);
+											} else {
+												questions(new_questions);
+											}
+										}
+									}
+								});
 
 		JPanel panel_7 = new JPanel();
 		panel_7.setMaximumSize(new Dimension(32740, 32731));
 		panel_4.add(panel_7);
 		panel_7.setLayout(new BorderLayout(0, 0));
-
-		JRadioButton rdbtnNewRadioButton_4 = new JRadioButton("5 (Absolutely Agree)");
-		rdbtnNewRadioButton_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnNewRadioButton_4.setPreferredSize(new Dimension(100, 25));
-		panel_7.add(rdbtnNewRadioButton_4, BorderLayout.CENTER);
-		rdbtnNewRadioButton_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String[] dep = employee.getDepartment().split("\\s");
-				if (dep[1].equals("Employee")) {
-					//liapis defines what happens
-					if (new_length == 0) {
-						endMessage("End of Evaluation", "EmployeeMenu", frame);
-					} else {
-						questions(new_questions);
-					}
-				} else {
-					sum += 5;
-					if (new_length == 0) {
-						endMessage("End of Evaluation", "DirectorMenu", frame);
-					} else {
-						questions(new_questions);
-					}
-				}
-			}
-		});
 
 		Component horizontalStrut_5 = Box.createHorizontalStrut(20);
 		panel_7.add(horizontalStrut_5, BorderLayout.WEST);
@@ -420,5 +444,36 @@ public class EvaluateOperation extends LoginMenu {
 
 		Component verticalStrut_7 = Box.createVerticalStrut(-30);
 		panel_7.add(verticalStrut_7, BorderLayout.SOUTH);
+		
+				JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("3 (Neither Disagree Nor Agree)");
+				panel_7.add(rdbtnNewRadioButton_2, BorderLayout.CENTER);
+				rdbtnNewRadioButton_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				rdbtnNewRadioButton_2.setPreferredSize(new Dimension(100, 25));
+				rdbtnNewRadioButton_2.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						layeredPane.setVisible(false);
+						if (dep[1].equals("Employee")) {
+							answers[count - 1] = 3;
+							if (new_length == 0) {
+								try {
+									Evaluationforgui.saveAnswers(answers, employee.getDirectorId());
+									endMessage("End of Evaluation", "EmployeeMenu", name, frame, employee);
+								} catch (Exception e1) {
+									endMessage("An error has occured.", "EmployeeMenu", name, frame, employee);
+								}
+							} else {
+								questions(new_questions);
+							}
+						} else {
+							sum += 3;
+							if (new_length == 0) {
+								EvaluationEmployee.saving(sum, employee.getId(), dep[0]);
+								endMessage("End of Evaluation", "DirectorMenu", name, frame, employee);
+							} else {
+								questions(new_questions);
+							}
+						}
+					}
+				});
 	}
 }

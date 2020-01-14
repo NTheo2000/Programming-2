@@ -9,8 +9,10 @@ import javax.swing.JLayeredPane;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 
-import EvaluateCandidates.Employee;
-import EvaluateCandidates.WorkersDatabase;
+import evaluateCandidates.Employee;
+import evaluateCandidates.WorkersDatabase;
+
+//import org.json.simple.parser.JSONParser;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -21,6 +23,11 @@ import javax.swing.JPanel;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+/*import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;*/
 
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -48,6 +55,38 @@ public class LoginMenu {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		/*try {
+			(new JSONParser()).parse(new FileReader("WorkersDatabase.json"));
+		} catch (IOException e) {
+			System.exit(0);
+		} catch (Exception e) {
+			WorkersDatabase.createDatabase();
+		}
+		try {
+			(new JSONParser()).parse(new FileReader("Candidates.json"));
+		} catch (IOException e) {
+			System.exit(0);
+		} catch (Exception e) {
+			CreateCandidate.createDatabase();
+		}
+		try {
+			new FileInputStream("MarketingDepartment.txt").close();
+		} catch (FileNotFoundException e1) {
+			CreatingFiles.main(null);
+		} catch (IOException e) {
+			System.exit(0);
+		}
+		try {
+			new FileInputStream("id_scores.json").close();
+		} catch (FileNotFoundException e1) {
+			try {
+				new File("id_scores.json").createNewFile();
+			} catch (IOException e) {
+				System.exit(0);
+			}
+		} catch (IOException e) {
+			System.exit(0);
+		}*/
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -65,7 +104,7 @@ public class LoginMenu {
 	 */
 	public LoginMenu() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(400, 130, 520, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		initialize();
 	}
@@ -85,7 +124,7 @@ public class LoginMenu {
 		panel.setVisible(true);
 		
 		JLabel lblNewLabel = new JLabel("Welcome to HumanMasteR");
-		lblNewLabel.setBounds(75, 11, 286, 36);
+		lblNewLabel.setBounds(107, 52, 286, 36);
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel.setForeground(Color.DARK_GRAY);
@@ -95,30 +134,30 @@ public class LoginMenu {
 		username.setHorizontalAlignment(SwingConstants.LEFT);
 		username.setForeground(Color.BLACK);
 		username.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		username.setBounds(112, 82, 78, 14);
+		username.setBounds(136, 138, 78, 14);
 		panel.add(username);
 		
 		usernameField = new JTextField();
 		usernameField.setHorizontalAlignment(SwingConstants.LEFT);
 		usernameField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		usernameField.setBounds(201, 81, 104, 20);
+		usernameField.setBounds(244, 135, 104, 20);
 		panel.add(usernameField);
 		usernameField.setColumns(10);
 		
 		JLabel password = new JLabel("Password");
 		password.setForeground(Color.BLACK);
 		password.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		password.setBounds(112, 147, 78, 14);
+		password.setBounds(136, 196, 78, 14);
 		panel.add(password);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(201, 146, 104, 20);
+		passwordField.setBounds(244, 195, 104, 20);
 		panel.add(passwordField);
 		
 		JButton loginButton = new JButton("Login");
 		loginButton.setForeground(Color.BLACK);
 		loginButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		loginButton.setBounds(157, 202, 89, 23);
+		loginButton.setBounds(189, 254, 89, 23);
 		panel.add(loginButton);
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -127,14 +166,14 @@ public class LoginMenu {
 					nullerror.setText(null);
 					panel.remove(nullerror);
 					guiCorrection = new JLabel("                                                           ");
-					guiCorrection.setBounds(70, 44, 320, 30);
+					guiCorrection.setBounds(85, 86, 320, 30);
 					panel.add(guiCorrection);
 				}
 				if (usernameField.getText().isEmpty() || passwordField.getPassword().length == 0) {
 					usernameField.setText(null);
 					passwordField.setText(null);
 					nullerror = new JLabel("You must type at least one caracter in every field.");
-					nullerror.setBounds(70, 44, 320, 30);
+					nullerror.setBounds(85, 86, 320, 30);
 					panel.add(nullerror);
 					nullerror.setFont(new Font("Tahoma", Font.PLAIN, 14));
 					nullerror.setForeground(Color.RED);
@@ -155,14 +194,14 @@ public class LoginMenu {
 						
 						errorHeadline = new JLabel("You have exceeded all remaining attempts");
 						blockedpanel.add(errorHeadline);
-						errorHeadline.setBounds(20, 20, 400, 30);
+						errorHeadline.setBounds(52, 99, 400, 30);
 						errorHeadline.setFont(new Font("Tahoma", Font.BOLD, 18));
 						errorHeadline.setForeground(Color.BLACK);
 						errorHeadline.setHorizontalAlignment(SwingConstants.CENTER);
 							
 						blockmessage = new JLabel("Your access has been blocked");
 						blockedpanel.add(blockmessage);
-						blockmessage.setBounds(50, 70, 330, 30);
+						blockmessage.setBounds(79, 140, 330, 30);
 						blockmessage.setFont(new Font("Tahoma", Font.PLAIN, 16));
 						blockmessage.setForeground(Color.RED);
 						blockmessage.setHorizontalAlignment(SwingConstants.CENTER);
@@ -173,7 +212,7 @@ public class LoginMenu {
 					} else {
 							error = new JLabel("Login failed.You have " + count + " attempts remaining.");
 					}
-					error.setBounds(90, 44, 270, 30);
+					error.setBounds(105, 86, 270, 30);
 					panel.add(error);
 					error.setFont(new Font("Tahoma", Font.PLAIN, 14));
 					error.setForeground(Color.RED);
@@ -217,8 +256,8 @@ public class LoginMenu {
 		headlinePanel.add(backButton, BorderLayout.WEST);
 		return backButton;
 	}
-	public void endMessage(String message, String errorinMenu, JFrame frame) {
-		JLayeredPane errorPane = new JLayeredPane();
+	public void endMessage(String message, final String errorinMenu, final String firstname, final JFrame frame, final Employee employee) {
+		final JLayeredPane errorPane = new JLayeredPane();
 		frame.getContentPane().add(errorPane, BorderLayout.CENTER);
 		errorPane.setLayout(new BorderLayout(0, 0));
 

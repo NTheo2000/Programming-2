@@ -1,5 +1,6 @@
 package GUI_Classes;
 
+
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -8,11 +9,11 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import evaluateCandidates.Employee;
+
 import javax.swing.JButton;
 import java.awt.Component;
-
-import EvaluateCandidates.Employee;
-
 
 import javax.swing.Box;
 import javax.swing.JPanel;
@@ -38,7 +39,7 @@ public class HRMenu extends LoginMenu{
 	public void initialize() {
 		frame.setVisible(true);
 
-		JLayeredPane panel = new JLayeredPane();
+		final JLayeredPane panel = new JLayeredPane();
 		panel.setBounds(10, 5, 382, 25);
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BorderLayout(0, 0));

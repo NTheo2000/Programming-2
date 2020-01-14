@@ -10,17 +10,18 @@ import java.text.NumberFormat;
 import evaluateEmployees.DataForCharts;
 
 import java.math.RoundingMode;
+
 public class PieChartEmployee {
+	
+	/** Contains the ID of a employee. */
+	private static String id2;
 
-    /** Contains the ID of an employee. */
-    private static String id2;
+	public PieChartEmployee(String id) {
+		id2 = id;
+	}
 
-    public PieChartEmployee(String id) {
-        id2 = id;
-    }
-
-    public Scene generateChart() throws Exception {
-        DataForCharts data = new DataForCharts();
+	public Scene generateChart() throws Exception {
+		DataForCharts data = new DataForCharts();
         double [] d;
             int z=0;
             int b=0;
@@ -46,7 +47,7 @@ public class PieChartEmployee {
                 }
     }
 
-    double a = (double)b/(double)d.length*100; //rounding the variables
+    double a = (double)b/(double)d.length*100;
     double c = (double)z/(double)d.length*100;
     double y = (double)r/(double)d.length*100;
     double p = (double)w/(double)d.length*100;
@@ -67,7 +68,7 @@ public class PieChartEmployee {
 
             PieChart chart = new PieChart(pieChartData);
             chart.setLegendVisible(false);
-            chart.setTitle("Pie Chart for " + d.length + " Employees");// setting the title
+            chart.setTitle("Pie Chart for " + d.length + " Employees");
 
             Group root = new Group(chart);
             Scene scene = new Scene(root,600,400);
@@ -81,13 +82,13 @@ public class PieChartEmployee {
                        "black",
                        "white"
                      );
-        return scene;
-    }
-/* color method */
+    	return scene;
+	}
+
    private void applyCustomColorSequence(ObservableList<PieChart.Data> pieChartData, String... pieColors) {
-       int i = 0;
+	   int i = 0;
        for (PieChart.Data data : pieChartData) {
-           data.getNode().setStyle("-fx-pie-color: " + pieColors[i % pieColors.length] + ";");
+    	   data.getNode().setStyle("-fx-pie-color: " + pieColors[i % pieColors.length] + ";");
            i++;
        }
    }

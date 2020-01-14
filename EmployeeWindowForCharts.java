@@ -1,5 +1,6 @@
 package GUI_Classes;
 
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -20,7 +21,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
-import EvaluateCandidates.Employee;
+import evaluateCandidates.Employee;
 import javafx.embed.swing.JFXPanel;
 
 public class EmployeeWindowForCharts extends LoginMenu {
@@ -42,7 +43,7 @@ public class EmployeeWindowForCharts extends LoginMenu {
 	}
 	
 	private void initialize() {
-		JLayeredPane choosePane = new JLayeredPane();
+		final JLayeredPane choosePane = new JLayeredPane();
 		frame.getContentPane().add(choosePane, BorderLayout.CENTER);
 		choosePane.setLayout(new BorderLayout(0, 0));
 		
@@ -86,7 +87,7 @@ public class EmployeeWindowForCharts extends LoginMenu {
 		headlinePanel.add(errorPanel, BorderLayout.SOUTH);
 		errorPanel.setLayout(new BorderLayout(0, 0));
 		
-		JLabel errorLabel = new JLabel("First semester can't be grater than the last.");
+		final JLabel errorLabel = new JLabel("First semester can't be grater than the last.");
 		errorLabel.setForeground(SystemColor.control);
 		errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		errorLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -127,7 +128,7 @@ public class EmployeeWindowForCharts extends LoginMenu {
 		firstPanel.add(numberPanel1, BorderLayout.CENTER);
 		numberPanel1.setLayout(new BorderLayout(0, 0));
 		
-		JSpinner spinner1 = new JSpinner();
+		final JSpinner spinner1 = new JSpinner();
 		spinner1.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
 		spinner1.setPreferredSize(new Dimension(29, 22));
 		numberPanel1.add(spinner1);
@@ -173,7 +174,7 @@ public class EmployeeWindowForCharts extends LoginMenu {
 		secondPanel.add(numberPanel2, BorderLayout.CENTER);
 		numberPanel2.setLayout(new BorderLayout(0, 0));
 		
-		JSpinner spinner2 = new JSpinner();
+		final JSpinner spinner2 = new JSpinner();
 		spinner2.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
 		spinner2.setPreferredSize(new Dimension(29, 22));
 		numberPanel2.add(spinner2);
@@ -199,8 +200,8 @@ public class EmployeeWindowForCharts extends LoginMenu {
 		okButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					int s1 = (int) spinner1.getValue();
-					int s2 = (int) spinner2.getValue();
+					int s1 = (Integer) spinner1.getValue();
+					int s2 = (Integer) spinner2.getValue();
 					if (s1 <= s2) {
 						choosePane.setVisible(false);
 						frame.validate();
@@ -208,9 +209,9 @@ public class EmployeeWindowForCharts extends LoginMenu {
 						for (int i = s1; i <= s2; i++) {
 							semesters.add(i);
 						}
-						String[] dep = employee.getDepartment().split("//s");
+						String[] dep = employee.getDepartment().split("\\s");
 
-						JLayeredPane chartPane = new JLayeredPane();
+						final JLayeredPane chartPane = new JLayeredPane();
 						frame.getContentPane().add(chartPane, BorderLayout.CENTER);
 						chartPane.setLayout(new BorderLayout(0, 0));
 							
@@ -235,7 +236,7 @@ public class EmployeeWindowForCharts extends LoginMenu {
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
-					endMessage("An error has occured", "EmployeeMenu", frame);
+					endMessage("An error has occured", "EmployeeMenu", firstname, frame, employee);
 				}
 			}
 		});
