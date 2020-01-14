@@ -1,17 +1,25 @@
-package evaluateEmployees;
 
+/*
+ * EvaluationEmployee
+ */
+
+package evaluationEmployees;
 
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
-import org.json.simple.parser.ParseException;
-
 /**
- * This class comprises three methods by which employees of the marketing
- * department are evaluated, their scores recorded and their scores retrieved.
- * Specifically it contains the following methods:evaluationMethod, getDegrees
- * and setSemester.
+ * This class performs all employee evaluation procedures. Specifically, it
+ * records employee rankings for the current semester, checks if employees have
+ * already been evaluated, deletes employee rankings, retrieves rankings for
+ * each semester, and records employee rankings for each semester.All of these
+ * functions are performed by the methods : saving, check, delete, getDegrees,
+ * setSemester.
  * 
  * @author Dimitris Vougioukos
  *
@@ -29,36 +37,26 @@ public class EvaluationEmployee {
 			"Is he/she faithfully following the commandments of his/her superiors?",
 			"Is he/she typical of his/her obligations?", "Is he/she communicative accessible to his/her colleagues?" };
 	/**
-	 * Contains the ratings and IDs of the employees of the marketing department for
-	 * the current semester.
+	 * Contains the scores and IDs of the employees of a department for the current
+	 * semester.
 	 */
 	public static ArrayList<ArrayList<Double>> averageandidofemployees = new ArrayList<ArrayList<Double>>();
-	/** Contains the marketing staff rankings for all their semesters. */
+	/** Includes the results of the semesters of the employees of a department. */
 	public static ArrayList<ArrayList<Double>> degreespersemester = new ArrayList<ArrayList<Double>>();
 	/**
-	 * Contains the employees' IDs of the marketing department and is parallel to
-	 * the list degreespersemester.
+	 * Contains the employees' IDs of a department and is parallel to the list
+	 * degreespersemester.
 	 */
 	public static ArrayList<Double> idperemployee = new ArrayList<Double>();
-
-	private static int count1 = 1;// Helpful variable.
-	/*
-	 * Contains the lists averageandidofemployees, degreespersemester and
-	 * idperemployee when reading them from file MarketingDepartment.
-	 */
+	/** Contains lists that we read them from files. */
 	public static Object[] arrays;
-	public static Object[] arrays2;
-	public static Object[] arrays3;
-	public static Object[] arrays4;
 
 	/**
-	 * Performs the evaluation of marketing employees.
+	 * Saves the scores of employees for the current semester.
 	 * 
-	 * @param directorid the ID of the marketing director.
-	 * @return a number indicating whether or not the evaluation was done.
-	 * @throws FileNotFoundException
-	 * @throws IOException
-	 * @throws ParseException
+	 * @param sum        Contains the sum of an employee's evaluation.
+	 * @param id         Contains the employee's ID.
+	 * @param department Contains the department to which the employee belongs.
 	 */
 
 	public static void saving(int sum, String id, String department) {
@@ -74,21 +72,31 @@ public class EvaluationEmployee {
 				degreespersemester, idperemployee);
 	}
 
+	/**
+	 * Checks whether an employee has already been evaluated this semester.
+	 * 
+	 * @param id         Contains the employee's ID.
+	 * @param department Contains the department to which the employee belongs.
+	 * @return true if already evaluated and wrong if not already evaluated.
+	 */
 	public static boolean check(String id, String department) {
-		try {
-			arrays = ReadingAndWritingInFile.readObject(department.concat("Department.txt"));
-			averageandidofemployees = (ArrayList<ArrayList<Double>>) arrays[0];
-			for (int i = 0; i < averageandidofemployees.size() - 1; i++) {
-				if (averageandidofemployees.get(i).get(1) == Double.parseDouble(id)) {
-					return true;
-				}
+		checkSemester();
+		arrays = ReadingAndWritingInFile.readObject(department.concat("Department.txt"));
+		averageandidofemployees = (ArrayList<ArrayList<Double>>) arrays[0];
+		for (int i = 0; i < averageandidofemployees.size(); i++) {
+			if (averageandidofemployees.get(i).get(1) == Double.parseDouble(id)) {
+				return true;
 			}
-		} catch (Exception e) {
-			return false;
 		}
 		return false;
 	}
 
+	/**
+	 * Deletes an employee's rating for the current semester.
+	 * 
+	 * @param id         Contains the employee's ID.
+	 * @param department Contains the department to which the employee belongs.
+	 */
 	public static void delete(String id, String department) {
 		arrays = ReadingAndWritingInFile.readObject(department.concat("Department.txt"));
 		averageandidofemployees = (ArrayList<ArrayList<Double>>) arrays[0];
@@ -97,6 +105,7 @@ public class EvaluationEmployee {
 		for (int i = 0; i < averageandidofemployees.size(); i++) {
 			if (averageandidofemployees.get(i).get(1) == Double.parseDouble(id)) {
 				averageandidofemployees.remove(i);
+				break;
 			}
 		}
 		ReadingAndWritingInFile.writeObject(department.concat("Department.txt"), averageandidofemployees,
@@ -104,60 +113,70 @@ public class EvaluationEmployee {
 	}
 
 	/**
-	 * Retrieves the scores of a particular marketing worker for some semesters.
+	 * Recovers an employee's results for some semesters.
 	 * 
-	 * @param id        the ID of a particular marketing employee.
-	 * @param semesters contains the semesters for which we obtain his/her grade.
-	 * @return his/her scores in those specific semesters.
+	 * @param id         Contains the employee's ID.
+	 * @param semesters  Contains the semesters for which it must recover the
+	 *                   employee's scores.
+	 * @param department Contains the department to which the employee belongs.
+	 * @return scores.
+	 * 
 	 */
 	public static double[] getDegrees(String id, ArrayList<Integer> semesters, String department) {
-		try {
-			arrays = ReadingAndWritingInFile.readObject(department.concat("Department.txt"));
-			degreespersemester = (ArrayList<ArrayList<Double>>) arrays[1];
-			idperemployee = (ArrayList<Double>) arrays[2];
-			int row = -1;
-			for (int i = 0; i <= idperemployee.size() - 1; i++) {
-				if (idperemployee.get(i) == Double.parseDouble(id)) {
-					row = i;
-					break;
-				}
+		arrays = ReadingAndWritingInFile.readObject(department.concat("Department.txt"));
+		degreespersemester = (ArrayList<ArrayList<Double>>) arrays[1];
+		idperemployee = (ArrayList<Double>) arrays[2];
+		int row = -1;
+		for (int i = 0; i <= idperemployee.size() - 1; i++) {
+			if (idperemployee.get(i) == Double.parseDouble(id)) {
+				row = i;
+				break;
 			}
-			double[] degrees = new double[semesters.size()];
-			if (row == -1) {
-				return degrees;
-			}
-			for (int i = 0; i <= semesters.size() - 1; i++) {
-				if (degreespersemester.get(row).size() >= semesters.get(i))
-					degrees[i] = degreespersemester.get(row).get(semesters.get(i) - 1);
-				else
-					degrees[i] = 0;
-			}
-			return degrees;
-		} catch (Exception e) {
-			return null;
 		}
+		double[] degrees = new double[semesters.size()];
+		if (row == -1) {
+			return degrees;
+		}
+		for (int i = 0; i <= semesters.size() - 1; i++) {
+			if (degreespersemester.get(row).size() >= semesters.get(i))
+				degrees[i] = degreespersemester.get(row).get(semesters.get(i) - 1);
+			else
+				degrees[i] = 0;
+		}
+		return degrees;
 	}
 
-	/** Records the final results of the marketing employees of this semester. */
+	/** Stores the final employee scores for the semester. */
 	public static void setSemester() {
 		arrays = ReadingAndWritingInFile.readObject("MarketingDepartment.txt");
 		averageandidofemployees = (ArrayList<ArrayList<Double>>) arrays[0];
 		degreespersemester = (ArrayList<ArrayList<Double>>) arrays[1];
 		idperemployee = (ArrayList<Double>) arrays[2];
-		arrays2 = ReadingAndWritingInFile.readObject("HRDepartment.txt");
+		Object[] arrays2 = ReadingAndWritingInFile.readObject("HRDepartment.txt");
 		ArrayList<ArrayList<Double>> averageandidofemployees2 = (ArrayList<ArrayList<Double>>) arrays2[0];
 		ArrayList<ArrayList<Double>> degreespersemester2 = (ArrayList<ArrayList<Double>>) arrays2[1];
 		ArrayList<Double> idperemployee2 = (ArrayList<Double>) arrays2[2];
-		arrays3 = ReadingAndWritingInFile.readObject("AccountingDepartment.txt");
+		Object[] arrays3 = ReadingAndWritingInFile.readObject("AccountingDepartment.txt");
 		ArrayList<ArrayList<Double>> averageandidofemployees3 = (ArrayList<ArrayList<Double>>) arrays3[0];
 		ArrayList<ArrayList<Double>> degreespersemester3 = (ArrayList<ArrayList<Double>>) arrays3[1];
 		ArrayList<Double> idperemployee3 = (ArrayList<Double>) arrays3[2];
-		arrays4 = ReadingAndWritingInFile.readObject("ITDepartment.txt");
+		Object[] arrays4 = ReadingAndWritingInFile.readObject("ITDepartment.txt");
 		ArrayList<ArrayList<Double>> averageandidofemployees4 = (ArrayList<ArrayList<Double>>) arrays4[0];
 		ArrayList<ArrayList<Double>> degreespersemester4 = (ArrayList<ArrayList<Double>>) arrays4[1];
 		ArrayList<Double> idperemployee4 = (ArrayList<Double>) arrays4[2];
-		if (count1 == 1) {
-			++count1;
+		int times = ReadingAndWritingInFile.readNumber("Times.txt");
+		if (times == 1) {
+			++times;
+			try {
+				new FileWriter("Times.txt").close();
+				FileOutputStream wr = new FileOutputStream("Times.txt");
+				wr.write(times);
+				wr.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			for (int i = 0; i <= averageandidofemployees.size() - 1; i++) {
 				idperemployee.add(i, averageandidofemployees.get(i).get(1));
 				degreespersemester.add(new ArrayList<Double>());
@@ -179,10 +198,12 @@ public class EvaluationEmployee {
 				degreespersemester4.get(i).add(0, averageandidofemployees4.get(i).get(0));
 			}
 		} else {
+			int count2;
 			for (int i = 0; i <= averageandidofemployees.size() - 1; i++) {
-				int count2 = 1;
+				count2 = 1;
 				for (int j = 0; j <= idperemployee.size() - 1; j++) {
-					if (averageandidofemployees.get(i).get(1) == idperemployee.get(j)) {
+					if (String.valueOf(averageandidofemployees.get(i).get(1))
+							.equals(String.valueOf(idperemployee.get(j)))) {
 						degreespersemester.get(j).add(degreespersemester.get(j).size(),
 								averageandidofemployees.get(i).get(0));
 						count2 = 0;
@@ -195,10 +216,12 @@ public class EvaluationEmployee {
 					degreespersemester.get(degreespersemester.size() - 1).add(0, averageandidofemployees.get(i).get(0));
 				}
 			}
+
 			for (int i = 0; i <= averageandidofemployees2.size() - 1; i++) {
-				int count2 = 1;
+				count2 = 1;
 				for (int j = 0; j <= idperemployee2.size() - 1; j++) {
-					if (averageandidofemployees2.get(i).get(1) == idperemployee2.get(j)) {
+					if (String.valueOf(averageandidofemployees2.get(i).get(1))
+							.equals(String.valueOf(idperemployee2.get(j)))) {
 						degreespersemester2.get(j).add(degreespersemester2.get(j).size(),
 								averageandidofemployees2.get(i).get(0));
 						count2 = 0;
@@ -213,9 +236,10 @@ public class EvaluationEmployee {
 				}
 			}
 			for (int i = 0; i <= averageandidofemployees3.size() - 1; i++) {
-				int count2 = 1;
+				count2 = 1;
 				for (int j = 0; j <= idperemployee3.size() - 1; j++) {
-					if (averageandidofemployees3.get(i).get(1) == idperemployee3.get(j)) {
+					if (String.valueOf(averageandidofemployees3.get(i).get(1))
+							.equals(String.valueOf(idperemployee3.get(j)))) {
 						degreespersemester3.get(j).add(degreespersemester3.get(j).size(),
 								averageandidofemployees3.get(i).get(0));
 						count2 = 0;
@@ -230,9 +254,10 @@ public class EvaluationEmployee {
 				}
 			}
 			for (int i = 0; i <= averageandidofemployees4.size() - 1; i++) {
-				int count2 = 1;
+				count2 = 1;
 				for (int j = 0; j <= idperemployee4.size() - 1; j++) {
-					if (averageandidofemployees4.get(i).get(1) == idperemployee4.get(j)) {
+					if (String.valueOf(averageandidofemployees4.get(i).get(1))
+							.equals(String.valueOf(idperemployee4.get(j)))) {
 						degreespersemester4.get(j).add(degreespersemester4.get(j).size(),
 								averageandidofemployees4.get(i).get(0));
 						count2 = 0;
@@ -248,16 +273,16 @@ public class EvaluationEmployee {
 			}
 
 		}
-		for (int i = 0; i <= averageandidofemployees.size() - 1; i++) {
+		for (int i = averageandidofemployees.size() - 1; i >= 0; i--) {
 			averageandidofemployees.remove(i);
 		}
-		for (int i = 0; i <= averageandidofemployees2.size() - 1; i++) {
+		for (int i = averageandidofemployees2.size() - 1; i >= 0; i--) {
 			averageandidofemployees2.remove(i);
 		}
-		for (int i = 0; i <= averageandidofemployees3.size() - 1; i++) {
+		for (int i = averageandidofemployees3.size() - 1; i >= 0; i--) {
 			averageandidofemployees3.remove(i);
 		}
-		for (int i = 0; i <= averageandidofemployees4.size() - 1; i++) {
+		for (int i = averageandidofemployees4.size() - 1; i >= 0; i--) {
 			averageandidofemployees4.remove(i);
 		}
 		ReadingAndWritingInFile.writeObject("MarketingDepartment.txt", averageandidofemployees, degreespersemester,
@@ -268,6 +293,21 @@ public class EvaluationEmployee {
 				idperemployee3);
 		ReadingAndWritingInFile.writeObject("ITDepartment.txt", averageandidofemployees4, degreespersemester4,
 				idperemployee4);
+	}
 
+	/** Checks if the current semester is over. */
+	public static void checkSemester() {
+		Object[] a = ReadingAndWritingInFile.read("Days.txt");
+		Long days = (Long) a[0]; // days of currents semester.
+		LocalDate lastdate = (LocalDate) a[1]; // date of last connection to program.
+		if (!(LocalDate.now().equals(lastdate))) {
+			days = days + ChronoUnit.DAYS.between(lastdate, LocalDate.now());
+			if (days > 182) {
+				setSemester();
+				days = days - 182;
+			}
+			lastdate = LocalDate.now();
+			ReadingAndWritingInFile.write("Days.txt", days, lastdate);
+		}
 	}
 }
