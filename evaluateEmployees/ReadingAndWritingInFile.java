@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 /**
  * This class records and retrieves data to / from a specific folder through its
- * methods writeObject, readObject, writeNumber and readNumber.
+ * methods writeObject, readObject, readNumber, write and read.
  * 
  * @author Dimitris Vougioukos
  *
