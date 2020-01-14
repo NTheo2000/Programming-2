@@ -1,5 +1,4 @@
-package evaluateCandidates;
-
+package evaluationCandidate;
 
 import java.io.FileReader;
 
@@ -7,8 +6,16 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+/**
+ * Employee class which handles the employee data Reads and writes to the json
+ * file the employee data.
+ * 
+ * @version 5.1 14 jan 2020
+ * @author Michalis Dontas
+ *
+ */
 public class Employee {
-	
+
 	private String full_name;
 	private long age;
 	private String nationality;
@@ -17,11 +24,17 @@ public class Employee {
 	private double salary;
 	private String id;
 	private String department;
-	
+
+	/**
+	 * Simple constructor
+	 */
 	public Employee() {
 
 	}
-	
+
+	/**
+	 * Constructor with @param JSONObject employee
+	 */
 	public Employee(JSONObject employee) {
 		this.full_name = (String) searchPersonalDataInFile(employee, "full_name");
 		this.age = (Long) searchPersonalDataInFile(employee, "age");
@@ -33,60 +46,81 @@ public class Employee {
 		this.department = findDepartment(id);
 	}
 
-	protected Object searchPersonalDataInFile(JSONObject employee, String keywords)  {
+	/**
+	 * Search personal data in file
+	 * 
+	 * @param employee
+	 * @param keywords
+	 * @return the keywords
+	 */
+	protected Object searchPersonalDataInFile(JSONObject employee, String keywords) {
 		return employee.get(keywords);
 	}
 
 	public String getFull_name() {
 		return full_name;
 	}
+
 	public double getSalary() {
 		return salary;
 	}
+
 	public long getAge() {
 		return age;
 	}
+
 	public String getCity_of_residence() {
 		return city_of_residence;
 	}
+
 	public String getNationality() {
 		return nationality;
 	}
+
 	public String getDepartment() {
 		return department;
 	}
+
 	public String getId() {
 		return id;
 	}
+
 	public int getDepartmentId() {
 		return Integer.parseInt((String.valueOf(id)).substring(0, 1));
 	}
+
+	/**
+	 * finds department
+	 * 
+	 * @param id
+	 * @return the department
+	 */
 	public static String findDepartment(String id) {
 		String dep = "";
 		int dep_number = Integer.parseInt((String.valueOf(id)).substring(0, 1));
-		switch(dep_number) {
-		case 0 :
+		switch (dep_number) {
+		case 0:
 			dep = "HR Manager";
 			break;
-		case 1 : 
+		case 1:
 			dep = "Marketing Employee";
 			break;
-		case 2 :
+		case 2:
 			dep = "Accounting Employee";
 			break;
-		case 3 :
+		case 3:
 			dep = "IT Employee";
 			break;
-		case 4 : 
+		case 4:
 			dep = "HR Employee";
 			break;
-		case 5 :
+		case 5:
 			dep = "Marketing Director";
 			break;
-		case 6 :
+		case 6:
 			dep = "Accounting Director";
 			break;
-		case 7 :
+		case 7:
 			dep = "IT Director";
 			break;
 		case 8:
@@ -98,16 +132,23 @@ public class Employee {
 		}
 		return dep;
 	}
+
+	/**
+	 * finds the director id
+	 * 
+	 * @return the director id
+	 * @throws Exception
+	 */
 	public String getDirectorId() throws Exception {
 		int dep_number = Integer.parseInt((String.valueOf(this.id)).substring(0, 1));
 		String director_id = null;
 		JSONParser parser = new JSONParser();
 		JSONArray employees = (JSONArray) parser.parse(new FileReader("WorkersDatabase.json"));
-		switch(dep_number) {
-		case 1 :
-		case 2 :
-		case 3 :
-		case 4 :
+		switch (dep_number) {
+		case 1:
+		case 2:
+		case 3:
+		case 4:
 			for (Object obj : employees) {
 				String potential_id = (String) ((JSONObject) obj).get("id");
 				int first_number = Integer.parseInt((String.valueOf(potential_id)).substring(0, 1));
@@ -122,10 +163,11 @@ public class Employee {
 		}
 		return director_id;
 	}
+
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", full_name=" + full_name + ", age=" + age + ", nationality=" + nationality
 				+ ", city_of_residence=" + city_of_residence + ", ssn=" + ssn + ", salary=" + salary + "] "
-						+ "works as " + department;
+				+ "works as " + department;
 	}
 }

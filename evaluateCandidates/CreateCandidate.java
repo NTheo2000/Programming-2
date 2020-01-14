@@ -1,4 +1,4 @@
-package evaluateCandidates;
+package evaluationCandidate;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,6 +11,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * Creates the database for the candidates. This class creates the database for
+ * the candidates we use for the evaluation system. Using random variables the
+ * class generates the data for the CV's of the candidates. This data is stored
+ * in a JSON file which is named Candidates.json.
+ *
+ * @version 4.2 14 Jan 2020
+ * @author Miltiadis Tsichlis
+ */
 public class CreateCandidate {
 	protected static String[] full_name = new String[100];
 	protected static long[] age = new long[30];
@@ -25,6 +34,9 @@ public class CreateCandidate {
 	protected static boolean[] recommendation_letter = new boolean[2];
 	protected static double[] grade_inmaster_or_phd = new double[51];
 
+	/**
+	 * Simple constructor.
+	 */
 	public CreateCandidate() {
 
 	}
@@ -131,6 +143,10 @@ public class CreateCandidate {
 
 	protected static JSONArray candidateList = new JSONArray();
 
+	/**
+	 * Creates the candidate database and stores it in the Json file named
+	 * Candidate,json
+	 */
 	@SuppressWarnings("unchecked")
 	public static void createDatabase() {
 		String name = "Candidates.json";
@@ -291,7 +307,7 @@ public class CreateCandidate {
 			grade_inmaster_or_phd[i] = 5 + (double) i / 10;
 		}
 
-		int rand1, rand5, rand4, rand2,rand3;
+		int rand1, rand5, rand4, rand2, rand3;
 		try {
 			for (i = 0; i < 100; i++) {
 				rand4 = new Random().nextInt(5);
@@ -300,9 +316,8 @@ public class CreateCandidate {
 				rand5 = new Random().nextInt(nationality.length);
 				rand4 = new Random().nextInt(field.length);
 				rand2 = new Random().nextInt(recommendation_letter.length);
-				candidateList.add(createCandidate(full_name[i], ssn[i], email[i], age[rand1],
-						former_experience[rand1], nationality[rand5], city_of_residence[rand5], rand4,
-						rand3, recommendation_letter[rand2]));
+				candidateList.add(createCandidate(full_name[i], ssn[i], email[i], age[rand1], former_experience[rand1],
+						nationality[rand5], city_of_residence[rand5], rand4, rand3, recommendation_letter[rand2]));
 			}
 
 			File file = new File(name);
@@ -316,6 +331,13 @@ public class CreateCandidate {
 			System.out.println(e);
 		}
 	}
+
+	/**
+	 * Creates a Map with a random amount of languages and a random level o
+	 * knowledge.
+	 * 
+	 * @return
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private static Map create_language_map() {
 		Random rand = new Random();
@@ -328,6 +350,12 @@ public class CreateCandidate {
 		}
 		return languages;
 	}
+
+	/**
+	 * Creates a Map with random amount of diplomas and a random grade.
+	 * 
+	 * @return
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private static Map create_maps() {
 		Random rand = new Random();
@@ -342,6 +370,22 @@ public class CreateCandidate {
 
 	}
 
+	/**
+	 * method which has the following parameters creates a candidate and stores
+	 * him/her in the JSON file.
+	 * 
+	 * @param full_name
+	 * @param ssn
+	 * @param email
+	 * @param age
+	 * @param former_experience
+	 * @param nationality
+	 * @param city_of_residence
+	 * @param level_of_computer_handling
+	 * @param number_of_programming_languages
+	 * @param recommendation_letter
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public static JSONObject createCandidate(String full_name, String ssn, String email, long age,
 			long former_experience, String nationality, String city_of_residence, long level_of_computer_handling,
@@ -361,7 +405,6 @@ public class CreateCandidate {
 		candidate.put("level_of_computer_handling", level_of_computer_handling);
 		candidate.put("programming_languages", number_of_programming_languages);
 		candidate.put("recommendation_letter", recommendation_letter);
-
 		return candidate;
 	}
 }
