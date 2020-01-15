@@ -1,9 +1,8 @@
+package evaluateEmployees;
 
 /*
  * EvaluationEmployee
  */
-
-package evaluationEmployees;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
