@@ -1,4 +1,4 @@
-package evaluationCandidate;
+package evaluateCandidates;
 
 import java.io.FileReader;
 import java.io.FileWriter;
