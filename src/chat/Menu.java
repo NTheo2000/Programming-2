@@ -54,7 +54,7 @@ public class Menu {
 
 	}
 	
-	protected void readFiles () throws ClassNotFoundException {
+	protected static void readFiles () throws ClassNotFoundException {
 		File f1 = new File("chatidf.txt");
 		File f2 = new File("messagef.txt");
 		File f3 = new File("membersf.txt");
@@ -76,7 +76,6 @@ public class Menu {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
