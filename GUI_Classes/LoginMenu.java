@@ -57,8 +57,8 @@ public class LoginMenu {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		WorkersDatabase.createDatabase();
 		EventQueue.invokeLater(new Runnable() {
-			WorkersDatabase.createDatabase();
 			public void run() {
 				try {
 					LoginMenu window = new LoginMenu();
