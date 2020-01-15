@@ -28,6 +28,8 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import evaluateCandidates.WorkersDatabase;
+
 /**
  * Creates the first menu and includes the main method of the project
  * 
@@ -56,6 +58,7 @@ public class LoginMenu {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			WorkersDatabase.createDatabase();
 			public void run() {
 				try {
 					LoginMenu window = new LoginMenu();
