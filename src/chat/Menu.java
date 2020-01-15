@@ -15,7 +15,7 @@ public class Menu {
 	}
 
 	/*Files*/
-	private static void handleFiles() {
+	protected static void handleFiles() {
 		File f1 = new File("chatidf.txt");
 		File f2 = new File("messagef.txt");
 		File f3 = new File("membersf.txt");
