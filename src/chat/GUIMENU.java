@@ -122,6 +122,7 @@ public class GUIMENU extends LoginMenu {
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				layeredPane.setVisible(false);
+				Menu.handleFiles();
 				String[] dep = employee.getDepartment().split("\\s");
 				if (dep[1].equals("Manager")) {
 					new HRMenu(firstname, frame, employee);
