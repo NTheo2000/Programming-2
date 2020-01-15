@@ -1,4 +1,4 @@
-package evaluationCandidate;
+package evaluateCandidates;
 
 import org.json.simple.JSONObject;
 
