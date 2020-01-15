@@ -1,7 +1,5 @@
 package chat;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import javax.swing.JLayeredPane;
@@ -12,7 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+import GUI_Classes.DirectorMenu;
+import GUI_Classes.EmployeeMenu;
+import GUI_Classes.HRMenu;
 import GUI_Classes.LoginMenu;
+import GUI_Classes.Settings;
 import evaluateCandidates.Employee;
 
 public class GUIMENU extends LoginMenu {
@@ -117,5 +119,18 @@ public class GUIMENU extends LoginMenu {
 		backButton.setIcon(new ImageIcon(Settings.class.getResource("/com/sun/javafx/scene/control/skin/caspian/images/backspace-icon.png")));
 		backButton.setBounds(0, 0, 100, 23);
 		layeredPane.add(backButton);
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				layeredPane.setVisible(false);
+				String[] dep = employee.getDepartment().split("\\s");
+				if (dep[1].equals("Manager")) {
+					new HRMenu(firstname, frame, employee);
+				} else if (dep[1].equals("Director")) {
+					new DirectorMenu(firstname, frame, employee);
+				} else {
+					new EmployeeMenu(firstname, frame, employee);
+				}
+			}
+		});
 	}
 }
