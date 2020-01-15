@@ -1,7 +1,7 @@
+package evaluateEmployees;
 /*
  * ReadingAndWritingInFile
  */
-package evaluationEmployees;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
