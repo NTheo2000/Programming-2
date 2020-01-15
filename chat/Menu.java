@@ -16,10 +16,10 @@ public class Menu {
 
 	/*Files*/
 	private static void handleFiles() {
-		File f1 = new File("C:\\Users\\Admin\\eclipse-workspace\\ProgrammingHRProject\\src\\chatidf.txt");
-		File f2 = new File("C:\\Users\\Admin\\eclipse-workspace\\ProgrammingHRProject\\src\\messagef.txt");
-		File f3 = new File("C:\\Users\\Admin\\eclipse-workspace\\ProgrammingHRProject\\src\\membersf.txt");
-		File f4 = new File("C:\\Users\\Admin\\eclipse-workspace\\ProgrammingHRProject\\src\\cidf.txt");
+		File f1 = new File("chatidf.txt");
+		File f2 = new File("messagef.txt");
+		File f3 = new File("membersf.txt");
+		File f4 = new File("cidf.txt");
 		CommunicationOutput output = new CommunicationOutput();
 		try {
 			FileOutputStream fo1 = new FileOutputStream(f1);
