@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
 
+import chat.GUIMENU;
 import evaluateCandidates.Employee;
 
 /**
@@ -149,7 +150,8 @@ public class DirectorMenu extends LoginMenu {
 		chatButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		chatButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				panel.setVisible(false);
+				new GUIMENU(firstname, frame, employee);
 			}
 		});
 
