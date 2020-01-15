@@ -110,5 +110,12 @@ public class GUIMENU extends LoginMenu {
 		lblChatMenu.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblChatMenu.setBounds(15, 16, 125, 20);
 		layeredPane.add(lblChatMenu);
+		
+		JButton backButton = new JButton("Back");
+		backButton.setIconTextGap(6);
+		backButton.setHorizontalAlignment(SwingConstants.LEFT);
+		backButton.setIcon(new ImageIcon(Settings.class.getResource("/com/sun/javafx/scene/control/skin/caspian/images/backspace-icon.png")));
+		backButton.setBounds(0, 0, 100, 23);
+		layeredPane.add(backButton);
 	}
 }
