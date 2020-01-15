@@ -1,4 +1,4 @@
-package evaluationCandidate;
+package evaluateCandidates;
 
 import java.util.ArrayList;
 import java.util.Comparator;
