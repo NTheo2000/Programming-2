@@ -42,17 +42,17 @@ manager της επιχείρησης να πραγματοποιεί με πι�
 
 2)Η επιλογή Evaluate Employees δίνει την δυνατότητα στον manager να
 αξιολογήσει τον κάθε εργαζόμενο και να ελέγξει την πορεία
-του. ![]()
+του. ![](https://i.ibb.co/wLYj2sS/picture5.png)
 
 Η πορεία του στην συνέχεια εμφανίζεται και μέσα από charts
-![](LineChart.png)
+![](https://i.ibb.co/MydZTyk/Line-Chart.png)
 
 3)Η επιλογή Chats καθιστά εφικτή την επικοινωνία του manager με το
 προσωπικό και είναι κοινή για όλους τους χρήστες.
 
 **Employee Menu**
 
-![](picture6.png)
+![](https://i.ibb.co/NTzqzQx/picture6.png)
 
 1)  Η επιλογή Your Performance εμφανίζει ένα chart με την απόδοση του
     χρήστη
@@ -60,14 +60,14 @@ manager της επιχείρησης να πραγματοποιεί με πι�
 2)  Η επιλογή Evaluate Director εμφανίζει τις ερωτήσεις του
     ερωτηματολογίου από τις οποίες αξιολογείται ο Director
     
-    ![](Questionnaire.PNG)
+    ![](https://i.ibb.co/6NBVCqp/Questionnaire.png)
 
 3)  Η επιλογή Chats καθιστά εφικτή την επικοινωνία του χρήστη με το
     προσωπικό και είναι κοινή για όλους τους χρήστες.
 
 **Manager Menu**
 
-![](picture7.png)
+![](https://i.ibb.co/zF3x8gD/picture7.png)
 
 1)  Η επιλογή Your Performance εμφανίζει ένα chart με την απόδοση του
     χρήστη.
