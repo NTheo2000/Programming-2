@@ -12,6 +12,7 @@ public class CreateDatabases {
 		WorkersDatabase.createDatabase();
 		CreateCandidate.createDatabase();
 		CreatingFiles.main(null);
+		System.out.println("Executed");
 		try {
 			new File("id_scores.json").createNewFile();
 		} catch (IOException e) {
