@@ -1,8 +1,12 @@
-package chat;
+import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+
 import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
@@ -10,25 +14,30 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-import GUI_Classes.DirectorMenu;
-import GUI_Classes.EmployeeMenu;
-import GUI_Classes.HRMenu;
-import GUI_Classes.LoginMenu;
-import GUI_Classes.Settings;
-import evaluateCandidates.Employee;
-
 public class GUIMENU extends LoginMenu {
 
 	private JFrame frame;
-	private String firstname;
-	private Employee employee;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GUIMENU window = new GUIMENU();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
 	/**
 	 * Create the application.
 	 */
-	public GUIMENU(String firstname, JFrame frame, Employee employee) {
-		this.firstname = firstname;
-		this.frame = frame;
-		this.employee = employee;
+	public GUIMENU() {
 		initialize();
 	}
 
@@ -36,9 +45,20 @@ public class GUIMENU extends LoginMenu {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		
 		JLayeredPane layeredPane = new JLayeredPane();
 		frame.getContentPane().add(layeredPane, BorderLayout.CENTER);
-		layeredPane.setLayout(null);
+		layeredPane.setLayout(new BorderLayout(0,0));
+		
+		JPanel panel = new JPanel();
+		panel.getComponents();
+		panel.add(layeredPane);
+		panel.setLayout(new BorderLayout(0,0));
+		
 		
 		JButton btnNewMessage = new JButton("New Message");
 		btnNewMessage.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -110,28 +130,19 @@ public class GUIMENU extends LoginMenu {
 		
 		JLabel lblChatMenu = new JLabel("Chat Menu");
 		lblChatMenu.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblChatMenu.setBounds(15, 16, 125, 20);
+		lblChatMenu.setBounds(151, 16, 125, 20);
 		layeredPane.add(lblChatMenu);
 		
-		JButton backButton = new JButton("Back");
-		backButton.setIconTextGap(6);
-		backButton.setHorizontalAlignment(SwingConstants.LEFT);
-		backButton.setIcon(new ImageIcon(Settings.class.getResource("/com/sun/javafx/scene/control/skin/caspian/images/backspace-icon.png")));
-		backButton.setBounds(0, 0, 100, 23);
-		layeredPane.add(backButton);
+		//JPanel topPanel = new JPanel();
+		//lblChatMenu.add(topPanel, BorderLayout.WEST);
+		//topPanel.setLayout(new BorderLayout(0, 0));
+
+		JButton backButton = setBackButton(panel);
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				layeredPane.setVisible(false);
 				Menu.handleFiles();
-				String[] dep = employee.getDepartment().split("\\s");
-				if (dep[1].equals("Manager")) {
-					new HRMenu(firstname, frame, employee);
-				} else if (dep[1].equals("Director")) {
-					new DirectorMenu(firstname, frame, employee);
-				} else {
-					new EmployeeMenu(firstname, frame, employee);
-				}
 			}
 		});
 	}
+
 }
