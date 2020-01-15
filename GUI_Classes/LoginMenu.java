@@ -9,8 +9,13 @@ import javax.swing.JLayeredPane;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import evaluateCandidates.CreateCandidate;
 import evaluateCandidates.Employee;
 import evaluateCandidates.WorkersDatabase;
+import evaluateEmployees.CreatingFiles;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -21,14 +26,17 @@ import javax.swing.JPanel;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
-import evaluateCandidates.WorkersDatabase;
 
 /**
  * Creates the first menu and includes the main method of the project
@@ -57,7 +65,73 @@ public class LoginMenu {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		WorkersDatabase.createDatabase();
+		try {
+			(new JSONParser()).parse(new FileReader("WorkersDatabase.json"));
+		} catch (ParseException e) {
+			WorkersDatabase.createDatabase();
+		} catch (FileNotFoundException e) {
+			WorkersDatabase.createDatabase();
+		} catch (IOException e) {
+			System.exit(0);
+		}
+		try {
+			(new JSONParser()).parse(new FileReader("Candidates.json"));
+		} catch (ParseException e) {
+			CreateCandidate.createDatabase();
+		} catch (FileNotFoundException e) {
+			CreateCandidate.createDatabase();
+		} catch (IOException e) {
+			System.exit(0);
+		}
+		try {
+			new FileInputStream("MarketingDepartment.txt").close();
+		} catch (FileNotFoundException e) {
+			CreatingFiles.main(null);
+		} catch (IOException e) {
+			System.exit(0);
+		}
+		try {
+			(new JSONParser()).parse(new FileReader("id_scores.json"));
+		} catch (ParseException e) {
+			try {
+				new File("id_scores.json").createNewFile();
+			} catch (IOException e1) {
+				System.exit(0);
+			}
+		} catch (FileNotFoundException e) {
+			try {
+				new File("id_scores.json").createNewFile();
+			} catch (IOException e1) {
+				System.exit(0);
+			}
+		} catch (IOException e) {
+			System.exit(0);
+		}
+		try {
+			new FileInputStream("chatidf.txt").close();
+		} catch (FileNotFoundException e) {
+			try {
+				new File("chatidf.txt").createNewFile();
+			} catch (IOException e1) {
+				System.exit(0);
+			}
+			try {
+				new File("messagef.txt").createNewFile();
+			} catch (IOException e1) {
+				System.exit(0);
+			}			
+			try {
+				new File("membersf.txt").createNewFile();
+			} catch (IOException e1) {
+				System.exit(0);
+			}
+			try {
+				new File("cidf.txt").createNewFile();
+			} catch (IOException e1) {
+				System.exit(0);
+			}		} catch (IOException e) {
+			System.exit(0);
+		}		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
